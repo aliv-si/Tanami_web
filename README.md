@@ -1,6 +1,6 @@
 # 
-<p align="center">
-  <img src="images/logotext.png" width="400" alt="Logo Tanami">
+<p>
+  <img src="public/images/logotext.png" width="300" alt="Logo Tanami">
 </p>
 
 
@@ -59,6 +59,7 @@ plants
 
 ## 📌 Project Goals
 
-Tanami aims to: - Simplify home gardening - Increase productivity and
-plant health - Empower communities through technology, knowledge, and
-commerce
+Tanami aims to: 
+- Simplify home gardening
+- Increase productivity and plant health
+- Empower communities through technology, knowledge, and commerce

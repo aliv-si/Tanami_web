@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 <p>
   <img src="public/images/logotext.png" width="400" alt="Logo Tanami">
-=======
-# 
-<p>
-  <img src="public/images/logotext.png" width="300" alt="Logo Tanami">
->>>>>>> 7e6a9c97fbc479bdbd6461825a6c05eb7fb2ae20
 </p>
 
 **Tanami** is a smart gardening application designed to help users
@@ -69,11 +63,6 @@ This assistant provides plant-specific insights, such as:
 ## 📌 Project Goals
 
 Tanami aims to: 
-<<<<<<< HEAD
 - Simplify home gardening 
 - Increase productivity and plant health 
-=======
-- Simplify home gardening
-- Increase productivity and plant health
->>>>>>> 7e6a9c97fbc479bdbd6461825a6c05eb7fb2ae20
 - Empower communities through technology, knowledge, and commerce

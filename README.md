@@ -1,59 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+# 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="images/logotext.png" width="400" alt="Logo Tanami">
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Tanami** is a smart gardening application designed to help users
+manage their home garden effortlessly. Equipped with automated hardware
+and intelligent features, Tanami brings modern agriculture directly to
+your backyard.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Core Capabilities
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔧 Smart Automation
 
-## Learning Laravel
+Tanami integrates IoT-based tools capable of: - **Automatic watering**
+using soil moisture sensors - **Automatic fertilizing** using soil
+fertility sensors
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Both operations run intelligently based on real-time sensor data.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📡 Real-Time Monitoring
 
-## Laravel Sponsors
+Tanami provides live updates including: - **Soil moisture levels** (from
+moisture sensors) - **Soil fertility levels** (from fertility sensors) -
+**Current weather conditions** (sourced from BMKG) - **10-day weather
+forecast** (also from BMKG)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🌿 Planting Guidance
 
-### Premium Partners
+Tanami includes: - **Tips & tricks** for planting various types of
+plants - Practical guides to help users maintain healthy and productive
+gardens
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🧑‍🤝‍🧑 Community
 
-## Contributing
+A social space where users can: - Interact with fellow gardeners - Share
+experiences and gardening knowledge
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛒 Marketplace
 
-## Code of Conduct
+A platform for buying and selling: - Garden produce - Gardening tools
+and supplies
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+This feature helps users increase their income directly through the app.
 
-## Security Vulnerabilities
+## 🩺 TanamCare --- Plant Disease Detection
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+An AI-powered feature that allows users to: - Take a photo of an
+unhealthy plant - Receive information about pests/diseases - Get
+recommended solutions for treatment
 
-## License
+## 🤖 TanamAssistant -- Your Personal Plant Advisor
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This assistant provides plant-specific insights, such as: - Ideal soil
+moisture range - Fertilizing reminders (including fertilizer types) -
+Estimated harvest period - Other maintenance tips tailored to the user's
+plants
+
+## 📌 Project Goals
+
+Tanami aims to: - Simplify home gardening - Increase productivity and
+plant health - Empower communities through technology, knowledge, and
+commerce

@@ -237,37 +237,162 @@ class PesananController extends Controller
 
     /**
      * Upload payment proof
+     * - Validasi: JPG/PNG, max 2MB
+     * - Simpan ke storage/app/public/bukti-bayar/
+     * - Update status → menunggu_verifikasi
      */
     public function uploadBukti(Request $request, int $id): RedirectResponse
     {
-        // TODO: Implement (3.5)
-        return back();
+        $request->validate([
+            'bukti_bayar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            'bukti_bayar.required' => 'Bukti pembayaran wajib diupload.',
+            'bukti_bayar.image' => 'File harus berupa gambar.',
+            'bukti_bayar.mimes' => 'Format file harus JPG atau PNG.',
+            'bukti_bayar.max' => 'Ukuran file maksimal 2MB.',
+        ]);
+
+        /** @var \App\Models\Pengguna $user */
+        $user = Auth::user();
+
+        $pesanan = Pesanan::where('id_pembeli', $user->id_pengguna)
+            ->findOrFail($id);
+
+        if (!$pesanan->bisaUploadBukti()) {
+            return back()->withErrors([
+                'error' => 'Pesanan tidak bisa diupload bukti bayar. Status saat ini: ' . $pesanan->status_pesanan
+            ]);
+        }
+
+        // Simpan file
+        $file = $request->file('bukti_bayar');
+        $filename = 'bukti_' . $pesanan->id_pesanan . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/bukti-bayar', $filename);
+
+        // Update pesanan
+        $pesanan->update([
+            'bukti_bayar' => 'bukti-bayar/' . $filename,
+            'status_pesanan' => Pesanan::STATUS_MENUNGGU_VERIFIKASI,
+        ]);
+
+        return back()->with('success', 'Bukti pembayaran berhasil diupload. Menunggu verifikasi dari petani.');
     }
 
     /**
      * Cancel order
+     * - Hanya bisa jika status pending atau menunggu_verifikasi
+     * - Release reserved stock
+     * - Set alasan_batal, tgl_dibatalkan
      */
     public function batal(Request $request, int $id): RedirectResponse
     {
-        // TODO: Implement (3.5)
-        return back();
+        $request->validate([
+            'alasan_batal' => 'nullable|string|max:500',
+        ]);
+
+        /** @var \App\Models\Pengguna $user */
+        $user = Auth::user();
+
+        $pesanan = Pesanan::with('items.produk')
+            ->where('id_pembeli', $user->id_pengguna)
+            ->findOrFail($id);
+
+        if (!$pesanan->bisaDibatalkan()) {
+            return back()->withErrors([
+                'error' => 'Pesanan tidak bisa dibatalkan. Status saat ini: ' . $pesanan->status_pesanan
+            ]);
+        }
+
+        DB::transaction(function () use ($pesanan, $request) {
+            // Release reserved stock untuk semua item
+            foreach ($pesanan->items as $item) {
+                $item->produk->releaseStok($item->jumlah);
+            }
+
+            // Update pesanan
+            $pesanan->update([
+                'status_pesanan' => Pesanan::STATUS_DIBATALKAN,
+                'alasan_batal' => $request->alasan_batal ?? 'Dibatalkan oleh pembeli',
+                'tgl_dibatalkan' => now(),
+            ]);
+        });
+
+        return redirect()->route('pesanan')
+            ->with('success', 'Pesanan berhasil dibatalkan.');
     }
 
     /**
      * Confirm order received
+     * - Hanya bisa jika status terkirim
+     * - Update status → selesai
+     * - Set tgl_selesai, id_konfirmasi
+     * - Release escrow ke petani
      */
     public function konfirmasi(int $id): RedirectResponse
     {
-        // TODO: Implement (3.5)
-        return back();
+        /** @var \App\Models\Pengguna $user */
+        $user = Auth::user();
+
+        $pesanan = Pesanan::with(['escrow', 'items.produk'])
+            ->where('id_pembeli', $user->id_pengguna)
+            ->findOrFail($id);
+
+        if (!$pesanan->bisaDikonfirmasi()) {
+            return back()->withErrors([
+                'error' => 'Pesanan tidak bisa dikonfirmasi. Status saat ini: ' . $pesanan->status_pesanan
+            ]);
+        }
+
+        DB::transaction(function () use ($pesanan, $user) {
+            // Update pesanan
+            $pesanan->update([
+                'status_pesanan' => Pesanan::STATUS_SELESAI,
+                'tgl_selesai' => now(),
+                'id_konfirmasi' => $user->id_pengguna,
+            ]);
+
+            // Release escrow ke petani
+            if ($pesanan->escrow) {
+                $idPetani = $pesanan->items->first()->produk->id_petani;
+                $pesanan->escrow->kirimKePetani($idPetani, 'Dikonfirmasi oleh pembeli');
+            }
+        });
+
+        return redirect()->route('pesanan.detail', $id)
+            ->with('success', 'Terima kasih! Pesanan telah dikonfirmasi selesai.');
     }
 
     /**
      * Request refund
+     * - Hanya bisa jika status terkirim
+     * - Update status → minta_refund
      */
     public function mintaRefund(Request $request, int $id): RedirectResponse
     {
-        // TODO: Implement (3.5)
-        return back();
+        $request->validate([
+            'alasan_refund' => 'required|string|max:500',
+        ], [
+            'alasan_refund.required' => 'Alasan refund wajib diisi.',
+            'alasan_refund.max' => 'Alasan refund maksimal 500 karakter.',
+        ]);
+
+        /** @var \App\Models\Pengguna $user */
+        $user = Auth::user();
+
+        $pesanan = Pesanan::where('id_pembeli', $user->id_pengguna)
+            ->findOrFail($id);
+
+        if (!$pesanan->bisaRefund()) {
+            return back()->withErrors([
+                'error' => 'Pesanan tidak bisa diajukan refund. Status saat ini: ' . $pesanan->status_pesanan
+            ]);
+        }
+
+        $pesanan->update([
+            'status_pesanan' => Pesanan::STATUS_MINTA_REFUND,
+            'alasan_refund' => $request->alasan_refund,
+        ]);
+
+        return back()->with('success', 'Permintaan refund berhasil dikirim. Admin akan meninjau permintaan Anda.');
     }
 }

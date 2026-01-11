@@ -10,7 +10,7 @@ Dokumen ini berisi checklist lengkap untuk pengembangan backend TANAMI E-Commerc
 | ---- | ---------------------------- | --------------- | -------- |
 | 1    | Database & Migrations        | ✅ Selesai      | 100%     |
 | 2    | Models & Relationships       | ✅ Selesai      | 100%     |
-| 3    | Business Logic & Controllers | 🔄 Skeleton     | 20%      |
+| 3    | Business Logic & Controllers | ✅ Selesai      | 100%     |
 | 4    | Automation (Scheduled Jobs)  | ⏳ Pending      | 0%       |
 | 5    | Audit & Logging              | ⏳ Pending      | 0%       |
 | 6    | Admin Dashboard              | ⏳ Pending      | 0%       |
@@ -103,175 +103,175 @@ Dokumen ini berisi checklist lengkap untuk pengembangan backend TANAMI E-Commerc
 
 ---
 
-## **FASE 3: Business Logic & Controllers** 🔄 IN PROGRESS
+## **FASE 3: Business Logic & Controllers** ✅ SELESAI
 
 ### 3.1 Authentication
 
 | Task               | Controller       | Method             | Status  |
 | ------------------ | ---------------- | ------------------ | ------- |
-| Show login form    | `AuthController` | `showLogin()`      | ⏳ TODO |
-| Process login      | `AuthController` | `login()`          | ⏳ TODO |
-| Show register form | `AuthController` | `showRegister()`   | ⏳ TODO |
-| Process register   | `AuthController` | `register()`       | ⏳ TODO |
-| Logout             | `AuthController` | `logout()`         | ⏳ TODO |
-| Show profile       | `AuthController` | `showProfil()`     | ⏳ TODO |
-| Update profile     | `AuthController` | `updateProfil()`   | ⏳ TODO |
-| Change password    | `AuthController` | `updatePassword()` | ⏳ TODO |
+| Show login form    | `AuthController` | `showLogin()`      | ✅ DONE |
+| Process login      | `AuthController` | `login()`          | ✅ DONE |
+| Show register form | `AuthController` | `showRegister()`   | ✅ DONE |
+| Process register   | `AuthController` | `register()`       | ✅ DONE |
+| Logout             | `AuthController` | `logout()`         | ✅ DONE |
+| Show profile       | `AuthController` | `showProfil()`     | ✅ DONE |
+| Update profile     | `AuthController` | `updateProfil()`   | ✅ DONE |
+| Change password    | `AuthController` | `updatePassword()` | ✅ DONE |
 
 **Detail Implementasi:**
 
--   [ ] Validasi email unique
--   [ ] Password min 8 karakter, harus di-hash dengan bcrypt
--   [ ] Session timeout 2 jam
--   [ ] Redirect berdasarkan role setelah login
+-   [x] Validasi email unique
+-   [x] Password min 8 karakter, harus di-hash dengan bcrypt
+-   [x] Session timeout 2 jam
+-   [x] Redirect berdasarkan role setelah login
 -   [ ] Email verification (optional)
 
 ### 3.2 Katalog & Produk (Public)
 
 | Task                 | Controller         | Method         | Status  |
 | -------------------- | ------------------ | -------------- | ------- |
-| List produk + filter | `ProdukController` | `katalog()`    | ⏳ TODO |
-| Detail produk        | `ProdukController` | `show()`       | ⏳ TODO |
-| Produk by kategori   | `ProdukController` | `byKategori()` | ⏳ TODO |
+| List produk + filter | `ProdukController` | `katalog()`    | ✅ DONE |
+| Detail produk        | `ProdukController` | `show()`       | ✅ DONE |
+| Produk by kategori   | `ProdukController` | `byKategori()` | ✅ DONE |
 
 **Detail Implementasi:**
 
--   [ ] Filter by kategori
--   [ ] Search by nama produk
--   [ ] Sort: terbaru, termurah, termahal, terlaris
--   [ ] Pagination 12 per page
--   [ ] Tampilkan hanya produk aktif dengan stok tersedia
--   [ ] Load ulasan dan rating rata-rata
+-   [x] Filter by kategori
+-   [x] Search by nama produk
+-   [x] Sort: terbaru, termurah, termahal, terlaris
+-   [x] Pagination 12 per page
+-   [x] Tampilkan hanya produk aktif dengan stok tersedia
+-   [x] Load ulasan dan rating rata-rata
 
 ### 3.3 Keranjang (Shopping Cart)
 
 | Task        | Controller            | Method      | Status  |
 | ----------- | --------------------- | ----------- | ------- |
-| Show cart   | `KeranjangController` | `index()`   | ⏳ TODO |
-| Add to cart | `KeranjangController` | `store()`   | ⏳ TODO |
-| Update qty  | `KeranjangController` | `update()`  | ⏳ TODO |
-| Remove item | `KeranjangController` | `destroy()` | ⏳ TODO |
-| Clear cart  | `KeranjangController` | `clear()`   | ⏳ TODO |
+| Show cart   | `KeranjangController` | `index()`   | ✅ DONE |
+| Add to cart | `KeranjangController` | `store()`   | ✅ DONE |
+| Update qty  | `KeranjangController` | `update()`  | ✅ DONE |
+| Remove item | `KeranjangController` | `destroy()` | ✅ DONE |
+| Clear cart  | `KeranjangController` | `clear()`   | ✅ DONE |
 
 **Detail Implementasi:**
 
--   [ ] Cek stok tersedia sebelum add/update
--   [ ] Jika produk sudah ada, tambah qty (bukan duplikat)
--   [ ] Group items by petani untuk display
--   [ ] Hitung subtotal per item dan total keseluruhan
+-   [x] Cek stok tersedia sebelum add/update
+-   [x] Jika produk sudah ada, tambah qty (bukan duplikat)
+-   [x] Group items by petani untuk display
+-   [x] Hitung subtotal per item dan total keseluruhan
 
 ### 3.4 Checkout & Order ⭐
 
 | Task             | Controller          | Method       | Status  |
 | ---------------- | ------------------- | ------------ | ------- |
-| Show checkout    | `PesananController` | `checkout()` | ⏳ TODO |
-| Process checkout | `PesananController` | `store()`    | ⏳ TODO |
-| List my orders   | `PesananController` | `index()`    | ⏳ TODO |
-| Order detail     | `PesananController` | `show()`     | ⏳ TODO |
+| Show checkout    | `PesananController` | `checkout()` | ✅ DONE |
+| Process checkout | `PesananController` | `store()`    | ✅ DONE |
+| List my orders   | `PesananController` | `index()`    | ✅ DONE |
+| Order detail     | `PesananController` | `show()`     | ✅ DONE |
 
 **Detail Implementasi Checkout:**
 
--   [ ] Load keranjang, validasi tidak kosong
--   [ ] Pilih kota tujuan → auto hitung ongkir
--   [ ] Input kode kupon → validasi & hitung diskon
--   [ ] Set `batas_bayar` = NOW + 24 JAM
--   [ ] Reserve stock (`stok_direserve`)
--   [ ] Create `pesanan` dengan status `pending`
--   [ ] Create `item_pesanan` untuk setiap item
--   [ ] Record `pemakaian_kupon` jika pakai kupon
--   [ ] Clear keranjang
--   [ ] Redirect ke halaman detail pesanan
+-   [x] Load keranjang, validasi tidak kosong
+-   [x] Pilih kota tujuan → auto hitung ongkir
+-   [x] Input kode kupon → validasi & hitung diskon
+-   [x] Set `batas_bayar` = NOW + 24 JAM
+-   [x] Reserve stock (`stok_direserve`)
+-   [x] Create `pesanan` dengan status `pending`
+-   [x] Create `item_pesanan` untuk setiap item
+-   [x] Record `pemakaian_kupon` jika pakai kupon
+-   [x] Clear keranjang
+-   [x] Redirect ke halaman detail pesanan
 
 ### 3.5 Pembayaran & Upload Bukti ⭐
 
 | Task             | Controller          | Method          | Status  |
 | ---------------- | ------------------- | --------------- | ------- |
-| Upload bukti     | `PesananController` | `uploadBukti()` | ⏳ TODO |
-| Cancel order     | `PesananController` | `batal()`       | ⏳ TODO |
-| Confirm received | `PesananController` | `konfirmasi()`  | ⏳ TODO |
-| Request refund   | `PesananController` | `mintaRefund()` | ⏳ TODO |
+| Upload bukti     | `PesananController` | `uploadBukti()` | ✅ DONE |
+| Cancel order     | `PesananController` | `batal()`       | ✅ DONE |
+| Confirm received | `PesananController` | `konfirmasi()`  | ✅ DONE |
+| Request refund   | `PesananController` | `mintaRefund()` | ✅ DONE |
 
 **Detail Upload Bukti:**
 
--   [ ] Validasi: JPG/PNG, max 2MB
--   [ ] Simpan ke `storage/app/public/bukti-bayar/`
--   [ ] Update status → `menunggu_verifikasi`
+-   [x] Validasi: JPG/PNG, max 2MB
+-   [x] Simpan ke `storage/app/public/bukti-bayar/`
+-   [x] Update status → `menunggu_verifikasi`
 
 **Detail Cancel:**
 
--   [ ] Hanya bisa jika status `pending` atau `menunggu_verifikasi`
--   [ ] Release reserved stock
--   [ ] Set `alasan_batal`, `tgl_dibatalkan`
+-   [x] Hanya bisa jika status `pending` atau `menunggu_verifikasi`
+-   [x] Release reserved stock
+-   [x] Set `alasan_batal`, `tgl_dibatalkan`
 
 **Detail Konfirmasi:**
 
--   [ ] Hanya bisa jika status `terkirim`
--   [ ] Update status → `selesai`
--   [ ] Set `tgl_selesai`, `id_konfirmasi`
--   [ ] Release escrow ke petani
+-   [x] Hanya bisa jika status `terkirim`
+-   [x] Update status → `selesai`
+-   [x] Set `tgl_selesai`, `id_konfirmasi`
+-   [x] Release escrow ke petani
 
 ### 3.6 Verifikasi Petani ⭐
 
 | Task           | Controller                 | Method         | Status  |
 | -------------- | -------------------------- | -------------- | ------- |
-| List orders    | `Petani\PesananController` | `index()`      | ⏳ TODO |
-| Order detail   | `Petani\PesananController` | `show()`       | ⏳ TODO |
-| Verify payment | `Petani\PesananController` | `verifikasi()` | ⏳ TODO |
-| Reject payment | `Petani\PesananController` | `tolak()`      | ⏳ TODO |
-| Process order  | `Petani\PesananController` | `proses()`     | ⏳ TODO |
-| Ship order     | `Petani\PesananController` | `kirim()`      | ⏳ TODO |
+| List orders    | `Petani\PesananController` | `index()`      | ✅ DONE |
+| Order detail   | `Petani\PesananController` | `show()`       | ✅ DONE |
+| Verify payment | `Petani\PesananController` | `verifikasi()` | ✅ DONE |
+| Reject payment | `Petani\PesananController` | `tolak()`      | ✅ DONE |
+| Process order  | `Petani\PesananController` | `proses()`     | ✅ DONE |
+| Ship order     | `Petani\PesananController` | `kirim()`      | ✅ DONE |
 
 **Detail Verifikasi Payment:**
 
--   [ ] Hanya order dengan status `menunggu_verifikasi`
--   [ ] Update status → `dibayar`
--   [ ] Set `tgl_verifikasi`, `id_verifikator`
--   [ ] Kurangi stok aktual (produk.stok)
--   [ ] Release reserved stock
--   [ ] Create `escrow` dengan status `ditahan`
+-   [x] Hanya order dengan status `menunggu_verifikasi`
+-   [x] Update status → `dibayar`
+-   [x] Set `tgl_verifikasi`, `id_verifikator`
+-   [x] Kurangi stok aktual (produk.stok)
+-   [x] Release reserved stock
+-   [x] Create `escrow` dengan status `ditahan`
 
 **Detail Reject Payment:**
 
--   [ ] Update status → `dibatalkan`
--   [ ] Set `alasan_tolak`, `tgl_dibatalkan`
--   [ ] Release reserved stock
+-   [x] Update status → `dibatalkan`
+-   [x] Set `alasan_tolak`, `tgl_dibatalkan`
+-   [x] Release reserved stock
 
 **Detail Kirim:**
 
--   [ ] Input nomor resi
--   [ ] Update status → `dikirim`
+-   [x] Input nomor resi
+-   [x] Update status → `dikirim`
 
 ### 3.7 Produk Management (Petani)
 
 | Task          | Controller                | Method      | Status  |
 | ------------- | ------------------------- | ----------- | ------- |
-| List produk   | `Petani\ProdukController` | `index()`   | ⏳ TODO |
-| Form tambah   | `Petani\ProdukController` | `create()`  | ⏳ TODO |
-| Store produk  | `Petani\ProdukController` | `store()`   | ⏳ TODO |
-| Form edit     | `Petani\ProdukController` | `edit()`    | ⏳ TODO |
-| Update produk | `Petani\ProdukController` | `update()`  | ⏳ TODO |
-| Delete produk | `Petani\ProdukController` | `destroy()` | ⏳ TODO |
+| List produk   | `Petani\ProdukController` | `index()`   | ✅ DONE |
+| Form tambah   | `Petani\ProdukController` | `create()`  | ✅ DONE |
+| Store produk  | `Petani\ProdukController` | `store()`   | ✅ DONE |
+| Form edit     | `Petani\ProdukController` | `edit()`    | ✅ DONE |
+| Update produk | `Petani\ProdukController` | `update()`  | ✅ DONE |
+| Delete produk | `Petani\ProdukController` | `destroy()` | ✅ DONE |
 
 **Detail Implementasi:**
 
--   [ ] Generate slug otomatis dari nama
--   [ ] Upload foto: JPG/PNG, max 5MB
--   [ ] Simpan ke `storage/app/public/produk/`
--   [ ] Tidak bisa delete jika ada reserved stock
+-   [x] Generate slug otomatis dari nama
+-   [x] Upload foto: JPG/PNG, max 5MB
+-   [x] Simpan ke `storage/app/public/produk/`
+-   [x] Tidak bisa delete jika ada reserved stock
 
 ### 3.8 Admin Features
 
 | Task           | Controller                  | Method      | Status  |
 | -------------- | --------------------------- | ----------- | ------- |
-| Dashboard      | `Admin\DashboardController` | `index()`   | ⏳ TODO |
-| CRUD Kategori  | `Admin\KategoriController`  | \*          | ⏳ TODO |
-| CRUD Kota      | `Admin\KotaController`      | \*          | ⏳ TODO |
-| CRUD Kupon     | `Admin\KuponController`     | \*          | ⏳ TODO |
-| User list      | `Admin\PenggunaController`  | `index()`   | ⏳ TODO |
-| Verify petani  | `Admin\PenggunaController`  | `verify()`  | ⏳ TODO |
-| Monitor escrow | `Admin\EscrowController`    | `index()`   | ⏳ TODO |
-| Approve refund | `Admin\RefundController`    | `approve()` | ⏳ TODO |
-| Reject refund  | `Admin\RefundController`    | `reject()`  | ⏳ TODO |
+| Dashboard      | `Admin\DashboardController` | `index()`   | ✅ DONE |
+| CRUD Kategori  | `Admin\KategoriController`  | \*          | ✅ DONE |
+| CRUD Kota      | `Admin\KotaController`      | \*          | ✅ DONE |
+| CRUD Kupon     | `Admin\KuponController`     | \*          | ✅ DONE |
+| User list      | `Admin\PenggunaController`  | `index()`   | ✅ DONE |
+| Verify petani  | `Admin\PenggunaController`  | `verify()`  | ✅ DONE |
+| Monitor escrow | `Admin\EscrowController`    | `index()`   | ✅ DONE |
+| Approve refund | `Admin\RefundController`    | `approve()` | ✅ DONE |
+| Reject refund  | `Admin\RefundController`    | `reject()`  | ✅ DONE |
 
 ---
 

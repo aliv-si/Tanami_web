@@ -50,6 +50,7 @@ class Pesanan extends Model
         'tgl_selesai_otomatis',
         'alasan_batal',
         'tgl_dibatalkan',
+        'alasan_refund',
     ];
 
     protected $casts = [

@@ -67,6 +67,21 @@ class Pesanan extends Model
         'tgl_dibatalkan' => 'datetime',
     ];
 
+    /**
+     * Non-persisted property untuk menyimpan alasan log sementara
+     * Digunakan oleh PesananObserver untuk contextual logging
+     */
+    public ?string $alasan_log = null;
+
+    /**
+     * Update pesanan dengan alasan yang akan di-log
+     */
+    public function updateWithReason(array $attributes, ?string $alasan = null): bool
+    {
+        $this->alasan_log = $alasan;
+        return $this->update($attributes);
+    }
+
     // ==================== SCOPES ====================
 
     public function scopePending($query)

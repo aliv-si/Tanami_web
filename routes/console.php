@@ -39,3 +39,13 @@ Schedule::command('orders:auto-complete')
     ->everySixHours()
     ->withoutOverlapping()
     ->appendOutputTo(storage_path('logs/scheduler.log'));
+
+/**
+ * 4.4 Payment Reminder (Opsional)
+ * Jalankan setiap 6 jam untuk kirim reminder ke pembeli
+ * yang pesanannya akan timeout dalam 6 jam
+ */
+Schedule::command('orders:send-payment-reminder')
+    ->everySixHours()
+    ->withoutOverlapping()
+    ->appendOutputTo(storage_path('logs/scheduler.log'));

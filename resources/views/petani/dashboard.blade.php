@@ -2,25 +2,6 @@
 
 @section('title', 'Dashboard')
 
-@php
-    // Dummy data - will be replaced with actual data from controller
-    $stats = [
-        'totalProducts' => 0,
-        'productGrowth' => '+0%',
-        'activeOrders' => 0,
-        'totalSales' => 0,
-        'salesGrowth' => '+0%',
-        'availableBalance' => 0,
-    ];
-    $recentOrders = [];
-    $rating = [
-        'score' => 0,
-        'totalReviews' => 0,
-        'productQuality' => 0,
-        'deliverySpeed' => 0,
-    ];
-@endphp
-
 @section('content')
 <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="flex items-center justify-between px-8 py-4">
@@ -28,7 +9,7 @@
         <div class="flex items-center gap-6">
             <div class="relative hidden lg:block">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
-                <input class="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-64" placeholder="Cari pesanan, produk..." type="text"/>
+                <input class="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-64" placeholder="Cari pesanan, produk..." type="text" />
             </div>
             <div class="flex items-center gap-4">
                 <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full">
@@ -141,7 +122,7 @@
                     <div class="flex gap-1 mt-2 mb-2">
                         @for($i = 0; $i < 5; $i++)
                             <span class="material-symbols-outlined text-yellow-400 fill-1">star</span>
-                        @endfor
+                            @endfor
                     </div>
                     <p class="text-sm text-gray-500 font-sans">Berdasarkan {{ $rating['totalReviews'] }} ulasan</p>
                 </div>

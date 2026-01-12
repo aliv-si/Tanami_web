@@ -12,7 +12,9 @@ class HistoriStatus extends Model
 
     protected $table = 'histori_status';
     protected $primaryKey = 'id_histori';
-    public $timestamps = false;
+
+    const CREATED_AT = 'tgl_dibuat';
+    const UPDATED_AT = null; // No updated_at column
 
     protected $fillable = [
         'id_pesanan',

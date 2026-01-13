@@ -2,22 +2,6 @@
 
 @section('title', 'Ulasan Pelanggan')
 
-@php
-    // Dummy data - will be replaced with actual data from controller
-    $ratingStats = [
-        'average' => 4.8,
-        'totalReviews' => 0,
-        'distribution' => [
-            5 => 0,
-            4 => 0,
-            3 => 0,
-            2 => 0,
-            1 => 0,
-        ],
-    ];
-    $reviews = [];
-@endphp
-
 @section('content')
 <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="flex items-center justify-between px-8 py-5">
@@ -51,19 +35,19 @@
                 <div class="flex items-center gap-1 mt-3">
                     @for($i = 0; $i < 5; $i++)
                         @if($i < floor($ratingStats['average']))
-                            <span class="material-symbols-outlined text-yellow-400 fill-1 text-2xl">star</span>
+                        <span class="material-symbols-outlined text-yellow-400 fill-1 text-2xl">star</span>
                         @else
-                            <span class="material-symbols-outlined text-gray-300 text-2xl">star</span>
+                        <span class="material-symbols-outlined text-gray-300 text-2xl">star</span>
                         @endif
-                    @endfor
+                        @endfor
                 </div>
                 <p class="text-sm text-gray-500 mt-2">Berdasarkan {{ $ratingStats['totalReviews'] }} ulasan</p>
             </div>
             <div class="space-y-3">
                 @for($star = 5; $star >= 1; $star--)
                 @php
-                    $count = $ratingStats['distribution'][$star] ?? 0;
-                    $percentage = $ratingStats['totalReviews'] > 0 ? ($count / $ratingStats['totalReviews']) * 100 : 0;
+                $count = $ratingStats['distribution'][$star] ?? 0;
+                $percentage = $ratingStats['totalReviews'] > 0 ? ($count / $ratingStats['totalReviews']) * 100 : 0;
                 @endphp
                 <div class="flex items-center gap-3">
                     <span class="text-sm font-medium text-gray-600 w-12">{{ $star }} ⭐</span>
@@ -94,11 +78,11 @@
                                 <div class="flex">
                                     @for($i = 0; $i < 5; $i++)
                                         @if($i < $review['rating'])
-                                            <span class="material-symbols-outlined text-yellow-400 fill-1 text-sm">star</span>
+                                        <span class="material-symbols-outlined text-yellow-400 fill-1 text-sm">star</span>
                                         @else
-                                            <span class="material-symbols-outlined text-gray-300 text-sm">star</span>
+                                        <span class="material-symbols-outlined text-gray-300 text-sm">star</span>
                                         @endif
-                                    @endfor
+                                        @endfor
                                 </div>
                                 <span class="text-xs text-gray-400">{{ $review['date'] }}</span>
                             </div>
@@ -109,7 +93,7 @@
                         {{ $review['product']['name'] }}
                     </div>
                     <p class="text-gray-700 text-sm leading-relaxed">{{ $review['comment'] }}</p>
-                    
+
                     @if($review['reply'])
                     <div class="mt-4 pl-4 border-l-2 border-primary/30 bg-gray-50 p-3 rounded-r-lg">
                         <p class="text-xs font-semibold text-primary mb-1">Balasan Anda:</p>

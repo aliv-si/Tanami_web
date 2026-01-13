@@ -11,9 +11,9 @@ Dokumen ini berisi checklist lengkap untuk pengembangan backend TANAMI E-Commerc
 | 1    | Database & Migrations        | ✅ Selesai      | 100%     |
 | 2    | Models & Relationships       | ✅ Selesai      | 100%     |
 | 3    | Business Logic & Controllers | ✅ Selesai      | 100%     |
-| 4    | Automation (Scheduled Jobs)  | ⏳ Pending      | 0%       |
-| 5    | Audit & Logging              | ⏳ Pending      | 0%       |
-| 6    | Admin Dashboard              | ⏳ Pending      | 0%       |
+| 4    | Automation (Scheduled Jobs)  | ✅ Selesai      | 100%     |
+| 5    | Audit & Logging              | ✅ Selesai      | 100%     |
+| 6    | Admin Dashboard              | ✅ Selesai      | 100%     |
 | 7    | API Endpoints                | ✅ Routes Ready | 30%      |
 | 8    | Notifikasi                   | ⏳ Pending      | 0%       |
 
@@ -273,9 +273,50 @@ Dokumen ini berisi checklist lengkap untuk pengembangan backend TANAMI E-Commerc
 | Approve refund | `Admin\RefundController`    | `approve()` | ✅ DONE |
 | Reject refund  | `Admin\RefundController`    | `reject()`  | ✅ DONE |
 
+### 3.9 Petani Dashboard ✅ DONE
+
+| Task            | Controller                   | Method    | Status  |
+| --------------- | ---------------------------- | --------- | ------- |
+| Dashboard stats | `Petani\DashboardController` | `index()` | ✅ DONE |
+
+**Data yang Dibutuhkan (dari Blade):**
+
+-   [x] `totalProducts` - COUNT produk milik petani
+-   [x] `productGrowth` - Persentase pertumbuhan produk (opsional)
+-   [x] `activeOrders` - COUNT pesanan aktif (dibayar, diproses, dikirim)
+-   [x] `totalSales` - SUM total_bayar dari pesanan selesai
+-   [x] `salesGrowth` - Persentase pertumbuhan sales (opsional)
+-   [x] `availableBalance` - SUM escrow status dikirim ke petani ini
+-   [x] `recentOrders` - 5 pesanan terbaru
+-   [x] `rating.score` - AVG rating dari ulasan produk petani
+-   [x] `rating.totalReviews` - COUNT ulasan produk petani
+-   [x] `rating.productQuality` - Persentase kualitas (opsional)
+-   [x] `rating.deliverySpeed` - Persentase kecepatan (opsional)
+
+### 3.10 Ulasan / Review ✅ DONE
+
+| Task               | Controller                | Method    | Status  |
+| ------------------ | ------------------------- | --------- | ------- |
+| List ulasan petani | `Petani\UlasanController` | `index()` | ✅ DONE |
+| Buat ulasan        | `UlasanController`        | `store()` | ✅ DONE |
+
+**Data Petani Ulasan (dari Blade):**
+
+-   [x] `ratingStats.average` - AVG rating semua produk petani
+-   [x] `ratingStats.totalReviews` - COUNT total ulasan
+-   [x] `ratingStats.distribution` - COUNT per rating (1-5 bintang)
+-   [x] `reviews[]` - List ulasan dengan: customerName, rating, date, product, comment, reply
+
+**Fitur Buat Ulasan (Pembeli):**
+
+-   [x] Validasi: hanya bisa review jika pesanan selesai
+-   [x] Rating 1-5 bintang (required)
+-   [x] Komentar (opsional)
+-   [x] Satu ulasan per produk per pesanan
+
 ---
 
-## **FASE 4: Automation (Scheduled Jobs)** ⭐ ⏳ PENDING
+## **FASE 4: Automation (Scheduled Jobs)** ⭐ ✅ SELESAI
 
 ### 4.1 Auto-Cancel Timeout Pembayaran (24 Jam)
 
@@ -317,7 +358,7 @@ Dokumen ini berisi checklist lengkap untuk pengembangan backend TANAMI E-Commerc
 
 ---
 
-## **FASE 5: Audit & Logging** ⭐ ⏳ PENDING
+## **FASE 5: Audit & Logging** ⭐ ✅ SELESAI
 
 ### 5.1 Observer untuk Pesanan
 

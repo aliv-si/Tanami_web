@@ -147,7 +147,6 @@ resources/views/
 │
 ├── layouts/
 │   ├── app.blade.php            (Aliv) # Layout utama (navbar, footer)
-│   ├── guest.blade.php          (Adams) # Layout untuk auth pages
 │   ├── petani.blade.php         (Imax) # Layout dashboard petani (sidebar)
 │   └── admin.blade.php          (Adams) # Layout dashboard admin (sidebar)
 │
@@ -161,8 +160,8 @@ resources/views/
 │   └── pagination.blade.php     (Aliv) # Custom pagination
 │
 ├── auth/
-│   ├── login.blade.php          (Adams) 
-│   └── register.blade.php       (Adams) 
+│   ├── login.blade.php          (Aliv) 
+│   └── register.blade.php       (Aliv) 
 │
 ├── pages/
 │   ├── beranda.blade.php        (Aliv) 
@@ -174,11 +173,11 @@ resources/views/
 │   └── produk-detail.blade.php  (Aliv) 
 │
 ├── pembeli/
-│   ├── profil.blade.php         (Aliv) 
-│   ├── keranjang.blade.php      (Aliv) 
-│   ├── checkout.blade.php       (Aliv) 
-│   ├── pesanan.blade.php        (Aliv) 
-│   └── pesanan-detail.blade.php (Aliv) 
+│   ├── profil.blade.php         (Lukman) 
+│   ├── keranjang.blade.php      (Lukman) 
+│   ├── checkout.blade.php       (Lukman) 
+│   ├── pesanan.blade.php        (Lukman) 
+│   └── pesanan-detail.blade.php (Lukman) 
 │
 ├── petani/
 │   ├── dashboard.blade.php      (Imax) 
@@ -194,18 +193,18 @@ resources/views/
 └── admin/
     ├── dashboard.blade.php      (Adams) 
     ├── pengguna/
-    │   ├── index.blade.php      (Adams) 
-    │   ├── petani.blade.php     (Adams) 
-    │   └── show.blade.php       (Adams) 
+    │   ├── index.blade.php      (Azfa) 
+    │   ├── petani.blade.php     (Azfa) 
+    │   └── show.blade.php       (Azfa) 
     ├── master/
     │   ├── kategori.blade.php   (Adams) 
     │   ├── kota.blade.php       (Adams) 
     │   └── kupon.blade.php      (Adams) 
     ├── pesanan/
-    │   ├── index.blade.php      (Adams) 
-    │   └── detail.blade.php     (Adams) 
-    ├── escrow.blade.php         (Adams) 
-    ├── refund.blade.php         (Adams) 
+    │   ├── index.blade.php      (Azfa) 
+    │   └── detail.blade.php     (Azfa) 
+    ├── escrow.blade.php         (Azfa) 
+    ├── refund.blade.php         (Azfa) 
     └── laporan.blade.php        (Adams) 
 ```
 

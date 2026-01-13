@@ -63,6 +63,9 @@ class DashboardController extends Controller
             ->orderBy('tgl_dibuat', 'desc')
             ->limit(10)
             ->get();
+        // echo "<pre>";
+        // print_r($recentOrders);
+        // die;
 
         // Pending Petani Verification (last 5)
         $pendingPetani = Pengguna::where('role_pengguna', 'petani')

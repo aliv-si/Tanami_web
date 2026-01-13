@@ -55,10 +55,15 @@ class KuponController extends Controller
             return back()->withErrors(['nilai_diskon' => 'Diskon persen maksimal 100%.'])->withInput();
         }
 
+        // Determine which column to use based on tipe_diskon
+        $nominalDiskon = $validated['tipe_diskon'] === 'nominal' ? $validated['nilai_diskon'] : null;
+        $persenDiskon = $validated['tipe_diskon'] === 'persen' ? $validated['nilai_diskon'] : null;
+
         Kupon::create([
             'kode_kupon' => Str::upper($validated['kode_kupon']),
             'tipe_diskon' => $validated['tipe_diskon'],
-            'nilai_diskon' => $validated['nilai_diskon'],
+            'nominal_diskon' => $nominalDiskon,
+            'persen_diskon' => $persenDiskon,
             'min_belanja' => $validated['min_belanja'] ?? 0,
             'limit_per_user' => $validated['limit_per_user'] ?? null,
             'limit_total' => $validated['limit_total'] ?? null,
@@ -94,10 +99,15 @@ class KuponController extends Controller
             return back()->withErrors(['nilai_diskon' => 'Diskon persen maksimal 100%.'])->withInput();
         }
 
+        // Determine which column to use based on tipe_diskon
+        $nominalDiskon = $validated['tipe_diskon'] === 'nominal' ? $validated['nilai_diskon'] : null;
+        $persenDiskon = $validated['tipe_diskon'] === 'persen' ? $validated['nilai_diskon'] : null;
+
         $kupon->update([
             'kode_kupon' => Str::upper($validated['kode_kupon']),
             'tipe_diskon' => $validated['tipe_diskon'],
-            'nilai_diskon' => $validated['nilai_diskon'],
+            'nominal_diskon' => $nominalDiskon,
+            'persen_diskon' => $persenDiskon,
             'min_belanja' => $validated['min_belanja'] ?? 0,
             'limit_per_user' => $validated['limit_per_user'] ?? null,
             'limit_total' => $validated['limit_total'] ?? null,

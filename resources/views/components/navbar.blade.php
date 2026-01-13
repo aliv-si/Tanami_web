@@ -3,41 +3,38 @@
     <div class="px-4 md:px-10 py-3 mx-auto max-w-[1280px]">
         <div class="flex items-center justify-between whitespace-nowrap">
             <div class="flex items-center gap-3 text-content-dark dark:text-white">
-                <div class="size-8 text-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined text-3xl">eco</span>
-                </div>
-                <h2
-                    class="text-content-dark dark:text-white text-xl font-bold font-heading leading-tight tracking-[-0.015em]">
-                    TANAMI</h2>
+                <img 
+                    src="{{ asset('images/logoinvert.png') }}" 
+                    alt="Tanami Logo"
+                    class="h-6 w-auto object-contain"
+                />
             </div>
             <div class="hidden md:flex flex-1 justify-center gap-8 font-heading">
                 <a class="text-content-dark dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-[16px] font-semibold leading-normal"
-                    href="#">Home</a>
+                    href="{{ route('home') }}">Home</a>
                 <a class="text-content-dark dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-[16px] font-semibold leading-normal"
-                    href="#">Shop</a>
+                    href="{{ route('katalog') }}">Shop</a>
                 <a class="text-content-dark dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-[16px] font-semibold leading-normal"
-                    href="#">About</a>
+                    href="{{ route('tentang') }}">About</a>
                 <a class="text-content-dark dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-[16px] font-semibold leading-normal"
-                    href="#">Contact</a>
+                    href="{{ route('kontak') }}">Contact</a>
             </div>
-            <div class="flex gap-3">
+            <div class="flex items-center justify-center gap-3">
                 <button
                     class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-content-dark dark:text-white transition-colors">
                     <span class="material-symbols-outlined">search</span>
                 </button>
-                <button
-                    class="relative flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-content-dark dark:text-white transition-colors">
-                    <span class="material-symbols-outlined">shopping_bag</span>
-                    <span class="absolute top-1 right-1 size-2 bg-primary rounded-full"></span>
-                </button>
-                <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center gap-3">
                 @auth
                 {{-- Keranjang (hanya untuk pembeli) --}}
                 @if(auth()->user()->isPembeli())
-                <a href="{{ route('keranjang') }}" class="nav-icon-btn relative">
-                    <span class="material-symbols-outlined">shopping_bag</span>
-                    <span class="absolute top-1 right-1 size-2 bg-primary rounded-full"></span>
-                </a>
+                <button
+                    class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-content-dark dark:text-white transition-colors">
+                    <a href="{{ route('keranjang') }}" class="nav-icon-btn relative">
+                        <span class="material-symbols-outlined">shopping_bag</span>
+                        <span class="absolute top-1 right-1 size-2 bg-primary rounded-full"></span>
+                    </a>
+                </button>
                 @endif
 
                 {{-- Profile Dropdown --}}

@@ -118,6 +118,12 @@ class DashboardController extends Controller
             'deliverySpeed' => 80, // Placeholder - could be calculated from order processing time
         ];
 
-        return view('petani.dashboard', compact('stats', 'recentOrders', 'rating'));
+        // ==================== PENDING VERIFICATION ====================
+        
+        $pendingVerification = Pesanan::whereHas('items', fn($q) => $q->where('id_petani', $petaniId))
+            ->menungguVerifikasi()
+            ->count();
+
+        return view('petani.dashboard', compact('stats', 'recentOrders', 'rating', 'pendingVerification'));
     }
 }

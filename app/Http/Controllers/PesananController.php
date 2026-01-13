@@ -246,6 +246,7 @@ class PesananController extends Controller
     public function show(int $id): View
     {
         $pesanan = Pesanan::with([
+            'pembeli',
             'kota',
             'items.produk.petani',
             'historiStatus.pengubah',

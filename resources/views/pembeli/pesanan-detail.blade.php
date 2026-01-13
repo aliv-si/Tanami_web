@@ -140,7 +140,7 @@
                                     <div class="mt-4 flex items-center text-sm font-sans text-gray-500 dark:text-gray-400">
                                         <span>Qty: {{ $item->jumlah }}</span>
                                         <span class="mx-2">•</span>
-                                        <span>@ Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}</span>
+                                        <span>@ Rp {{ number_format($item->harga_snapshot, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                             <div class="h-px bg-gray-100 dark:bg-white/10 my-2"></div>
                             <div class="flex justify-between items-center text-lg font-heading font-bold text-[#1e3f1b] dark:text-white">
                                 <span>Total Price</span>
-                                <span>Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</span>
+                                <span>Rp {{ number_format($pesanan->total_bayar, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>
@@ -191,9 +191,9 @@
                                 </div>
                                 <div>
                                     <h4 class="font-heading font-bold {{ $loop->first ? 'text-[#53be20]' : 'text-[#1e3f1b] dark:text-white' }} text-sm">{{ $statusLabels[$histori->status_baru] ?? $histori->status_baru }}</h4>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ $histori->tgl_ubah->format('d M, h:i A') }}</p>
-                                    @if($histori->keterangan)
-                                    <p class="text-xs text-[#1e3f1b] dark:text-gray-300 mt-2 font-medium">{{ $histori->keterangan }}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ $histori->tgl_dibuat->format('d M, h:i A') }}</p>
+                                    @if($histori->alasan)
+                                    <p class="text-xs text-[#1e3f1b] dark:text-gray-300 mt-2 font-medium">{{ $histori->alasan }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -223,13 +223,13 @@
                                 <span class="material-symbols-outlined text-gray-400">person_pin_circle</span>
                             </div>
                             <div>
-                                <p class="font-heading font-semibold text-[#1e3f1b] dark:text-white">{{ $pesanan->nama_penerima }}</p>
+                                <p class="font-heading font-semibold text-[#1e3f1b] dark:text-white">{{ $pesanan->pembeli->nama_lengkap }}</p>
                                 <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
-                                    {{ $pesanan->alamat_pengiriman }}<br>
+                                    {{ $pesanan->pembeli->alamat ?? '-' }}<br>
                                     {{ $pesanan->kota->nama_kota ?? '' }}
                                 </p>
-                                @if($pesanan->no_hp_penerima)
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">{{ $pesanan->no_hp_penerima }}</p>
+                                @if($pesanan->pembeli->no_hp)
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">{{ $pesanan->pembeli->no_hp }}</p>
                                 @endif
                                 @if($pesanan->no_resi)
                                 <p class="text-sm text-[#53be20] mt-2 font-medium">Resi: {{ $pesanan->no_resi }}</p>

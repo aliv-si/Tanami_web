@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Beranda | Tanami')
+@section('title', 'Home | Tanami')
 
 @section('content')
 <main class="flex flex-col flex-1">
@@ -38,7 +38,7 @@
                     @auth
                     <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit font-heading">
                         <span class="material-symbols-outlined text-sm mr-1">waving_hand</span>
-                        Selamat datang, {{ auth()->user()->nama_lengkap }}!
+                        Welcome, {{ auth()->user()->nama_lengkap }}!
                     </div>
                     @else
                     <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit font-heading">
@@ -71,20 +71,16 @@
                         @else
                         <a href="{{ route('katalog') }}" class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-[16px] font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary/90">
                             <span class="material-symbols-outlined mr-2">storefront</span>
-                            Belanja Sekarang
-                        </a>
-                        <a href="{{ route('pesanan') }}" class="inline-flex h-12 items-center justify-center rounded-lg border border-gray-200 bg-white dark:bg-white/5 px-8 text-[16px] font-semibold text-[#1e3f1b] dark:text-white shadow-sm transition-colors hover:bg-gray-50">
-                            <span class="material-symbols-outlined mr-2">receipt_long</span>
-                            Pesanan Saya
+                            Shop Now
                         </a>
                         @endif
                         @else
                         {{-- Guest: Register/Login CTA --}}
                         <a href="{{ route('register') }}" class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-[16px] font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 focus-visible:outline-none">
-                            Daftar Sekarang
+                            Register Now
                         </a>
                         <a href="{{ route('katalog') }}" class="inline-flex h-12 items-center justify-center rounded-lg border border-gray-200 bg-white dark:bg-white/5 dark:border-white/10 px-8 text-[16px] font-semibold text-[#1e3f1b] dark:text-white shadow-sm transition-colors hover:bg-gray-50 dark:hover:bg-white/10">
-                            Lihat Katalog
+                            See Catalog
                         </a>
                         @endauth
                     </div>
@@ -203,7 +199,7 @@
                         picks for this season.</p>
                 </div>
                 <a class="hidden sm:flex items-center text-primary font-heading font-semibold hover:underline"
-                    href="#">
+                    href="{{ route('katalog') }}">
                     View all
                     <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                 </a>

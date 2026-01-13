@@ -140,7 +140,7 @@
                                     <div class="mt-4 flex items-center text-sm font-sans text-gray-500 dark:text-gray-400">
                                         <span>Qty: {{ $item->jumlah }}</span>
                                         <span class="mx-2">•</span>
-                                        <span>@ Rp {{ number_format($item->harga_snapshot, 0, ',', '.') }}</span>
+                                        <span>@ Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>

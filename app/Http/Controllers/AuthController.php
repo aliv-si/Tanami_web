@@ -59,7 +59,7 @@ class AuthController extends Controller
                 return redirect()->intended(route('petani.dashboard'))
                     ->with('success', 'Selamat datang, ' . $user->nama_lengkap . '!');
             } else {
-                return redirect()->intended(route('beranda'))
+                return redirect()->intended(route('home'))
                     ->with('success', 'Selamat datang, ' . $user->nama_lengkap . '!');
             }
         }
@@ -118,7 +118,7 @@ class AuthController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
-            return redirect()->route('beranda')
+            return redirect()->route('home')
                 ->with('success', 'Registrasi berhasil! Selamat datang, ' . $user->nama_lengkap . '!');
         }
 

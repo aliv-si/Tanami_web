@@ -122,6 +122,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profil', [AuthController::class, 'showProfil'])->name('profil');
     Route::put('/profil', [AuthController::class, 'updateProfil'])->name('profil.update');
     Route::put('/profil/password', [AuthController::class, 'updatePassword'])->name('profil.password');
+    Route::post('/profil/foto', [AuthController::class, 'updateFoto'])->name('profil.foto');
 
     // --------------------- KERANJANG ---------------------
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');

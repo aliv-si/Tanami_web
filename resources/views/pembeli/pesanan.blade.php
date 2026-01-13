@@ -104,7 +104,7 @@
                     @endif
 
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <div class="text-xl font-heading font-bold text-[#1e3f1b] dark:text-white">Rp {{ number_format($order->total_harga, 0, ',', '.') }}</div>
+                        <div class="text-xl font-heading font-bold text-[#1e3f1b] dark:text-white">Rp {{ number_format($order->total_bayar, 0, ',', '.') }}</div>
                         <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                             <!-- View Details Button -->
                             <a href="{{ route('pesanan.detail', $order->id_pesanan) }}"
@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="p-6">
                                     <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Order: #TNM-{{ str_pad($order->id_pesanan, 5, '0', STR_PAD_LEFT) }}</p>
-                                    <p class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-4">Total: Rp {{ number_format($order->total_harga, 0, ',', '.') }}</p>
+                                    <p class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-4">Total: Rp {{ number_format($order->total_bayar, 0, ',', '.') }}</p>
                                     <input type="file" name="bukti_bayar" accept="image/jpeg,image/png" required
                                         class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm">
                                     <p class="text-xs text-gray-500 mt-2">Format: JPG, PNG. Max: 2MB</p>

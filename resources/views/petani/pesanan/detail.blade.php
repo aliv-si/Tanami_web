@@ -37,9 +37,9 @@
             </div>
         </div>
         <div class="flex items-center gap-4">
-            <button class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-50">
+            <a href="{{ route('petani.pesanan.invoice', $pesanan->id_pesanan) }}" target="_blank" class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-50">
                 <span class="material-symbols-outlined text-lg">print</span> Cetak Invoice
-            </button>
+            </a>
         </div>
     </div>
 </header>

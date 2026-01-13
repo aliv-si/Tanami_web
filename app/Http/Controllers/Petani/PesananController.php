@@ -352,4 +352,28 @@ class PesananController extends Controller
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
+    /**
+     * Print invoice
+     */
+    public function invoice(int $id): View
+    {
+        $petaniId = Auth::id();
+
+        $pesanan = Pesanan::whereHas('items', fn($q) => $q->where('id_petani', $petaniId))
+            ->with([
+                'pembeli',
+                'kota',
+                'items' => fn($q) => $q->where('id_petani', $petaniId)->with('produk'),
+            ])
+            ->findOrFail($id);
+
+        // Calculate petani's portion
+        $subtotalPetani = $pesanan->items->sum('subtotal');
+
+        return view('petani.pesanan.invoice', [
+            'pesanan' => $pesanan,
+            'subtotalPetani' => $subtotalPetani,
+        ]);
+    }
 }

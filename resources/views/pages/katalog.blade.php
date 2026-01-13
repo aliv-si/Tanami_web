@@ -164,43 +164,43 @@
                 </div>
             </aside>
             <div class="flex-1">
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
                     <div
                         class="group relative flex flex-col bg-white dark:bg-[#1e2a1a] border border-[#dfe5dc] dark:border-[#2a3825] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         <div class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
                             <span
-                                class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-md z-10 font-heading">New</span>
+                                class="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-md z-10 font-heading">New</span>
                             <button
-                                class="absolute top-3 right-3 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
-                                <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
+                                <span class="material-symbols-outlined text-[18px]">favorite</span>
                             </button>
                             <img alt="Organic Potting Soil"
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="Bag of organic potting soil with a small plant growing out of it"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmh4sVQKlMX9BX-L3ZbAtlvpZLOJDMB4riXgNr7o7HsA6brxZzkmyQlt3lubPR-MPHY_rwWemML0kiRshU9mZKKSeACjGUAOxPG3-jxcKjkLpAEfQ8zy_UGC6ieM-XYgnf2CJQhHsuHwXszh-J1L7rhgTE3Anp6oZa-yxWE6P08VIPTr1cmW5Lh8EPW3rYapodiIf-z20hrxvP2cJCrr9P2zPSegRJjAYSt-axCeFCG6H_ioAiXrAMAOBfVGDZb3mwzFfuVzD9Ydrj" />
                         </div>
-                        <div class="p-4 flex flex-col flex-1">
-                            <div class="flex items-center gap-1 mb-2">
+                        <div class="p-3.5 flex flex-col flex-1">
+                            <div class="flex items-center gap-0.5 mb-1.5">
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
-                                <span class="material-symbols-outlined text-gray-300 text-[16px]">star</span>
-                                <span class="text-xs text-text-secondary ml-1 font-display">(24)</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-gray-300 text-[14px]">star</span>
+                                <span class="text-[10px] text-text-secondary ml-1 font-display">(24)</span>
                             </div>
-                            <h3 class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading">
+                            <h3
+                                class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
                                 Premium Organic Potting Soil Mix - 5kg</h3>
-                            <p class="text-sm text-text-secondary dark:text-gray-400 mb-4 line-clamp-2 font-display">
+                            <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">
                                 Nutrient-rich blend perfect for indoor and outdoor plants. 100% Organic.</p>
-                            <div class="mt-auto flex items-center justify-between">
-                                <span class="text-xl font-bold text-[#53be20] font-display">$18.99</span>
+                            <div class="mt-auto flex items-center justify-between gap-2">
+                                <span class="text-lg font-bold text-[#53be20] font-display">$18.99</span>
                                 <button
-                                    class="flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 font-heading">
-                                    <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    class="flex items-center gap-1.5 bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all duration-300 font-heading">
+                                    <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
                                     Add to Cart
                                 </button>
                             </div>
@@ -210,42 +210,42 @@
                         class="group relative flex flex-col bg-white dark:bg-[#1e2a1a] border border-[#dfe5dc] dark:border-[#2a3825] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         <div class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
                             <span
-                                class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2.5 py-1 rounded-md z-10 font-heading">Sale</span>
+                                class="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-md z-10 font-heading">Sale</span>
                             <button
-                                class="absolute top-3 right-3 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
-                                <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
+                                <span class="material-symbols-outlined text-[18px]">favorite</span>
                             </button>
                             <img alt="Steel Garden Shovel"
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="Heavy duty gardening shovel with wooden handle on soil"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM57pXZS1bZgCg1BuQtTN8GTolhkWZvDxImXthXIxMmiuIcrDnWfZQkPAan0d5NzDXs7jfRYFuc4hNZVF1qYjAjGg-Ua2jy1A-ttSO8fvOGI3Z9dIP8GJ-_npo1_gCy927zBn6IDDWaA8WWRQL5MI_kscWVI7lyxCU6XGIQ1cvWbjadkHeikNJnJEGTCNR-mgTGqxcV4wQVLcsID4AjnRSpcA9dg0m4kWEoH8MOJg5d5_LIBeZvIc6-6v81G0qc1PBfSNEqp8PtTig" />
                         </div>
-                        <div class="p-4 flex flex-col flex-1">
-                            <div class="flex items-center gap-1 mb-2">
+                        <div class="p-3.5 flex flex-col flex-1">
+                            <div class="flex items-center gap-0.5 mb-1.5">
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
-                                <span class="text-xs text-text-secondary ml-1 font-display">(128)</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
+                                <span class="text-[10px] text-text-secondary ml-1 font-display">(128)</span>
                             </div>
-                            <h3 class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading">
+                            <h3
+                                class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
                                 Heavy Duty Stainless Steel Shovel</h3>
-                            <p class="text-sm text-text-secondary dark:text-gray-400 mb-4 line-clamp-2 font-display">
+                            <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">
                                 Ergonomic handle and rust-resistant blade for tough gardening tasks.</p>
-                            <div class="mt-auto flex items-center justify-between">
+                            <div class="mt-auto flex items-center justify-between gap-2">
                                 <div class="flex flex-col">
-                                    <span class="text-xs text-gray-400 line-through font-display">$45.00</span>
-                                    <span class="text-xl font-bold text-[#53be20] font-display">$34.99</span>
+                                    <span class="text-[10px] text-gray-400 line-through font-display">$45.00</span>
+                                    <span class="text-lg font-bold text-[#53be20] font-display">$34.99</span>
                                 </div>
                                 <button
-                                    class="flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 font-heading">
-                                    <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    class="flex items-center gap-1.5 bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all duration-300 font-heading">
+                                    <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
                                     Add to Cart
                                 </button>
                             </div>
@@ -255,36 +255,36 @@
                         class="group relative flex flex-col bg-white dark:bg-[#1e2a1a] border border-[#dfe5dc] dark:border-[#2a3825] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         <div class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
                             <button
-                                class="absolute top-3 right-3 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
-                                <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
+                                <span class="material-symbols-outlined text-[18px]">favorite</span>
                             </button>
                             <img alt="Hybrid Corn Seeds"
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="Closeup of corn seeds in a burlap sack"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnzzL8WIBnb1j50MffomTZkKx-K-iFsF1Jrk06SquBH9jXlnWY9tGQnZilDxz0SZapWEo9zY1TyE-KBhlwJRKx8v7YbNVBjWRAt01CRK3QfHxYAPFrHuUMLHOXLxD20P7BcEdUUEViJ29z5OLLvPoe6szE_nBVL4IhpmUbRxsrtm02sfOb5dh_KLiCDQzDhtFRctHqQQpKon0jbeyjwCXjNYRA2bWDtEl1PhkVNlGp9YBmCHMoVGBes6ryQJ6HJm_RSaM0MWS11uQI" />
                         </div>
-                        <div class="p-4 flex flex-col flex-1">
-                            <div class="flex items-center gap-1 mb-2">
+                        <div class="p-3.5 flex flex-col flex-1">
+                            <div class="flex items-center gap-0.5 mb-1.5">
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
-                                <span class="material-symbols-outlined text-gray-300 text-[16px]">star</span>
-                                <span class="text-xs text-text-secondary ml-1 font-display">(56)</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-gray-300 text-[14px]">star</span>
+                                <span class="text-[10px] text-text-secondary ml-1 font-display">(56)</span>
                             </div>
-                            <h3 class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading">
+                            <h3
+                                class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
                                 Golden Harvest Hybrid Corn Seeds - 1kg</h3>
-                            <p class="text-sm text-text-secondary dark:text-gray-400 mb-4 line-clamp-2 font-display">
+                            <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">
                                 High-yield variety suitable for various climates. Drought resistant.</p>
-                            <div class="mt-auto flex items-center justify-between">
-                                <span class="text-xl font-bold text-[#53be20] font-display">$12.50</span>
+                            <div class="mt-auto flex items-center justify-between gap-2">
+                                <span class="text-lg font-bold text-[#53be20] font-display">$12.50</span>
                                 <button
-                                    class="flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 font-heading">
-                                    <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    class="flex items-center gap-1.5 bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all duration-300 font-heading">
+                                    <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
                                     Add to Cart
                                 </button>
                             </div>
@@ -294,35 +294,35 @@
                         class="group relative flex flex-col bg-white dark:bg-[#1e2a1a] border border-[#dfe5dc] dark:border-[#2a3825] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         <div class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
                             <button
-                                class="absolute top-3 right-3 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
-                                <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
+                                <span class="material-symbols-outlined text-[18px]">favorite</span>
                             </button>
                             <img alt="Modern Watering Can"
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="Small green watering can on a wooden table"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDyhO5Ou65My3nPvmzvVGIBZWkDmrjqDS-X6-q44sZ-Y1EF3ErwqlBFekb_Ctebga2x7OTH6emmVnJtJJqW9QoyBlPmllSNXfYdgBCbjgQlMQuZ7bsSQMKcymeKdu9G-2mC4Rk9SbER9yasGO14HK6Uwo38t5KPoIcMZNTXP75jF2Uj9HatVODHPqWWCuBU7a8-A-aZQ7e33aqSsiQp3kuojTFWT0LiE-gehAXgXw8Op0BTrDpiCqMHvZrXgDhK7k8WHmqZsB8p1oF" />
                         </div>
-                        <div class="p-4 flex flex-col flex-1">
-                            <div class="flex items-center gap-1 mb-2">
+                        <div class="p-3.5 flex flex-col flex-1">
+                            <div class="flex items-center gap-0.5 mb-1.5">
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
-                                <span class="material-symbols-outlined text-gray-300 text-[16px]">star</span>
-                                <span class="material-symbols-outlined text-gray-300 text-[16px]">star</span>
-                                <span class="text-xs text-text-secondary ml-1 font-display">(15)</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-gray-300 text-[14px]">star</span>
+                                <span class="material-symbols-outlined text-gray-300 text-[14px]">star</span>
+                                <span class="text-[10px] text-text-secondary ml-1 font-display">(15)</span>
                             </div>
-                            <h3 class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading">
+                            <h3
+                                class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
                                 Modern Compact Watering Can - 2L</h3>
-                            <p class="text-sm text-text-secondary dark:text-gray-400 mb-4 line-clamp-2 font-display">
+                            <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">
                                 Stylish and functional design for indoor plant care. Durable plastic.</p>
-                            <div class="mt-auto flex items-center justify-between">
-                                <span class="text-xl font-bold text-[#53be20] font-display">$15.00</span>
+                            <div class="mt-auto flex items-center justify-between gap-2">
+                                <span class="text-lg font-bold text-[#53be20] font-display">$15.00</span>
                                 <button
-                                    class="flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 font-heading">
-                                    <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    class="flex items-center gap-1.5 bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all duration-300 font-heading">
+                                    <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
                                     Add to Cart
                                 </button>
                             </div>
@@ -332,40 +332,40 @@
                         class="group relative flex flex-col bg-white dark:bg-[#1e2a1a] border border-[#dfe5dc] dark:border-[#2a3825] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         <div class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
                             <span
-                                class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-2.5 py-1 rounded-md z-10 font-heading">Best
+                                class="absolute top-3 left-3 bg-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-md z-10 font-heading">Best
                                 Seller</span>
                             <button
-                                class="absolute top-3 right-3 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
-                                <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
+                                <span class="material-symbols-outlined text-[18px]">favorite</span>
                             </button>
                             <img alt="All-Purpose Fertilizer"
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="Nitrogen fertilizer pellets in a clear glass bowl"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVNrKVLAuW3Tn9HTZ0o0J3AUCE1iEGHMj-b8GnsoZIBbLocg5Zxw1WAbMgqWhCEjDgUKJ6CIj9HMoL09glubWc2hH8r0IPlm2wsXrdPNdnVm6zSKcZUD1O4f5RvXD4r1POGqS2FTsDiIGBKwZ3tuSy3rN6uP-jAlROu47tfhrk9Ub6cBGEUfjUpiF4a0VvSdONykEsp5a5A_60vyUtL9wxsAXJPkbtYtMGhUtocUZM-pGIA6vJrTuTE7wrmZbhO9bVrsFgkoKuXarZ" />
                         </div>
-                        <div class="p-4 flex flex-col flex-1">
-                            <div class="flex items-center gap-1 mb-2">
+                        <div class="p-3.5 flex flex-col flex-1">
+                            <div class="flex items-center gap-0.5 mb-1.5">
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
-                                <span class="text-xs text-text-secondary ml-1 font-display">(342)</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
+                                <span class="text-[10px] text-text-secondary ml-1 font-display">(342)</span>
                             </div>
-                            <h3 class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading">
+                            <h3
+                                class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
                                 GrowFast All-Purpose Fertilizer - 10kg</h3>
-                            <p class="text-sm text-text-secondary dark:text-gray-400 mb-4 line-clamp-2 font-display">
+                            <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">
                                 Balanced NPK formula for vegetables, flowers, and lawns.</p>
-                            <div class="mt-auto flex items-center justify-between">
-                                <span class="text-xl font-bold text-[#53be20] font-display">$29.99</span>
+                            <div class="mt-auto flex items-center justify-between gap-2">
+                                <span class="text-lg font-bold text-[#53be20] font-display">$29.99</span>
                                 <button
-                                    class="flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 font-heading">
-                                    <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    class="flex items-center gap-1.5 bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all duration-300 font-heading">
+                                    <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
                                     Add to Cart
                                 </button>
                             </div>
@@ -375,36 +375,36 @@
                         class="group relative flex flex-col bg-white dark:bg-[#1e2a1a] border border-[#dfe5dc] dark:border-[#2a3825] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                         <div class="relative aspect-[4/3] w-full bg-gray-100 overflow-hidden">
                             <button
-                                class="absolute top-3 right-3 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
-                                <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10">
+                                <span class="material-symbols-outlined text-[18px]">favorite</span>
                             </button>
                             <img alt="Pruning Shears"
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                data-alt="Gardening gloves and pruner scissors on wooden surface"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLRoNisxsUDfCrOeM8PmeRjXP4Aad5TZ17ZrTi_v7OsHbSGiB6xyzPGMkmUWCqFrsK84eiUwF0sR6HMOWKOg3vQVT2kPIaIjPkTO2QMHNnAcdVjF3854yWeMeUxDlpMVHw2sZmMmsnH5WcZxkbEz0znMa1cN9LJ6eTo1373we90FTOdZrUt6TFFbWQSmuPItPsWsQ3PFzInG-0tLFseah4qoQTjShYMoPx-0tih2__JOXtJuqBOjV0nMHyShsvpAzgM2G1HlQtu6yy" />
                         </div>
-                        <div class="p-4 flex flex-col flex-1">
-                            <div class="flex items-center gap-1 mb-2">
+                        <div class="p-3.5 flex flex-col flex-1">
+                            <div class="flex items-center gap-0.5 mb-1.5">
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
                                 <span
-                                    class="material-symbols-outlined text-yellow-400 text-[16px] fill-current">star</span>
-                                <span class="material-symbols-outlined text-gray-300 text-[16px]">star</span>
-                                <span class="text-xs text-text-secondary ml-1 font-display">(45)</span>
+                                    class="material-symbols-outlined text-yellow-400 text-[14px] fill-current">star</span>
+                                <span class="material-symbols-outlined text-gray-300 text-[14px]">star</span>
+                                <span class="text-[10px] text-text-secondary ml-1 font-display">(45)</span>
                             </div>
-                            <h3 class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading">
+                            <h3
+                                class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
                                 Precision Steel Pruning Shears</h3>
-                            <p class="text-sm text-text-secondary dark:text-gray-400 mb-4 line-clamp-2 font-display">Sharp,
+                            <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">Sharp,
                                 durable blades for clean cuts on stems and branches.</p>
-                            <div class="mt-auto flex items-center justify-between">
-                                <span class="text-xl font-bold text-[#53be20] font-display">$22.00</span>
+                            <div class="mt-auto flex items-center justify-between gap-2">
+                                <span class="text-lg font-bold text-[#53be20] font-display">$22.00</span>
                                 <button
-                                    class="flex items-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 font-heading">
-                                    <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                    class="flex items-center gap-1.5 bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all duration-300 font-heading">
+                                    <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
                                     Add to Cart
                                 </button>
                             </div>

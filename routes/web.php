@@ -58,6 +58,45 @@ Route::get('/produk/{slug}', [ProdukController::class, 'show'])->name('produk.de
 
 
 // ============================================================================
+// DEV ROUTES (Development Only - Remove in Production!)
+// ============================================================================
+
+if (app()->environment('local')) {
+    Route::prefix('dev')->name('dev.')->group(function () {
+        // Auto-login as petani for testing
+        Route::get('/login-petani', function () {
+            $petani = \App\Models\Pengguna::where('role_pengguna', 'petani')->first();
+            if ($petani) {
+                \Illuminate\Support\Facades\Auth::login($petani);
+                return redirect()->route('petani.dashboard');
+            }
+            return 'No petani found. Run php artisan db:seed first.';
+        })->name('login-petani');
+
+        // Auto-login as admin for testing
+        Route::get('/login-admin', function () {
+            $admin = \App\Models\Pengguna::where('role_pengguna', 'admin')->first();
+            if ($admin) {
+                \Illuminate\Support\Facades\Auth::login($admin);
+                return redirect()->route('admin.dashboard');
+            }
+            return 'No admin found. Run php artisan db:seed first.';
+        })->name('login-admin');
+
+        // Auto-login as pembeli for testing
+        Route::get('/login-pembeli', function () {
+            $pembeli = \App\Models\Pengguna::where('role_pengguna', 'pembeli')->first();
+            if ($pembeli) {
+                \Illuminate\Support\Facades\Auth::login($pembeli);
+                return redirect()->route('pesanan');
+            }
+            return 'No pembeli found. Run php artisan db:seed first.';
+        })->name('login-pembeli');
+    });
+}
+
+
+// ============================================================================
 // AUTH ROUTES (Guest only)
 // ============================================================================
 

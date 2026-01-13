@@ -143,70 +143,69 @@ Halaman dashboard untuk user dengan role **admin**.
 ```
 resources/views/
 │
-├── welcome.blade.php
+├── welcome.blade.php            (Aliv)
 │
 ├── layouts/
-│   ├── app.blade.php           # Layout utama (navbar, footer)
-│   ├── guest.blade.php         # Layout untuk auth pages
-│   ├── petani.blade.php        # Layout dashboard petani (sidebar)
-│   └── admin.blade.php         # Layout dashboard admin (sidebar)
+│   ├── app.blade.php            (Aliv) # Layout utama (navbar, footer)
+│   ├── petani.blade.php         (Imax) # Layout dashboard petani (sidebar)
+│   └── admin.blade.php          (Adams) # Layout dashboard admin (sidebar)
 │
 ├── components/
-│   ├── navbar.blade.php        # Navigation bar
-│   ├── footer.blade.php        # Footer
-│   ├── sidebar-petani.blade.php
-│   ├── sidebar-admin.blade.php
-│   ├── product-card.blade.php  # Card produk reusable
-│   ├── alert.blade.php         # Flash message
-│   └── pagination.blade.php    # Custom pagination
+│   ├── navbar.blade.php         (Aliv) # Navigation bar
+│   ├── footer.blade.php         (Aliv) # Footer
+│   ├── sidebar-petani.blade.php (Ima) 
+│   ├── sidebar-admin.blade.php  (Adams) 
+│   ├── product-card.blade.php   (Aliv) # Card produk reusable
+│   ├── alert.blade.php          (Aliv) # Flash message
+│   └── pagination.blade.php     (Aliv) # Custom pagination
 │
 ├── auth/
-│   ├── login.blade.php
-│   └── register.blade.php
+│   ├── login.blade.php          (Aliv) 
+│   └── register.blade.php       (Aliv) 
 │
 ├── pages/
-│   ├── beranda.blade.php
-│   ├── tentang.blade.php
-│   ├── cara-kerja.blade.php
-│   ├── kontak.blade.php
-│   ├── katalog.blade.php
-│   ├── kategori.blade.php
-│   └── produk-detail.blade.php
+│   ├── beranda.blade.php        (Aliv) 
+│   ├── tentang.blade.php        (Aliv) 
+│   ├── cara-kerja.blade.php     (Aliv) 
+│   ├── kontak.blade.php         (Aliv) 
+│   ├── katalog.blade.php        (Aliv) 
+│   ├── kategori.blade.php       (Aliv) 
+│   └── produk-detail.blade.php  (Aliv) 
 │
 ├── pembeli/
-│   ├── profil.blade.php
-│   ├── keranjang.blade.php
-│   ├── checkout.blade.php
-│   ├── pesanan.blade.php
-│   └── pesanan-detail.blade.php
+│   ├── profil.blade.php         (Lukman) 
+│   ├── keranjang.blade.php      (Lukman) 
+│   ├── checkout.blade.php       (Lukman) 
+│   ├── pesanan.blade.php        (Lukman) 
+│   └── pesanan-detail.blade.php (Lukman) 
 │
 ├── petani/
-│   ├── dashboard.blade.php
+│   ├── dashboard.blade.php      (Imax) 
 │   ├── produk/
-│   │   ├── index.blade.php
-│   │   └── form.blade.php
+│   │   ├── index.blade.php      (Imax) 
+│   │   └── form.blade.php       (Imax) 
 │   ├── pesanan/
-│   │   ├── index.blade.php
-│   │   └── detail.blade.php
-│   ├── rekening.blade.php
-│   └── ulasan.blade.php
+│   │   ├── index.blade.php      (Imax) 
+│   │   └── detail.blade.php     (Imax) 
+│   ├── rekening.blade.php       (Imax) 
+│   └── ulasan.blade.php         (Imax) 
 │
 └── admin/
-    ├── dashboard.blade.php
+    ├── dashboard.blade.php      (Adams) 
     ├── pengguna/
-    │   ├── index.blade.php
-    │   ├── petani.blade.php
-    │   └── show.blade.php
+    │   ├── index.blade.php      (Azfa) 
+    │   ├── petani.blade.php     (Azfa) 
+    │   └── show.blade.php       (Azfa) 
     ├── master/
-    │   ├── kategori.blade.php
-    │   ├── kota.blade.php
-    │   └── kupon.blade.php
+    │   ├── kategori.blade.php   (Adams) 
+    │   ├── kota.blade.php       (Adams) 
+    │   └── kupon.blade.php      (Adams) 
     ├── pesanan/
-    │   ├── index.blade.php
-    │   └── detail.blade.php
-    ├── escrow.blade.php
-    ├── refund.blade.php
-    └── laporan.blade.php
+    │   ├── index.blade.php      (Azfa) 
+    │   └── detail.blade.php     (Azfa) 
+    ├── escrow.blade.php         (Azfa) 
+    ├── refund.blade.php         (Azfa) 
+    └── laporan.blade.php        (Adams) 
 ```
 
 ---

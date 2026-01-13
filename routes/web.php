@@ -42,7 +42,13 @@ Route::get('/logout', function () {
 // ============================================================================
 
 Route::get('/', function () {
-    return view('welcome');
+    $featuredProducts = \App\Models\Produk::with(['kategori', 'petani'])
+        ->where('stok', '>', 0)
+        ->orderBy('tgl_dibuat', 'desc')
+        ->take(4)
+        ->get();
+
+    return view('welcome', compact('featuredProducts'));
 })->name('home');
 
 Route::get('/beranda', function () {

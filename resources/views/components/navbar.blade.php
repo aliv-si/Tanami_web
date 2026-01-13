@@ -25,6 +25,10 @@
                     class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-content-dark dark:text-white transition-colors">
                     <span class="material-symbols-outlined">search</span>
                 </button>
+                <button
+                    class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-content-dark dark:text-white transition-colors">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
                 <div class="flex items-center justify-center gap-3">
                 @auth
                 {{-- Keranjang (hanya untuk pembeli) --}}

@@ -38,7 +38,7 @@
                     @auth
                     <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit font-heading">
                         <span class="material-symbols-outlined text-sm mr-1">waving_hand</span>
-                        Selamat datang, {{ auth()->user()->nama_lengkap }}!
+                        Welcome, {{ auth()->user()->nama_lengkap }}!
                     </div>
                     @else
                     <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit font-heading">
@@ -71,7 +71,7 @@
                         @else
                         <a href="{{ route('katalog') }}" class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-[16px] font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary/90">
                             <span class="material-symbols-outlined mr-2">storefront</span>
-                            Belanja Sekarang
+                            Shop Now
                         </a>
                         @endif
                         @else

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Petani;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderShippedMail;
+use App\Mail\PaymentVerifiedMail;
 use App\Models\Escrow;
 use App\Models\HistoriStatus;
 use App\Models\Pesanan;
@@ -10,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class PesananController extends Controller
@@ -158,6 +161,14 @@ class PesananController extends Controller
             ]);
 
             DB::commit();
+
+            // Send email to pembeli
+            try {
+                $pesanan->load('pembeli');
+                Mail::to($pesanan->pembeli->email)->queue(new PaymentVerifiedMail($pesanan));
+            } catch (\Exception $e) {
+                \Log::error('Failed to send payment verified email: ' . $e->getMessage());
+            }
 
             return back()->with('success', 'Pembayaran berhasil diverifikasi. Stok telah dikurangi dan dana ditahan di escrow.');
 
@@ -313,6 +324,14 @@ class PesananController extends Controller
             ]);
 
             DB::commit();
+
+            // Send email to pembeli
+            try {
+                $pesanan->load('pembeli');
+                Mail::to($pesanan->pembeli->email)->queue(new OrderShippedMail($pesanan));
+            } catch (\Exception $e) {
+                \Log::error('Failed to send order shipped email: ' . $e->getMessage());
+            }
 
             return back()->with('success', 'Pesanan berhasil dikirim dengan resi: ' . $request->input('no_resi'));
 

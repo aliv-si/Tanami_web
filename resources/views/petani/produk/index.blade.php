@@ -10,7 +10,7 @@
             <p class="text-sm text-gray-500 mt-1">Total {{ $stats['total'] }} produk ({{ $stats['aktif'] }} aktif, {{ $stats['stok_habis'] }} stok habis)</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-            <form action="{{ url('/produk') }}" method="GET" class="flex items-center gap-3">
+            <form action="{{ route('petani.produk') }}" method="GET" class="flex items-center gap-3">
                 <div class="relative">
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
                     <input name="q" value="{{ $currentSearch }}" class="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-64" placeholder="Cari produk..." type="text"/>
@@ -34,7 +34,7 @@
                     <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
                 </div>
             </form>
-            <a href="{{ url('/produk/tambah') }}" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-bold font-heading flex items-center gap-2 transition-all shadow-sm">
+            <a href="{{ route('petani.produk.create') }}" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-bold font-heading flex items-center gap-2 transition-all shadow-sm">
                 <span class="material-symbols-outlined">add</span>
                 Tambah Produk
             </a>
@@ -113,10 +113,10 @@
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-2">
-                                <a href="{{ url('/produk/' . $item->id_produk . '/edit') }}" class="p-2 text-gray-400 hover:text-primary hover:bg-primary/10 rounded-lg transition-all" title="Edit">
+                                <a href="{{ route('petani.produk.edit', $item->id_produk) }}" class="p-2 text-gray-400 hover:text-primary hover:bg-primary/10 rounded-lg transition-all" title="Edit">
                                     <span class="material-symbols-outlined text-xl">edit</span>
                                 </a>
-                                <form action="{{ url('/produk/' . $item->id_produk) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
+                                <form action="{{ route('petani.produk.destroy', $item->id_produk) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all" title="Hapus">
@@ -140,7 +140,7 @@
             </div>
             <h3 class="font-heading font-bold text-gray-600 mb-2">Belum ada produk</h3>
             <p class="text-sm text-gray-400 mb-4">Mulai tambahkan produk pertama Anda</p>
-            <a href="{{ url('/produk/tambah') }}" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold font-heading transition-all">
+            <a href="{{ route('petani.produk.tambah') }}" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold font-heading transition-all">
                 <span class="material-symbols-outlined">add</span>
                 Tambah Produk
             </a>

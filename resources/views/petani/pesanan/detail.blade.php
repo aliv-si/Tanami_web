@@ -6,7 +6,7 @@
 <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="flex items-center justify-between px-8 py-4">
         <div class="flex items-center gap-4">
-            <a href="{{ url('/pesanan') }}" class="p-2 hover:bg-gray-100 rounded-full text-gray-500">
+            <a href="{{ route('petani.pesanan') }}" class="p-2 hover:bg-gray-100 rounded-full text-gray-500">
                 <span class="material-symbols-outlined">arrow_back</span>
             </a>
             <div class="flex items-center gap-3">
@@ -142,7 +142,7 @@
                             </div>
                             <div>
                                 <p class="font-bold text-sm text-text-dark">{{ ucfirst(str_replace('_', ' ', $histori->status_baru)) }}</p>
-                                <p class="text-xs text-gray-500 mt-1">{{ $histori->tgl_diubah->format('d M Y - H:i') }}</p>
+                                <p class="text-xs text-gray-500 mt-1">{{ $histori->tgl_diubah ? $histori->tgl_diubah->format('d M Y - H:i') : '-' }}</p>
                                 @if($histori->alasan)
                                     <p class="text-xs text-gray-400 mt-1">{{ $histori->alasan }}</p>
                                 @endif
@@ -202,7 +202,7 @@
                         </div>
                         @endif
 
-                        <form action="{{ url('/pesanan/' . $pesanan->id_pesanan . '/verifikasi') }}" method="POST">
+                        <form action="{{ route('petani.pesanan.verifikasi', $pesanan->id_pesanan) }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold font-heading hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2">
                                 <span class="material-symbols-outlined text-xl">check_circle</span>
@@ -214,7 +214,7 @@
                         </button>
 
                     @elseif($pesanan->status_pesanan == 'dibayar')
-                        <form action="{{ url('/pesanan/' . $pesanan->id_pesanan . '/proses') }}" method="POST">
+                        <form action="{{ route('petani.pesanan.proses', $pesanan->id_pesanan) }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold font-heading hover:bg-blue-700 transition-all shadow-md flex items-center justify-center gap-2">
                                 <span class="material-symbols-outlined text-xl">sync</span>
@@ -223,7 +223,7 @@
                         </form>
 
                     @elseif($pesanan->status_pesanan == 'diproses')
-                        <form action="{{ url('/pesanan/' . $pesanan->id_pesanan . '/kirim') }}" method="POST">
+                        <form action="{{ route('petani.pesanan.kirim', $pesanan->id_pesanan) }}" method="POST">
                             @csrf
                             <div class="mb-4">
                                 <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="no_resi">Nomor Resi</label>
@@ -269,7 +269,7 @@
 <div id="tolak-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-xl max-w-md w-full p-6">
         <h3 class="text-lg font-bold font-heading mb-4">Tolak Pembayaran</h3>
-        <form action="{{ url('/pesanan/' . $pesanan->id_pesanan . '/tolak') }}" method="POST">
+        <form action="{{ route('petani.pesanan.tolak', $pesanan->id_pesanan) }}" method="POST">
             @csrf
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Alasan Penolakan <span class="text-red-500">*</span></label>

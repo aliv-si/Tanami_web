@@ -7,10 +7,10 @@
     <div class="flex items-center justify-between px-8 py-4">
         <h1 class="text-2xl font-bold font-heading text-text-dark">Pesanan Masuk</h1>
         <div class="flex items-center gap-6">
-            <div class="relative hidden lg:block">
+            <form action="{{ route('petani.pesanan') }}" method="GET" class="relative hidden lg:block">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
-                <input class="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-80" placeholder="Cari ID Pesanan atau nama pembeli..." type="text"/>
-            </div>
+                <input name="q" value="{{ $currentSearch ?? '' }}" class="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-80" placeholder="Cari ID Pesanan atau nama pembeli..." type="text"/>
+            </form>
             <div class="flex items-center gap-4">
                 <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full">
                     <span class="material-symbols-outlined">notifications</span>
@@ -26,34 +26,34 @@
 <!-- Status Tabs -->
 <div class="bg-white border-b border-gray-200 px-8">
     <nav class="flex gap-6 -mb-px">
-        <a href="{{ url('/pesanan') }}" class="py-4 px-1 border-b-2 {{ !$currentStatus ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all">
+        <a href="{{ route('petani.pesanan') }}" class="py-4 px-1 border-b-2 {{ !$currentStatus ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all">
             Semua Aktif
         </a>
-        <a href="{{ url('/pesanan?status=menunggu_verifikasi') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'menunggu_verifikasi' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'menunggu_verifikasi']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'menunggu_verifikasi' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Menunggu Verifikasi
             @if($statusCounts['menunggu_verifikasi'] > 0)
                 <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['menunggu_verifikasi'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?status=dibayar') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dibayar' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'dibayar']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dibayar' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Dibayar
             @if($statusCounts['dibayar'] > 0)
                 <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['dibayar'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?status=diproses') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'diproses' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'diproses']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'diproses' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Diproses
             @if($statusCounts['diproses'] > 0)
                 <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['diproses'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?status=dikirim') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dikirim' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'dikirim']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dikirim' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Dikirim
             @if($statusCounts['dikirim'] > 0)
                 <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['dikirim'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?semua=1') }}" class="py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-semibold text-sm transition-all">
+        <a href="{{ route('petani.pesanan', ['semua' => 1]) }}" class="py-4 px-1 border-b-2 {{ request('semua') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all">
             Semua Riwayat
         </a>
     </nav>
@@ -132,7 +132,7 @@
                         @endif
                         <div>
                             <p class="text-sm font-medium text-text-dark">{{ $item->produk->nama_produk ?? 'Produk' }}</p>
-                            <p class="text-xs text-gray-400">{{ $item->jumlah }} x Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}</p>
+                            <p class="text-xs text-gray-400">{{ $item->jumlah }} x Rp {{ number_format($item->harga_snapshot, 0, ',', '.') }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -143,20 +143,20 @@
 
                 <!-- Actions -->
                 <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <a href="{{ url('/pesanan/' . $order->id_pesanan) }}" class="text-primary font-semibold text-sm hover:underline flex items-center gap-1">
+                    <a href="{{ route('petani.pesanan.detail', $order->id_pesanan) }}" class="text-primary font-semibold text-sm hover:underline flex items-center gap-1">
                         <span class="material-symbols-outlined text-lg">visibility</span>
                         Lihat Detail
                     </a>
                     <div class="flex items-center gap-2">
                         @if($order->status_pesanan == 'menunggu_verifikasi')
-                            <form action="{{ url('/pesanan/' . $order->id_pesanan . '/verifikasi') }}" method="POST" class="inline">
+                            <form action="{{ route('petani.pesanan.verifikasi', $order->id_pesanan) }}" method="POST" class="inline">
                                 @csrf
                                 <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all">
                                     Verifikasi Pembayaran
                                 </button>
                             </form>
                         @elseif($order->status_pesanan == 'dibayar')
-                            <form action="{{ url('/pesanan/' . $order->id_pesanan . '/proses') }}" method="POST" class="inline">
+                            <form action="{{ route('petani.pesanan.proses', $order->id_pesanan) }}" method="POST" class="inline">
                                 @csrf
                                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-all">
                                     Proses Pesanan
@@ -177,7 +177,7 @@
         <div id="kirim-modal-{{ $order->id_pesanan }}" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
             <div class="bg-white rounded-xl max-w-md w-full p-6">
                 <h3 class="text-lg font-bold font-heading mb-4">Input Nomor Resi</h3>
-                <form action="{{ url('/pesanan/' . $order->id_pesanan . '/kirim') }}" method="POST">
+                <form action="{{ route('petani.pesanan.kirim', $order->id_pesanan) }}" method="POST">
                     @csrf
                     <div class="mb-4">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor Resi <span class="text-red-500">*</span></label>

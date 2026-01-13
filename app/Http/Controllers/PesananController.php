@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCompletedMail;
+use App\Mail\OrderCreatedMail;
+use App\Mail\PaymentUploadedMail;
+use App\Mail\RefundRequestedMail;
 use App\Models\Keranjang;
 use App\Models\Kota;
 use App\Models\Kupon;
+use App\Models\Pengguna;
 use App\Models\Pesanan;
 use App\Models\ItemPesanan;
 use App\Models\PemakaianKupon;
@@ -12,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class PesananController extends Controller
@@ -179,6 +185,22 @@ class PesananController extends Controller
             return $pesanan;
         });
 
+        // Send order created emails
+        try {
+            $pesanan->load(['pembeli', 'items.produk.petani']);
+            
+            // Email to pembeli
+            Mail::to($pesanan->pembeli->email)->queue(new OrderCreatedMail($pesanan, 'pembeli'));
+            
+            // Email to each petani
+            $petaniEmails = $pesanan->items->pluck('produk.petani.email')->unique()->filter();
+            foreach ($petaniEmails as $email) {
+                Mail::to($email)->queue(new OrderCreatedMail($pesanan, 'petani'));
+            }
+        } catch (\Exception $e) {
+            \Log::error('Failed to send order created email: ' . $e->getMessage());
+        }
+
         return redirect()->route('pesanan.detail', $pesanan->id_pesanan)
             ->with('success', 'Pesanan berhasil dibuat! Silakan upload bukti pembayaran sebelum ' . $pesanan->batas_bayar->format('d M Y H:i'));
     }
@@ -275,6 +297,17 @@ class PesananController extends Controller
             'status_pesanan' => Pesanan::STATUS_MENUNGGU_VERIFIKASI,
         ]);
 
+        // Send email to petani
+        try {
+            $pesanan->load('items.produk.petani');
+            $petaniEmails = $pesanan->items->pluck('produk.petani.email')->unique()->filter();
+            foreach ($petaniEmails as $email) {
+                Mail::to($email)->queue(new PaymentUploadedMail($pesanan));
+            }
+        } catch (\Exception $e) {
+            \Log::error('Failed to send payment uploaded email: ' . $e->getMessage());
+        }
+
         return back()->with('success', 'Bukti pembayaran berhasil diupload. Menunggu verifikasi dari petani.');
     }
 
@@ -358,6 +391,22 @@ class PesananController extends Controller
             }
         });
 
+        // Send order completed emails
+        try {
+            $pesanan->load(['pembeli', 'items.produk.petani']);
+            
+            // Email to pembeli
+            Mail::to($pesanan->pembeli->email)->queue(new OrderCompletedMail($pesanan, 'pembeli'));
+            
+            // Email to petani
+            $petaniEmails = $pesanan->items->pluck('produk.petani.email')->unique()->filter();
+            foreach ($petaniEmails as $email) {
+                Mail::to($email)->queue(new OrderCompletedMail($pesanan, 'petani'));
+            }
+        } catch (\Exception $e) {
+            \Log::error('Failed to send order completed email: ' . $e->getMessage());
+        }
+
         return redirect()->route('pesanan.detail', $id)
             ->with('success', 'Terima kasih! Pesanan telah dikonfirmasi selesai.');
     }
@@ -392,6 +441,17 @@ class PesananController extends Controller
             'status_pesanan' => Pesanan::STATUS_MINTA_REFUND,
             'alasan_refund' => $request->alasan_refund,
         ]);
+
+        // Send email to admins
+        try {
+            $pesanan->load('pembeli');
+            $adminEmails = Pengguna::where('role_pengguna', 'admin')->pluck('email');
+            foreach ($adminEmails as $email) {
+                Mail::to($email)->queue(new RefundRequestedMail($pesanan));
+            }
+        } catch (\Exception $e) {
+            \Log::error('Failed to send refund requested email: ' . $e->getMessage());
+        }
 
         return back()->with('success', 'Permintaan refund berhasil dikirim. Admin akan meninjau permintaan Anda.');
     }

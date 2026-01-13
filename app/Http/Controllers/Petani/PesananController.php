@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Petani;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderShippedMail;
+use App\Mail\PaymentVerifiedMail;
 use App\Models\Escrow;
 use App\Models\HistoriStatus;
 use App\Models\Pesanan;
@@ -10,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class PesananController extends Controller
@@ -39,13 +42,24 @@ class PesananController extends Controller
     {
         $query = $this->getPetaniOrdersQuery();
 
+        // Search by ID or pembeli name
+        if ($request->filled('q')) {
+            $search = $request->input('q');
+            $query->where(function ($q) use ($search) {
+                $q->where('id_pesanan', 'like', "%{$search}%")
+                  ->orWhereHas('pembeli', function ($q2) use ($search) {
+                      $q2->where('nama_lengkap', 'like', "%{$search}%");
+                  });
+            });
+        }
+
         // Filter by status
         if ($request->filled('status')) {
             $query->where('status_pesanan', $request->input('status'));
         }
 
         // Default: show only active orders (not cancelled/completed/refunded)
-        if (!$request->has('status') && !$request->has('semua')) {
+        if (!$request->has('status') && !$request->has('semua') && !$request->filled('q')) {
             $query->aktif();
         }
 
@@ -68,6 +82,7 @@ class PesananController extends Controller
             'pesanan' => $pesanan,
             'statusCounts' => $statusCounts,
             'currentStatus' => $request->input('status'),
+            'currentSearch' => $request->input('q'),
         ]);
     }
 
@@ -158,6 +173,14 @@ class PesananController extends Controller
             ]);
 
             DB::commit();
+
+            // Send email to pembeli
+            try {
+                $pesanan->load('pembeli');
+                Mail::to($pesanan->pembeli->email)->queue(new PaymentVerifiedMail($pesanan));
+            } catch (\Exception $e) {
+                \Log::error('Failed to send payment verified email: ' . $e->getMessage());
+            }
 
             return back()->with('success', 'Pembayaran berhasil diverifikasi. Stok telah dikurangi dan dana ditahan di escrow.');
 
@@ -313,6 +336,14 @@ class PesananController extends Controller
             ]);
 
             DB::commit();
+
+            // Send email to pembeli
+            try {
+                $pesanan->load('pembeli');
+                Mail::to($pesanan->pembeli->email)->queue(new OrderShippedMail($pesanan));
+            } catch (\Exception $e) {
+                \Log::error('Failed to send order shipped email: ' . $e->getMessage());
+            }
 
             return back()->with('success', 'Pesanan berhasil dikirim dengan resi: ' . $request->input('no_resi'));
 

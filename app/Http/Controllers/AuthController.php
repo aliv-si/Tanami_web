@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeMail;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Illuminate\Validation\Rules\Password;
 
@@ -112,6 +114,14 @@ class AuthController extends Controller
             'alamat' => $validated['alamat'] ?? null,
             'is_verified' => $validated['role_pengguna'] === 'pembeli', // Pembeli auto-verified
         ]);
+
+        // Send welcome email
+        try {
+            Mail::to($user->email)->queue(new WelcomeMail($user));
+        } catch (\Exception $e) {
+            // Log error but don't fail registration
+            \Log::error('Failed to send welcome email: ' . $e->getMessage());
+        }
 
         // Auto login for pembeli
         if ($user->isPembeli()) {

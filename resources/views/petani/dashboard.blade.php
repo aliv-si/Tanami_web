@@ -73,7 +73,7 @@
         <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                 <h2 class="text-lg font-bold font-heading">Pesanan Terbaru</h2>
-                <a href="{{ url('/pesanan') }}" class="text-primary text-sm font-semibold font-heading hover:underline">Lihat Semua</a>
+                <a href="{{ route('petani.pesanan') }}" class="text-primary text-sm font-semibold font-heading hover:underline">Lihat Semua</a>
             </div>
             @if(count($recentOrders) > 0)
             <div class="overflow-x-auto">
@@ -146,7 +146,7 @@
             <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <h3 class="font-heading font-bold text-gray-800 mb-4">Aksi Cepat</h3>
                 <div class="space-y-3">
-                    <a href="{{ url('/produk/tambah') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
+                    <a href="{{ route('petani.produk.create') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
                         <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                             <span class="material-symbols-outlined text-primary">add_circle</span>
                         </div>
@@ -155,7 +155,7 @@
                             <p class="text-xs text-gray-400">Tambahkan produk baru ke toko</p>
                         </div>
                     </a>
-                    <a href="{{ url('/pesanan') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
+                    <a href="{{ route('petani.pesanan') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
                         <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                             <span class="material-symbols-outlined text-blue-600">shopping_cart</span>
                         </div>
@@ -164,7 +164,7 @@
                             <p class="text-xs text-gray-400">Lihat dan proses pesanan</p>
                         </div>
                     </a>
-                    <a href="{{ url('/rekening') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
+                    <a href="{{ route('petani.rekening') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
                         <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                             <span class="material-symbols-outlined text-purple-600">account_balance</span>
                         </div>

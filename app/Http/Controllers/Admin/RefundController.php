@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RefundApprovedMail;
 use App\Models\Escrow;
 use App\Models\HistoriStatus;
 use App\Models\Pesanan;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class RefundController extends Controller
@@ -115,6 +117,13 @@ class RefundController extends Controller
             ]);
 
             DB::commit();
+
+            // Send email to pembeli
+            try {
+                Mail::to($pesanan->pembeli->email)->queue(new RefundApprovedMail($pesanan));
+            } catch (\Exception $e) {
+                \Log::error('Failed to send refund approved email: ' . $e->getMessage());
+            }
 
             return back()->with('success', 'Refund berhasil disetujui. Dana akan dikembalikan ke pembeli.');
 

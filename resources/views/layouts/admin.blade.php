@@ -7,6 +7,7 @@
     <title>Tanami - @yield('title', 'Admin Dashboard')</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
@@ -94,19 +95,80 @@
             </div>
 
             <div class="flex items-center gap-6">
-                <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full transition-colors">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white"></span>
-                </button>
                 <div class="h-10 w-[1px] bg-gray-100"></div>
-                <button class="flex items-center gap-3 p-1 hover:bg-gray-50 rounded-full transition-colors">
-                    <div class="size-9 rounded-lg bg-tanami-dark text-white flex items-center justify-center font-bold text-xs">AD</div>
-                    <div class="hidden lg:block text-left mr-2">
-                        <p class="text-sm font-heading font-bold text-tanami-dark leading-none">Admin User</p>
-                        <p class="text-[11px] text-gray-400 font-sans mt-1">Super Admin</p>
+                
+                {{-- Profile Dropdown --}}
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center gap-3 p-1 hover:bg-gray-50 rounded-full transition-colors">
+                        <div class="size-9 rounded-xl bg-gradient-to-br from-tanami-dark via-green-700 to-green-900 text-white flex items-center justify-center shadow-lg shadow-green-900/30">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+                        </div>
+                        <div class="hidden lg:block text-left mr-2">
+                            <p class="text-sm font-heading font-bold text-tanami-dark leading-none">Admin Tanami</p>
+                            <p class="text-[11px] text-gray-400 font-sans mt-1">Super Admin</p>
+                        </div>
+                        <span class="material-symbols-outlined text-gray-400 text-sm transition-transform" :class="{ 'rotate-180': open }">expand_more</span>
+                    </button>
+
+                    {{-- Dropdown Menu --}}
+                    <div x-show="open" 
+                         @click.away="open = false"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-1"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 translate-y-1"
+                         class="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50"
+                         style="display: none;">
+                        
+                        {{-- Profile Header --}}
+                        <div class="p-5 bg-gradient-to-br from-tanami-dark to-green-800">
+                            <div class="flex items-center gap-4">
+                                <div class="size-14 rounded-2xl bg-gradient-to-br from-white/30 via-white/20 to-white/10 flex items-center justify-center shadow-lg shadow-black/20 backdrop-blur-sm border border-white/20">
+                                    <span class="material-symbols-outlined text-white text-3xl drop-shadow-lg" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+                                </div>
+                                <div>
+                                    <p class="text-white font-heading font-bold text-lg">Super Admin</p>
+                                    <span class="inline-flex items-center mt-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/30 text-primary">
+                                        Full Access
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Description --}}
+                        <div class="p-5">
+                            <div class="flex items-start gap-3 mb-4">
+                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">verified_user</span>
+                                <div>
+                                    <p class="text-sm font-bold text-tanami-dark mb-1">Transaction Controller</p>
+                                    <p class="text-xs text-gray-500 leading-relaxed">
+                                        Mengontrol dan memonitoring seluruh transaksi yang terjadi di platform Tanami.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 mb-4">
+                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">monitoring</span>
+                                <div>
+                                    <p class="text-sm font-bold text-tanami-dark mb-1">System Monitoring</p>
+                                    <p class="text-xs text-gray-500 leading-relaxed">
+                                        Memantau aktivitas pengguna, pesanan, pembayaran, dan manajemen escrow.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl mt-0.5">manage_accounts</span>
+                                <div>
+                                    <p class="text-sm font-bold text-tanami-dark mb-1">User Management</p>
+                                    <p class="text-xs text-gray-500 leading-relaxed">
+                                        Mengelola akun pembeli, petani, dan verifikasi akun baru.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
-                </button>
+                </div>
             </div>
         </header>
 

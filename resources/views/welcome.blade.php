@@ -199,7 +199,7 @@
                         picks for this season.</p>
                 </div>
                 <a class="hidden sm:flex items-center text-primary font-heading font-semibold hover:underline"
-                    href="#">
+                    href="{{ route('katalog') }}">
                     View all
                     <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                 </a>

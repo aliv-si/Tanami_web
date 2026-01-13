@@ -23,6 +23,21 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap"
         rel="stylesheet" />
 
+    <style>
+        /* Hide scrollbar but keep scroll functionality */
+        html {
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+    </style>
+
     <script>
         tailwind.config = {
             darkMode: "class",

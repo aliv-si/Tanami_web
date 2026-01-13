@@ -26,34 +26,34 @@
 <!-- Status Tabs -->
 <div class="bg-white border-b border-gray-200 px-8">
     <nav class="flex gap-6 -mb-px">
-        <a href="{{ url('/pesanan') }}" class="py-4 px-1 border-b-2 {{ !$currentStatus ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all">
+        <a href="{{ route('petani.pesanan') }}" class="py-4 px-1 border-b-2 {{ !$currentStatus ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all">
             Semua Aktif
         </a>
-        <a href="{{ url('/pesanan?status=menunggu_verifikasi') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'menunggu_verifikasi' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'menunggu_verifikasi']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'menunggu_verifikasi' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Menunggu Verifikasi
             @if($statusCounts['menunggu_verifikasi'] > 0)
                 <span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['menunggu_verifikasi'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?status=dibayar') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dibayar' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'dibayar']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dibayar' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Dibayar
             @if($statusCounts['dibayar'] > 0)
                 <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['dibayar'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?status=diproses') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'diproses' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'diproses']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'diproses' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Diproses
             @if($statusCounts['diproses'] > 0)
                 <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['diproses'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?status=dikirim') }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dikirim' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
+        <a href="{{ route('petani.pesanan', ['status' => 'dikirim']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'dikirim' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">
             Dikirim
             @if($statusCounts['dikirim'] > 0)
                 <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs font-bold">{{ $statusCounts['dikirim'] }}</span>
             @endif
         </a>
-        <a href="{{ url('/pesanan?semua=1') }}" class="py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-semibold text-sm transition-all">
+        <a href="{{ route('petani.pesanan', ['semua' => 1]) }}" class="py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-semibold text-sm transition-all">
             Semua Riwayat
         </a>
     </nav>

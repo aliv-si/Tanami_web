@@ -12,13 +12,13 @@
 <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="flex items-center justify-between px-8 py-4">
         <div class="flex items-center gap-4">
-            <a href="{{ url('/produk') }}" class="p-2 hover:bg-gray-100 rounded-full transition-all text-gray-500">
+            <a href="{{ route('petani.produk') }}" class="p-2 hover:bg-gray-100 rounded-full transition-all text-gray-500">
                 <span class="material-symbols-outlined">arrow_back</span>
             </a>
             <h1 class="text-2xl font-bold font-heading text-text-dark">{{ $isEdit ? 'Edit Produk' : 'Tambah Produk Baru' }}</h1>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ url('/produk') }}" class="px-6 py-2.5 border border-gray-200 rounded-lg font-bold font-heading text-gray-600 hover:bg-gray-50 transition-all">
+            <a href="{{ route('petani.produk') }}" class="px-6 py-2.5 border border-gray-200 rounded-lg font-bold font-heading text-gray-600 hover:bg-gray-50 transition-all">
                 Batal
             </a>
             <button type="submit" form="product-form" class="bg-primary hover:bg-primary/90 text-white px-8 py-2.5 rounded-lg font-bold font-heading transition-all shadow-md">
@@ -43,7 +43,7 @@
         </div>
     @endif
 
-    <form id="product-form" action="{{ $isEdit ? url('/produk/' . $produk->id_produk) : url('/produk') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form id="product-form" action="{{ $isEdit ? route('petani.produk.update', $produk->id_produk) : route('petani.produk.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @if($isEdit)
             @method('PUT')
@@ -108,17 +108,44 @@
                         <p class="text-xs text-gray-400 mt-1">Klik × untuk menghapus foto</p>
                     </div>
                 @endif
-                <div class="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary transition-all cursor-pointer bg-gray-50/50">
-                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+                <div id="dropzone" onclick="document.getElementById('foto-input').click()" class="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary transition-all cursor-pointer bg-gray-50/50">
+                    <div id="upload-placeholder">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+                        </div>
+                        <p class="text-sm font-bold font-heading text-text-dark">Seret dan lepas gambar di sini</p>
+                        <p class="text-xs text-gray-400 mt-1">PNG, JPG, atau JPEG maksimal 5MB</p>
+                        <p class="mt-4 text-primary font-bold text-sm hover:underline">Atau pilih file</p>
                     </div>
-                    <p class="text-sm font-bold font-heading text-text-dark">Seret dan lepas gambar di sini</p>
-                    <p class="text-xs text-gray-400 mt-1">PNG, JPG, atau JPEG maksimal 5MB</p>
-                    <label class="mt-4 text-primary font-bold text-sm hover:underline cursor-pointer">
-                        Atau pilih file
-                        <input type="file" name="foto" class="hidden" accept="image/jpeg,image/png,image/jpg"/>
-                    </label>
+                    <div id="file-preview" class="hidden">
+                        <img id="preview-image" class="w-32 h-32 object-cover rounded-lg border border-gray-200 mb-2 mx-auto" src="" alt="Preview"/>
+                        <p id="file-name" class="text-sm font-medium text-text-dark"></p>
+                        <p class="text-xs text-primary mt-1">Klik untuk ganti foto</p>
+                    </div>
+                    <input type="file" id="foto-input" name="foto" class="hidden" accept="image/jpeg,image/png,image/jpg" onchange="previewFile(this)"/>
                 </div>
+                <script>
+                    function previewFile(input) {
+                        const placeholder = document.getElementById('upload-placeholder');
+                        const preview = document.getElementById('file-preview');
+                        const previewImg = document.getElementById('preview-image');
+                        const fileName = document.getElementById('file-name');
+                        
+                        if (input.files && input.files[0]) {
+                            const file = input.files[0];
+                            const reader = new FileReader();
+                            
+                            reader.onload = function(e) {
+                                previewImg.src = e.target.result;
+                                fileName.textContent = file.name;
+                                placeholder.classList.add('hidden');
+                                preview.classList.remove('hidden');
+                            }
+                            
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                </script>
             </div>
         </section>
 
@@ -149,7 +176,7 @@
             <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-bold font-heading transition-all shadow-md">
                 Simpan Produk
             </button>
-            <a href="{{ url('/produk') }}" class="w-full text-center px-6 py-3 border border-gray-200 rounded-lg font-bold font-heading text-gray-600 hover:bg-gray-50 transition-all">
+            <a href="{{ route('petani.produk') }}" class="w-full text-center px-6 py-3 border border-gray-200 rounded-lg font-bold font-heading text-gray-600 hover:bg-gray-50 transition-all">
                 Batal
             </a>
         </div>

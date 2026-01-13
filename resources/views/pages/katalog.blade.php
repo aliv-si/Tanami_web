@@ -154,6 +154,17 @@
                     </div>
                     <div class="p-3.5 flex flex-col flex-1">
                         {{-- Rating --}}
+
+                        {{-- Product Name --}}
+                        <h3 class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
+                            {{ $item->nama_produk }}
+                        </h3>
+
+                        {{-- Description --}}
+                        <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">
+                            {{ Str::limit($item->deskripsi, 80) }}
+                        </p>
+
                         {{-- Star Rating --}}
                         <div class="flex items-center gap-1 mb-1.5">
                             @php
@@ -187,21 +198,11 @@
                             <span class="text-[10px] text-text-secondary dark:text-gray-500 font-display">({{ $item->ulasan->count() }})</span>
                         </div>
 
-                        {{-- Product Name --}}
-                        <h3 class="text-base font-bold text-[#1e3f1b] dark:text-white mb-1 line-clamp-2 font-heading leading-tight">
-                            {{ $item->nama_produk }}
-                        </h3>
-
-                        {{-- Description --}}
-                        <p class="text-xs text-text-secondary dark:text-gray-400 mb-3 line-clamp-2 font-display">
-                            {{ Str::limit($item->deskripsi, 80) }}
-                        </p>
-
                         {{-- Price & Add to Cart --}}
                         <div class="mt-auto flex items-center justify-between gap-2">
-                            <div class="flex flex-col">
+                            <div class="flex items-baseline gap-1">
                                 <span class="text-lg font-bold text-[#53be20] font-display">Rp {{ number_format($item->harga, 0, ',', '.') }}</span>
-                                <span class="text-[10px] text-text-secondary font-display">per {{ $item->satuan }}</span>
+                                <span class="text-xs text-text-secondary font-display">/{{ $item->satuan }}</span>
                             </div>
                             <form action="{{ route('keranjang.store') }}" method="POST" onclick="event.stopPropagation();">
                                 @csrf

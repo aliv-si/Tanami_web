@@ -154,16 +154,37 @@
                     </div>
                     <div class="p-3.5 flex flex-col flex-1">
                         {{-- Rating --}}
-                        <div class="flex items-center gap-0.5 mb-1.5">
-                            @php $rating = round($item->rata_rating); @endphp
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <=$rating)
-                                <span class="material-symbols-outlined text-yellow-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                                @else
-                                <span class="material-symbols-outlined text-gray-300 text-[14px]">star</span>
-                                @endif
-                                @endfor
-                                <span class="text-[10px] text-text-secondary ml-1 font-display">({{ $item->ulasan->count() }})</span>
+                        {{-- Star Rating --}}
+                        <div class="flex items-center gap-1 mb-1.5">
+                            @php
+                            $avgRating = $item->rata_rating;
+                            $fullStars = floor($avgRating);
+                            $hasHalfStar = ($avgRating - $fullStars) >= 0.5;
+                            $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
+                            @endphp
+
+                            <div class="flex items-center">
+                                {{-- Full Stars --}}
+                                @for ($i = 0; $i < $fullStars; $i++)
+                                    <span class="fa-solid fa-star text-amber-400 text-[15px]" style="font-variation-settings: 'FILL' 1;"></span>
+                                    @endfor
+
+                                    {{-- Half Star --}}
+                                    @if ($hasHalfStar)
+                                    <span class="fa-solid fa-star-half-stroke text-amber-400 text-[15px]" style="font-variation-settings: 'FILL' 1;"></span>
+                                    @endif
+
+                                    {{-- Empty Stars --}}
+                                    @for ($i = 0; $i < $emptyStars; $i++)
+                                        <span class="fa-regular fa-star text-gray-300 dark:text-gray-600 text-[15px]"></span>
+                                        @endfor
+                            </div>
+
+                            {{-- Rating Number & Count --}}
+                            @if($avgRating > 0)
+                            <span class="text-xs font-semibold text-amber-500 ml-0.5">{{ number_format($avgRating, 1) }}</span>
+                            @endif
+                            <span class="text-[10px] text-text-secondary dark:text-gray-500 font-display">({{ $item->ulasan->count() }})</span>
                         </div>
 
                         {{-- Product Name --}}

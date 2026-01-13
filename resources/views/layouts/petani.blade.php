@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Tanami - @yield('title', 'Farmer Dashboard')</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -57,26 +58,28 @@
     </style>
     @stack('styles')
 </head>
+
 <body class="bg-background text-text-dark antialiased">
     <div class="flex min-h-screen">
         <!-- Sidebar Component -->
         @php
-            $activePage = $activePage ?? 'dashboard';
-            $currentPath = request()->path();
-            if (str_starts_with($currentPath, 'produk')) $activePage = 'produk';
-            elseif (str_starts_with($currentPath, 'pesanan')) $activePage = 'pesanan';
-            elseif (str_starts_with($currentPath, 'rekening')) $activePage = 'rekening';
-            elseif (str_starts_with($currentPath, 'ulasan')) $activePage = 'ulasan';
-            elseif (str_starts_with($currentPath, 'dashboard')) $activePage = 'dashboard';
+        $activePage = $activePage ?? 'dashboard';
+        $currentPath = request()->path();
+        if (str_starts_with($currentPath, 'produk')) $activePage = 'produk';
+        elseif (str_starts_with($currentPath, 'pesanan')) $activePage = 'pesanan';
+        elseif (str_starts_with($currentPath, 'rekening')) $activePage = 'rekening';
+        elseif (str_starts_with($currentPath, 'ulasan')) $activePage = 'ulasan';
+        elseif (str_starts_with($currentPath, 'dashboard')) $activePage = 'dashboard';
         @endphp
         <x-sidebar-petani :active="$activePage" />
-        
+
         <!-- Main Content -->
         <main class="flex-1 ml-64">
             @yield('content')
         </main>
     </div>
-    
+
     @stack('scripts')
 </body>
+
 </html>

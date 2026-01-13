@@ -34,7 +34,7 @@
                     <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
                 </div>
             </form>
-            <a href="{{ route('petani.produk.tambah') }}" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-bold font-heading flex items-center gap-2 transition-all shadow-sm">
+            <a href="{{ route('petani.produk.create') }}" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-bold font-heading flex items-center gap-2 transition-all shadow-sm">
                 <span class="material-symbols-outlined">add</span>
                 Tambah Produk
             </a>

@@ -39,13 +39,24 @@ class PesananController extends Controller
     {
         $query = $this->getPetaniOrdersQuery();
 
+        // Search by ID or pembeli name
+        if ($request->filled('q')) {
+            $search = $request->input('q');
+            $query->where(function ($q) use ($search) {
+                $q->where('id_pesanan', 'like', "%{$search}%")
+                  ->orWhereHas('pembeli', function ($q2) use ($search) {
+                      $q2->where('nama_lengkap', 'like', "%{$search}%");
+                  });
+            });
+        }
+
         // Filter by status
         if ($request->filled('status')) {
             $query->where('status_pesanan', $request->input('status'));
         }
 
         // Default: show only active orders (not cancelled/completed/refunded)
-        if (!$request->has('status') && !$request->has('semua')) {
+        if (!$request->has('status') && !$request->has('semua') && !$request->filled('q')) {
             $query->aktif();
         }
 
@@ -68,6 +79,7 @@ class PesananController extends Controller
             'pesanan' => $pesanan,
             'statusCounts' => $statusCounts,
             'currentStatus' => $request->input('status'),
+            'currentSearch' => $request->input('q'),
         ]);
     }
 

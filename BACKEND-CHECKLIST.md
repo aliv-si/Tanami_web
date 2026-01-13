@@ -382,39 +382,41 @@ Dokumen ini berisi checklist lengkap untuk pengembangan backend TANAMI E-Commerc
 
 ---
 
-## **FASE 6: Admin Dashboard** ⏳ PENDING
+## **FASE 6: Admin Dashboard** ✅ SELESAI
 
-### 6.1 Dashboard Statistics
+### 6.1 Dashboard Statistics ✅
 
-| Metric                        | Query                                |
-| ----------------------------- | ------------------------------------ |
-| GMV (Gross Merchandise Value) | SUM total_bayar dari pesanan selesai |
-| Total Transaksi               | COUNT pesanan (bukan pending/cancel) |
-| Total Pembeli                 | COUNT user role pembeli              |
-| Total Petani                  | COUNT user role petani               |
-| Petani Pending Verifikasi     | COUNT petani is_verified = false     |
-| Escrow Ditahan                | SUM escrow status ditahan            |
-| Pending Refund                | COUNT pesanan status minta_refund    |
+Implemented in `Admin\DashboardController::index()`
 
-### 6.2 Master Data Management
+| Metric                        | Query                                | Status  |
+| ----------------------------- | ------------------------------------ | ------- |
+| GMV (Gross Merchandise Value) | SUM total_bayar dari pesanan selesai | ✅ DONE |
+| Total Transaksi               | COUNT pesanan (bukan pending/cancel) | ✅ DONE |
+| Total Pembeli                 | COUNT user role pembeli              | ✅ DONE |
+| Total Petani                  | COUNT user role petani               | ✅ DONE |
+| Petani Pending Verifikasi     | COUNT petani is_verified = false     | ✅ DONE |
+| Escrow Ditahan                | SUM escrow status ditahan            | ✅ DONE |
+| Pending Refund                | COUNT pesanan status minta_refund    | ✅ DONE |
 
--   [ ] CRUD Kategori (nama, slug, deskripsi)
--   [ ] CRUD Kota (nama, provinsi, ongkir, is_aktif)
--   [ ] CRUD Kupon (kode, tipe, nominal/persen, min_belanja, limit, periode)
+### 6.2 Master Data Management ✅
 
-### 6.3 User Management
+-   [x] CRUD Kategori → `Admin\KategoriController`
+-   [x] CRUD Kota → `Admin\KotaController`
+-   [x] CRUD Kupon → `Admin\KuponController`
 
--   [ ] List semua user dengan filter role
--   [ ] Detail user dengan history pesanan/produk
--   [ ] Verifikasi akun petani baru
--   [ ] Deaktivasi akun (soft delete)
+### 6.3 User Management ✅
 
-### 6.4 Transaction Monitoring
+-   [x] List semua user dengan filter role → `Admin\PenggunaController::index()`
+-   [x] Detail user dengan history → `Admin\PenggunaController::show()`
+-   [x] Verifikasi akun petani baru → `Admin\PenggunaController::verify()`
+-   [x] Deaktivasi akun (soft delete) → `Admin\PenggunaController::destroy()`
 
--   [ ] List semua pesanan dengan filter status
--   [ ] Detail pesanan dengan histori status
--   [ ] Monitor escrow (ditahan, dikirim, direfund)
--   [ ] Handle refund request (approve/reject)
+### 6.4 Transaction Monitoring ✅
+
+-   [x] List semua pesanan dengan filter status → `Admin\PesananController::index()`
+-   [x] Detail pesanan dengan histori status → `Admin\PesananController::show()`
+-   [x] Monitor escrow → `Admin\EscrowController`
+-   [x] Handle refund request → `Admin\RefundController::approve/reject()`
 
 ---
 

@@ -20,17 +20,12 @@
                 <a class="text-content-dark dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-[16px] font-semibold leading-normal"
                     href="#">Contact</a>
             </div>
-            <div class="flex gap-3">
+            <div class="flex items-center justify-center gap-3">
                 <button
                     class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-content-dark dark:text-white transition-colors">
                     <span class="material-symbols-outlined">search</span>
                 </button>
-                <button
-                    class="relative flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-content-dark dark:text-white transition-colors">
-                    <span class="material-symbols-outlined">shopping_bag</span>
-                    <span class="absolute top-1 right-1 size-2 bg-primary rounded-full"></span>
-                </button>
-                <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center gap-3">
                 @auth
                 {{-- Keranjang (hanya untuk pembeli) --}}
                 @if(auth()->user()->isPembeli())

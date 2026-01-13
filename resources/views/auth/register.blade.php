@@ -42,118 +42,116 @@
     </script>
 </head>
 
-<body
-    class="bg-background-light dark:bg-background-dark font-sans text-base font-normal text-content-dark dark:text-content-light overflow-x-hidden antialiased">
-    <div class="relative flex flex-col w-full min-h-screen group/design-root">
-        <main
-            class="flex-1 flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8 w-full bg-background-light dark:bg-background-dark">
-            <div
-                class="w-full max-w-sm bg-white dark:bg-[#1f2b1b] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] overflow-hidden p-6 border border-gray-100 dark:border-white/5">
-                <div class="text-center mb-5">
-                    <h2 class="text-xl font-heading font-bold text-[#1e3f1b] dark:text-white leading-tight">Create Your
-                        Account</h2>
-                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 font-sans">Start growing smarter with Tanami
-                    </p>
+<body class="bg-background-light font-sans text-base font-normal text-content-dark antialiased">
+    <div class="relative flex flex-col w-full min-h-screen">
+        <main class="flex-1 flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8 w-full">
+            <div class="w-full max-w-md bg-white rounded-xl shadow-xl shadow-gray-200/50 overflow-hidden p-6 sm:p-8 border border-gray-100">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-heading font-bold text-[#1e3f1b] leading-tight">Create Your Account</h2>
+                    <p class="mt-1.5 text-sm text-gray-500 font-sans">Start growing smarter with Tanami</p>
                 </div>
-                <form action="#" class="space-y-3" method="POST">
+
+                @if (session('success'))
+                <div class="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p class="text-sm text-green-700">{{ session('success') }}</p>
+                </div>
+                @endif
+
+                @if ($errors->any())
+                <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                    @foreach ($errors->all() as $error)
+                    <p class="text-sm text-red-600">{{ $error }}</p>
+                    @endforeach
+                </div>
+                @endif
+
+                <form action="{{ route('register') }}" class="space-y-4" method="POST">
+                    @csrf
+
+                    {{-- Role Selection --}}
                     <div>
-                        <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                            for="full-name">Full Name</label>
-                        <div class="mt-0.5">
-                            <input autocomplete="name"
-                                class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
-                                id="full-name" name="full-name" placeholder="John Doe" required="" type="text" />
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                            for="email">Email Address</label>
-                        <div class="mt-0.5">
-                            <input autocomplete="email"
-                                class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
-                                id="email" name="email" placeholder="you@example.com" required=""
-                                type="email" />
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                            for="password">Password</label>
-                        <div class="mt-0.5 relative">
-                            <input autocomplete="new-password"
-                                class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
-                                id="password" name="password" placeholder="••••••••" required="" type="password" />
-                        </div>
-                        <div class="mt-1.5 flex gap-1">
-                            <div class="h-1 flex-1 bg-[#53be20] rounded-full"></div>
-                            <div class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full"></div>
-                            <div class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full"></div>
-                            <div class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full"></div>
-                        </div>
-                        <p class="text-[10px] text-gray-500 mt-1 font-sans">Password strength: Weak</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                            for="confirm-password">Confirm Password</label>
-                        <div class="mt-0.5">
-                            <input autocomplete="new-password"
-                                class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
-                                id="confirm-password" name="confirm-password" placeholder="••••••••" required=""
-                                type="password" />
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex h-5 items-center">
-                            <input
-                                class="h-3.5 w-3.5 text-[#53be20] focus:ring-[#53be20] border-gray-300 rounded cursor-pointer"
-                                id="terms" name="terms" type="checkbox" />
-                        </div>
-                        <div class="ml-2 text-xs">
-                            <label class="font-medium text-gray-600 dark:text-gray-400 font-sans" for="terms">
-                                I agree to the <a
-                                    class="text-[#53be20] hover:text-[#46a31b] hover:underline transition-colors"
-                                    href="#">Terms</a> &amp; <a
-                                    class="text-[#53be20] hover:text-[#46a31b] hover:underline transition-colors"
-                                    href="#">Privacy Policy</a>
+                        <label class="block text-xs font-bold text-[#1e3f1b] font-sans mb-2">Daftar Sebagai</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="relative cursor-pointer">
+                                <input type="radio" name="role_pengguna" value="pembeli" class="peer sr-only" {{ old('role_pengguna', 'pembeli') === 'pembeli' ? 'checked' : '' }} required />
+                                <div class="flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-lg peer-checked:border-[#53be20] peer-checked:bg-green-50 transition-all">
+                                    <span class="material-symbols-outlined text-gray-500 peer-checked:text-[#53be20]">shopping_bag</span>
+                                    <span class="text-sm font-semibold text-gray-700">Pembeli</span>
+                                </div>
+                            </label>
+                            <label class="relative cursor-pointer">
+                                <input type="radio" name="role_pengguna" value="petani" class="peer sr-only" {{ old('role_pengguna') === 'petani' ? 'checked' : '' }} />
+                                <div class="flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-lg peer-checked:border-[#53be20] peer-checked:bg-green-50 transition-all">
+                                    <span class="material-symbols-outlined text-gray-500 peer-checked:text-[#53be20]">agriculture</span>
+                                    <span class="text-sm font-semibold text-gray-700">Petani</span>
+                                </div>
                             </label>
                         </div>
+                        <p class="text-xs text-gray-400 mt-2">
+                            <span class="text-amber-600">⚠️</span> Akun petani memerlukan verifikasi admin (1-2 hari kerja)
+                        </p>
                     </div>
+
+                    {{-- Full Name --}}
                     <div>
-                        <button
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-[#53be20] hover:bg-[#46a31b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#53be20] font-heading transition-colors"
-                            type="submit">
-                            Create Account
-                        </button>
+                        <label class="block text-xs font-bold text-[#1e3f1b] font-sans mb-1" for="nama_lengkap">Nama Lengkap</label>
+                        <input autocomplete="name"
+                            class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-[#53be20] focus:ring-1 focus:ring-[#53be20] outline-none transition-all text-sm @error('nama_lengkap') border-red-500 @enderror"
+                            id="nama_lengkap" name="nama_lengkap" placeholder="John Doe" required type="text" value="{{ old('nama_lengkap') }}" />
                     </div>
+
+                    {{-- Email --}}
+                    <div>
+                        <label class="block text-xs font-bold text-[#1e3f1b] font-sans mb-1" for="email">Email Address</label>
+                        <input autocomplete="email"
+                            class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-[#53be20] focus:ring-1 focus:ring-[#53be20] outline-none transition-all text-sm @error('email') border-red-500 @enderror"
+                            id="email" name="email" placeholder="you@example.com" required type="email" value="{{ old('email') }}" />
+                    </div>
+
+                    {{-- Phone (Optional) --}}
+                    <div>
+                        <label class="block text-xs font-bold text-[#1e3f1b] font-sans mb-1" for="no_hp">No. HP <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                        <input autocomplete="tel"
+                            class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-[#53be20] focus:ring-1 focus:ring-[#53be20] outline-none transition-all text-sm"
+                            id="no_hp" name="no_hp" placeholder="08123456789" type="tel" value="{{ old('no_hp') }}" />
+                    </div>
+
+                    {{-- Password --}}
+                    <div>
+                        <label class="block text-xs font-bold text-[#1e3f1b] font-sans mb-1" for="password">Password</label>
+                        <input autocomplete="new-password"
+                            class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-[#53be20] focus:ring-1 focus:ring-[#53be20] outline-none transition-all text-sm @error('password') border-red-500 @enderror"
+                            id="password" name="password" placeholder="Minimal 8 karakter" required type="password" />
+                    </div>
+
+                    {{-- Confirm Password --}}
+                    <div>
+                        <label class="block text-xs font-bold text-[#1e3f1b] font-sans mb-1" for="password_confirmation">Konfirmasi Password</label>
+                        <input autocomplete="new-password"
+                            class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-[#53be20] focus:ring-1 focus:ring-[#53be20] outline-none transition-all text-sm"
+                            id="password_confirmation" name="password_confirmation" placeholder="Ulangi password" required type="password" />
+                    </div>
+
+                    {{-- Submit --}}
+                    <button
+                        class="w-full bg-[#53be20] hover:bg-[#46a31b] text-white font-heading font-semibold rounded-lg px-4 py-2.5 transition-all shadow-md shadow-[#53be20]/20 text-sm mt-2"
+                        type="submit">
+                        Daftar Sekarang
+                    </button>
                 </form>
-                <div class="mt-4">
-                    <div class="relative">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
-                        </div>
-                        <div class="relative flex justify-center text-xs">
-                            <span class="px-2 bg-white dark:bg-[#1f2b1b] text-gray-500 font-sans">Or continue
-                                with</span>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <button
-                            class="w-full flex justify-center items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-lg text-gray-700 dark:text-gray-200 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 font-sans transition-colors"
-                            type="button">
-                            <img alt="Google" class="w-4 h-4"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDiQcRd7colLZ05XYOmQHGwV5gds2UvrXCUOFFSP5dXmL1QkMIavzslGgp3faOzpe8YQ75Hdtv7KYvK7MrvNFi8in-851hqWppPnUNc_t3sj5mYtEhXJL-7WQDIS16rmSpvfK2c1C43w23FLf8eoxcT2uXeBY3E8juc38pGW8TccEN1eYI-GNeMq61EdoxTL5IM2cd2m4mlo5X_wtvd4jjQA8iyW0QWeNZ20m7tJQLkigeGX4GqgyMeJALu6mI-0BegWQZT0TEXfrZ" />
-                            Sign up with Google
-                        </button>
-                    </div>
-                </div>
-                <div class="mt-4 text-center border-t border-gray-100 dark:border-white/5 pt-4">
-                    <p class="text-xs text-gray-600 dark:text-gray-400 font-sans">
-                        Already have an account?
+
+                <div class="mt-5 text-center border-t border-gray-100 pt-5">
+                    <p class="text-sm text-gray-600 font-sans">
+                        Sudah punya akun?
                         <a class="font-semibold text-[#53be20] hover:text-[#46a31b] transition-colors"
-                            href="#">Login</a>
+                            href="{{ route('login') }}">Login</a>
                     </p>
                 </div>
             </div>
         </main>
+        <footer class="py-6 text-center text-sm text-gray-400 font-sans bg-background-light">
+            <p>© 2026 Tanami. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 

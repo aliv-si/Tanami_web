@@ -156,8 +156,21 @@ class AuthController extends Controller
      */
     public function showProfil(): View
     {
+        /** @var \App\Models\Pengguna $user */
         $user = Auth::user();
-        return view('pembeli.profil', compact('user'));
+        
+        // Order statistics
+        $orderStats = [
+            'total' => \App\Models\Pesanan::where('id_pembeli', $user->id_pengguna)->count(),
+            'active' => \App\Models\Pesanan::where('id_pembeli', $user->id_pengguna)
+                ->whereNotIn('status_pesanan', ['selesai', 'dibatalkan', 'direfund'])
+                ->count(),
+            'completed' => \App\Models\Pesanan::where('id_pembeli', $user->id_pengguna)
+                ->where('status_pesanan', 'selesai')
+                ->count(),
+        ];
+        
+        return view('pembeli.profil', compact('user', 'orderStats'));
     }
 
     /**
@@ -213,5 +226,37 @@ class AuthController extends Controller
         ]);
 
         return back()->with('success', 'Password berhasil diperbarui.');
+    }
+
+    /**
+     * Update profile photo
+     */
+    public function updateFoto(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'foto' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ], [
+            'foto.required' => 'Foto wajib dipilih.',
+            'foto.image' => 'File harus berupa gambar.',
+            'foto.mimes' => 'Format foto harus JPG atau PNG.',
+            'foto.max' => 'Ukuran foto maksimal 2MB.',
+        ]);
+
+        /** @var \App\Models\Pengguna $user */
+        $user = Auth::user();
+
+        // Delete old photo if exists
+        if ($user->foto && \Storage::disk('public')->exists($user->foto)) {
+            \Storage::disk('public')->delete($user->foto);
+        }
+
+        // Store new photo
+        $file = $request->file('foto');
+        $filename = 'avatar_' . $user->id_pengguna . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('avatars', $filename, 'public');
+
+        $user->update(['foto' => $path]);
+
+        return back()->with('success', 'Foto profil berhasil diperbarui.');
     }
 }

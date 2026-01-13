@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Beranda | Tanami')
+@section('title', 'Home | Tanami')
 
 @section('content')
 <main class="flex flex-col flex-1">
@@ -38,7 +38,7 @@
                     @auth
                     <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit font-heading">
                         <span class="material-symbols-outlined text-sm mr-1">waving_hand</span>
-                        Selamat datang, {{ auth()->user()->nama_lengkap }}!
+                        Welcome, {{ auth()->user()->nama_lengkap }}!
                     </div>
                     @else
                     <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary w-fit font-heading">
@@ -71,20 +71,16 @@
                         @else
                         <a href="{{ route('katalog') }}" class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-[16px] font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary/90">
                             <span class="material-symbols-outlined mr-2">storefront</span>
-                            Belanja Sekarang
-                        </a>
-                        <a href="{{ route('pesanan') }}" class="inline-flex h-12 items-center justify-center rounded-lg border border-gray-200 bg-white dark:bg-white/5 px-8 text-[16px] font-semibold text-[#1e3f1b] dark:text-white shadow-sm transition-colors hover:bg-gray-50">
-                            <span class="material-symbols-outlined mr-2">receipt_long</span>
-                            Pesanan Saya
+                            Shop Now
                         </a>
                         @endif
                         @else
                         {{-- Guest: Register/Login CTA --}}
                         <a href="{{ route('register') }}" class="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-[16px] font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 focus-visible:outline-none">
-                            Daftar Sekarang
+                            Register Now
                         </a>
                         <a href="{{ route('katalog') }}" class="inline-flex h-12 items-center justify-center rounded-lg border border-gray-200 bg-white dark:bg-white/5 dark:border-white/10 px-8 text-[16px] font-semibold text-[#1e3f1b] dark:text-white shadow-sm transition-colors hover:bg-gray-50 dark:hover:bg-white/10">
-                            Lihat Katalog
+                            See Catalog
                         </a>
                         @endauth
                     </div>
@@ -203,119 +199,66 @@
                         picks for this season.</p>
                 </div>
                 <a class="hidden sm:flex items-center text-primary font-heading font-semibold hover:underline"
-                    href="#">
+                    href="{{ route('katalog') }}">
                     View all
                     <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                 </a>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div
-                    class="bg-white dark:bg-[#1f2b1b] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Close up of a smart soil sensor device in dark soil"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxE7eDcmYVVRGHOds0-yQE0wN8X4BG-1WAhWX5edH3o-hvl90YBhbCj9xJyoYvOOZqRmGeFsSLT-849teLlLI3XLXA8jDQ_gmM9uKcjO89rd1mnpKePJMDZJPdyYdJ0hGsJjDZabupvl75x6YtT7hR_3L_nMpLMIDX_WzyF_YaJfmKg1zO5Bf6wR3es-4PlVFynehLRmEK2msfjyBRTacH_TVeUvdhWJwNdUDeKyP253ri4eggaQJGa29HHREL71yDQIkZLcIYqJhX");'>
+                @forelse($featuredProducts as $item)
+                <div class="bg-white dark:bg-[#1f2b1b] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
+                    <a href="{{ route('produk.detail', $item->slug_produk) }}" class="block relative aspect-square overflow-hidden bg-gray-100 dark:bg-[#253220]">
+                        @if($item->foto)
+                        <img alt="{{ $item->nama_produk }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="{{ Storage::url($item->foto) }}" />
+                        @else
+                        <div class="w-full h-full flex items-center justify-center">
+                            <span class="material-symbols-outlined text-5xl text-gray-400">image</span>
                         </div>
-                        <div
-                            class="absolute top-3 right-3 bg-white dark:bg-black/50 p-1.5 rounded-full text-gray-400 hover:text-red-500 cursor-pointer transition-colors shadow-sm">
-                            <span class="material-symbols-outlined text-xl">favorite</span>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">
-                            Tech</div>
-                        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] dark:text-white truncate">
-                            Smart Soil Sensor Pro</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span
-                                class="text-xl font-heading font-bold text-[#1e3f1b] dark:text-gray-200">$129.00</span>
-                            <button
-                                class="bg-primary hover:bg-primary/90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
+                        @endif
+                        @if($item->tgl_dibuat->diffInDays(now()) <= 7)
+                            <div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded font-heading">Baru
                 </div>
-                <div
-                    class="bg-white dark:bg-[#1f2b1b] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Bag of organic fertilizer pellets with green leaf icon"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBdqyAY8cOXgiqLGVnXKz7Ty9ZXwMqO9eD9mTQ044jZM4jj0_zYGu0kT-0d-EY6tSOBYVtsY3n7FwsfdfQHNRpwm7dHtkglJv9CTtpKcNkmHUKjIUs2gAC197gDvTXGtDSYTWiJARnolNz5DfCUwnQT3Bzs2nEZaMwiyUYoIVioTJDRezoE0D0gTcyfyWhT2FwghIrX1w1TYigKHD9DKXB6U-q2r2btlpVETmHk34YX7FQ6OJwWHrPNI8rOOXoxosI9fLzhyoqKgxPx");'>
-                        </div>
-                        <div
-                            class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded font-heading">
-                            Best Seller</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">
-                            Nutrients</div>
-                        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] dark:text-white truncate">
-                            Organic Nitrogen Boost</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span
-                                class="text-xl font-heading font-bold text-[#1e3f1b] dark:text-gray-200">$24.99</span>
-                            <button
-                                class="bg-primary hover:bg-primary/90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
+                @endif
+                <div class="absolute top-3 right-3 bg-white dark:bg-black/50 p-1.5 rounded-full text-gray-400 hover:text-red-500 cursor-pointer transition-colors shadow-sm">
+                    <span class="material-symbols-outlined text-xl">favorite</span>
                 </div>
-                <div
-                    class="bg-white dark:bg-[#1f2b1b] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Drip irrigation system watering plants in a greenhouse"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaLCCN1sb3pO-D-22LaE4c-H_DkorMbIeBoGCFQ8jRkMz2mnOPkhw3_Kl4aMJ0tVj5mCogMct_x1Ma0D2nC1VY-yRB8ERrxEiTXc7SFI9vn2qGn1iudpc4Wzu33yN4TRhtxJxwf1L79lqzemLTMNY8b4LQM-ThDhhn-SnW6P4iA6_Bd09WWZYLQcfULMmWVkhmWK5L63vam0dbAArX64sfXkoNCu3KYPZ8rL78Mr2FCAbA-OVcTZvgYxV65omcZeSjZtVlZ864Qo42");'>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">
-                            Irrigation</div>
-                        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] dark:text-white truncate">
-                            Auto-Drip Kit (50ft)</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span
-                                class="text-xl font-heading font-bold text-[#1e3f1b] dark:text-gray-200">$45.50</span>
-                            <button
-                                class="bg-primary hover:bg-primary/90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-white dark:bg-[#1f2b1b] rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Packet of high quality heirloom tomato seeds"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgTyX_gVdzneCxbC9fIWFWD50Fz2PNZcUiCmyJDicozr7VfjOQVT9tM0bnXe9ghgn2UzrjK60xGEph67kjI3-9xRtOsqH1R3NgYuEu5NAvbwBpMSfdU31gerbOTevgkBA13JAnq5IP85bFKxBEc4ruzFBezmOja3gl6FzS_YmWZTpyRQe4uvZS3ayWoaAv5FvgbEzi7hoX8qhGVzIXQviVfX1Gs38QzXnHI_8vvbtj0QN99mQtdBZzYigkOFDex9qCXLWTWIfpYIB6");'>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">
-                            Seeds</div>
-                        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] dark:text-white truncate">
-                            Heirloom Tomato Seeds</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span
-                                class="text-xl font-heading font-bold text-[#1e3f1b] dark:text-gray-200">$5.99</span>
-                            <button
-                                class="bg-primary hover:bg-primary/90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 flex sm:hidden justify-center">
-                <a class="flex items-center text-primary font-heading font-semibold hover:underline"
-                    href="#">
-                    View all products
-                    <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                 </a>
+                <div class="p-4">
+                    @if($item->kategori)
+                    <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">{{ $item->kategori->nama_kategori }}</div>
+                    @endif
+                    <a href="{{ route('produk.detail', $item->slug_produk) }}">
+                        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] dark:text-white truncate hover:text-primary transition-colors">{{ $item->nama_produk }}</h3>
+                    </a>
+                    <div class="flex items-baseline gap-1 mt-2">
+                        <span class="text-lg font-heading font-bold text-[#53be20]">Rp {{ number_format($item->harga, 0, ',', '.') }}</span>
+                        <span class="text-xs text-gray-500 font-sans">/{{ $item->satuan }}</span>
+                    </div>
+                    <form action="{{ route('keranjang.store') }}" method="POST" class="mt-3">
+                        @csrf
+                        <input type="hidden" name="id_produk" value="{{ $item->id_produk }}">
+                        <input type="hidden" name="jumlah" value="1">
+                        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white h-10 rounded-lg transition-colors flex items-center justify-center gap-2 font-heading font-semibold text-sm">
+                            <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            Tambah ke Keranjang
+                        </button>
+                    </form>
+                </div>
             </div>
+            @empty
+            <div class="col-span-full text-center py-12">
+                <span class="material-symbols-outlined text-5xl text-gray-300 mb-4">inventory_2</span>
+                <p class="text-gray-500 dark:text-gray-400 font-display">Belum ada produk tersedia.</p>
+            </div>
+            @endforelse
+        </div>
+        <div class="mt-8 flex sm:hidden justify-center">
+            <a class="flex items-center text-primary font-heading font-semibold hover:underline"
+                href="#">
+                View all products
+                <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+            </a>
+        </div>
         </div>
     </section>
 </main>

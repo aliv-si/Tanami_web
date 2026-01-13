@@ -11,14 +11,6 @@
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
                 <input name="q" value="{{ $currentSearch ?? '' }}" class="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-80" placeholder="Cari ID Pesanan atau nama pembeli..." type="text"/>
             </form>
-            <div class="flex items-center gap-4">
-                <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full">
-                    <span class="material-symbols-outlined">notifications</span>
-                    @if($statusCounts['menunggu_verifikasi'] > 0)
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-                    @endif
-                </button>
-            </div>
         </div>
     </div>
 </header>
@@ -26,7 +18,7 @@
 <!-- Status Tabs -->
 <div class="bg-white border-b border-gray-200 px-8">
     <nav class="flex gap-6 -mb-px">
-        <a href="{{ route('petani.pesanan') }}" class="py-4 px-1 border-b-2 {{ !$currentStatus ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all">
+        <a href="{{ route('petani.pesanan') }}" class="py-4 px-1 border-b-2 {{ !$currentStatus && !request('semua') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all">
             Semua Aktif
         </a>
         <a href="{{ route('petani.pesanan', ['status' => 'menunggu_verifikasi']) }}" class="py-4 px-1 border-b-2 {{ $currentStatus == 'menunggu_verifikasi' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700' }} font-semibold text-sm transition-all flex items-center gap-2">

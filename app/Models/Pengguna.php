@@ -27,6 +27,7 @@ class Pengguna extends Authenticatable
         'role_pengguna',
         'alamat',
         'no_hp',
+        'foto',
         'is_verified',
     ];
 

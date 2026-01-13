@@ -98,15 +98,22 @@
                 @if($isEdit && $produk->foto)
                     <div class="mb-4">
                         <p class="text-sm text-gray-500 mb-2">Foto saat ini:</p>
-                        <div class="relative inline-block">
+                        <div id="current-foto-container" class="relative inline-block">
                             <img src="{{ asset('storage/produk/' . $produk->foto) }}" alt="{{ $produk->nama_produk }}" class="w-32 h-32 object-cover rounded-lg border border-gray-200"/>
-                            <label class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 cursor-pointer hover:bg-red-600">
-                                <input type="checkbox" name="hapus_foto" value="1" class="hidden" onchange="this.parentElement.classList.toggle('bg-green-500'); this.parentElement.classList.toggle('bg-red-500')"/>
+                            <button type="button" onclick="hapusFotoPreview()" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 cursor-pointer hover:bg-red-600 transition-all">
                                 <span class="material-symbols-outlined text-sm">close</span>
-                            </label>
+                            </button>
+                            <input type="hidden" name="hapus_foto" id="hapus-foto-input" value="0"/>
                         </div>
-                        <p class="text-xs text-gray-400 mt-1">Klik × untuk menghapus foto</p>
+                        <p id="hapus-foto-hint" class="text-xs text-gray-400 mt-1">Klik × untuk menghapus foto</p>
                     </div>
+                    <script>
+                        function hapusFotoPreview() {
+                            document.getElementById('current-foto-container').style.display = 'none';
+                            document.getElementById('hapus-foto-input').value = '1';
+                            document.getElementById('hapus-foto-hint').innerHTML = '<span class="text-red-500 font-semibold">Foto akan dihapus saat disimpan</span>';
+                        }
+                    </script>
                 @endif
                 <div id="dropzone" onclick="document.getElementById('foto-input').click()" class="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary transition-all cursor-pointer bg-gray-50/50">
                     <div id="upload-placeholder">

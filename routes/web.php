@@ -28,11 +28,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ============================================================================
+// LOGOUT
+// ============================================================================
+Route::get('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/')->with('success', 'Berhasil logout');
+})->name('logout');
+
+// ============================================================================
 // PUBLIC PAGES
 // ============================================================================
 
 Route::get('/', function () {
-    return view('welcome');
+    $featuredProducts = \App\Models\Produk::with(['kategori', 'petani'])
+        ->where('stok', '>', 0)
+        ->orderBy('tgl_dibuat', 'desc')
+        ->take(4)
+        ->get();
+
+    return view('welcome', compact('featuredProducts'));
 })->name('home');
 
 Route::get('/beranda', function () {
@@ -122,6 +138,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profil', [AuthController::class, 'showProfil'])->name('profil');
     Route::put('/profil', [AuthController::class, 'updateProfil'])->name('profil.update');
     Route::put('/profil/password', [AuthController::class, 'updatePassword'])->name('profil.password');
+    Route::post('/profil/foto', [AuthController::class, 'updateFoto'])->name('profil.foto');
 
     // --------------------- KERANJANG ---------------------
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
@@ -168,6 +185,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/pesanan/{id}/tolak', [PetaniPesananController::class, 'tolak'])->name('pesanan.tolak');
         Route::post('/pesanan/{id}/proses', [PetaniPesananController::class, 'proses'])->name('pesanan.proses');
         Route::post('/pesanan/{id}/kirim', [PetaniPesananController::class, 'kirim'])->name('pesanan.kirim');
+        Route::get('/pesanan/{id}/invoice', [PetaniPesananController::class, 'invoice'])->name('pesanan.invoice');
 
         // Rekening
         Route::get('/rekening', [PetaniRekeningController::class, 'index'])->name('rekening');

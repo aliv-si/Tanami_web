@@ -14,6 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -57,7 +58,7 @@
                 </div>
                 <form action="{{ route('register') }}" class="space-y-3" method="POST">
                     @csrf
-                    
+
                     @if (session('success'))
                     <div class="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
                         <p class="text-sm text-green-700">{{ session('success') }}</p>
@@ -71,10 +72,10 @@
                         @endforeach
                     </div>
                     @endif
-                    
+
                     <div>
                         <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                        for="full-name">Daftar Sebagai</label>
+                            for="full-name">Daftar Sebagai</label>
                         <div class="grid grid-cols-2 gap-3">
                             <label class="relative cursor-pointer">
                                 <input type="radio" name="role_pengguna" value="pembeli" class="peer sr-only" {{ old('role_pengguna', 'pembeli') === 'pembeli' ? 'checked' : '' }} required />
@@ -97,13 +98,13 @@
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                            for="full-name">Full Name</label>
+                            for="nama_lengkap">Full Name</label>
                         <div class="mt-0.5">
                             <input autocomplete="name"
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
-                                id="full-name" name="full-name" placeholder="John Doe" required="" type="text" />
-                            @error('full_name')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                id="nama_lengkap" name="nama_lengkap" placeholder="John Doe" required="" type="text" value="{{ old('nama_lengkap') }}" />
+                            @error('nama_lengkap')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -114,9 +115,9 @@
                             <input autocomplete="email"
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
                                 id="email" name="email" placeholder="you@example.com" required=""
-                                type="email" />
+                                type="email" value="{{ old('email') }}" />
                             @error('email')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -126,29 +127,29 @@
                         <div class="mt-0.5 relative">
                             <input autocomplete="new-password"
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
-                                id="password" name="password" placeholder="••••••••" required="" type="password" />
+                                id="password" name="password" placeholder="••••••••" required="" type="password" oninput="checkPasswordStrength(this.value)" />
                             @error('password')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="mt-1.5 flex gap-1">
-                            <div class="h-1 flex-1 bg-[#53be20] rounded-full"></div>
-                            <div class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full"></div>
-                            <div class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full"></div>
-                            <div class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full"></div>
+                        <div class="mt-1.5 flex gap-1" id="strengthBars">
+                            <div id="bar1" class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full transition-colors"></div>
+                            <div id="bar2" class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full transition-colors"></div>
+                            <div id="bar3" class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full transition-colors"></div>
+                            <div id="bar4" class="h-1 flex-1 bg-gray-200 dark:bg-white/10 rounded-full transition-colors"></div>
                         </div>
-                        <p class="text-[10px] text-gray-500 mt-1 font-sans">Password strength: Weak</p>
+                        <p id="strengthText" class="text-[10px] text-gray-500 mt-1 font-sans">Password strength: -</p>
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                            for="confirm-password">Confirm Password</label>
+                            for="password_confirmation">Confirm Password</label>
                         <div class="mt-0.5">
                             <input autocomplete="new-password"
                                 class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#53be20] focus:border-[#53be20] text-sm font-sans bg-white dark:bg-white/5 text-gray-900 dark:text-white transition-colors"
-                                id="confirm-password" name="confirm-password" placeholder="••••••••" required=""
+                                id="password_confirmation" name="password_confirmation" placeholder="••••••••" required=""
                                 type="password" />
-                            @error('confirm-password')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @error('password_confirmation')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -156,7 +157,7 @@
                         <div class="flex h-5 items-center">
                             <input
                                 class="h-3.5 w-3.5 text-[#53be20] focus:ring-[#53be20] border-gray-300 rounded cursor-pointer"
-                                id="terms" name="terms" type="checkbox" />
+                                id="terms" name="terms" type="checkbox" required />
                         </div>
                         <div class="ml-2 text-xs">
                             <label class="font-medium text-gray-600 dark:text-gray-400 font-sans" for="terms">

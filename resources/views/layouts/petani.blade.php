@@ -65,15 +65,15 @@
             
             $activePage = 'dashboard'; // Default
 
-            if (request()->is('produk*')) {
+            if (request()->is('petani/produk*') || request()->is('produk*')) {
                 $activePage = 'produk';
-            } elseif (request()->is('pesanan*')) {
+            } elseif (request()->is('petani/pesanan*') || request()->is('pesanan*')) {
                 $activePage = 'pesanan';
-            } elseif (request()->is('rekening*')) {
+            } elseif (request()->is('petani/rekening*') || request()->is('rekening*')) {
                 $activePage = 'rekening';
-            } elseif (request()->is('ulasan*')) {
+            } elseif (request()->is('petani/ulasan*') || request()->is('ulasan*')) {
                 $activePage = 'ulasan';
-            } elseif (request()->is('dashboard*')) {
+            } elseif (request()->is('petani/dashboard*') || request()->is('dashboard*')) {
                 $activePage = 'dashboard';
             }
         @endphp

@@ -146,7 +146,7 @@
             <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <h3 class="font-heading font-bold text-gray-800 mb-4">Aksi Cepat</h3>
                 <div class="space-y-3">
-                    <a href="{{ route('petani.produk.tambah') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
+                    <a href="{{ route('petani.produk.create') }}" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all">
                         <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                             <span class="material-symbols-outlined text-primary">add_circle</span>
                         </div>

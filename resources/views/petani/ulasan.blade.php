@@ -15,6 +15,8 @@
                     <option>5 Bintang</option>
                     <option>4 Bintang</option>
                     <option>3 Bintang</option>
+                    <option>2 Bintang</option>
+                    <option>1 Bintang</option>
                 </select>
                 <select class="text-sm font-semibold text-gray-600 bg-gray-50 border-none rounded-lg focus:ring-primary">
                     <option>Urutkan: Terbaru</option>

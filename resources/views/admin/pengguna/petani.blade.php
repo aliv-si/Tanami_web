@@ -6,7 +6,16 @@
 @section('header_title', 'Farmers Management')
 
 @section('content')
-    <div class="max-w-[1600px] mx-auto space-y-6">
+    <div class="max-w-[1400px] mx-auto space-y-8">
+
+        <div class="flex items-center gap-2 text-xs font-medium text-gray-400 mb-1">
+                <span>Dashboard</span>
+                <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+                <span class="flex items-center gap-2 text-xs font-medium text-gray-400 mb-1">User Management</span>
+                <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+                <span class="text-primary">Farmer </span>
+            </div>
+
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
                 <h1 class="text-2xl font-heading font-bold text-[#1e3f1b]">Farmers Management</h1>

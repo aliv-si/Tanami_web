@@ -1,25 +1,25 @@
 @php
 $active = $active ?? (
-    request()->routeIs('dashboard') ? 'dashboard' :
-    (request()->routeIs('pengguna*') ? 'pengguna' :
-    (request()->routeIs('kategori') ? 'kategori' :
-    (request()->routeIs('kota') ? 'kota' :
-    (request()->routeIs('kupon') ? 'kupon' :
-    (request()->routeIs('pesanan*') ? 'pesanan' :
-    (request()->routeIs('escrow') ? 'escrow' :
-    (request()->routeIs('refund') ? 'refund' :
-    (request()->routeIs('laporan') ? 'laporan' : '')))))))));
+request()->routeIs('admin.dashboard') ? 'dashboard' :
+(request()->routeIs('admin.pengguna*') ? 'pengguna' :
+(request()->routeIs('admin.kategori*') ? 'kategori' :
+(request()->routeIs('admin.kota*') ? 'kota' :
+(request()->routeIs('admin.kupon*') ? 'kupon' :
+(request()->routeIs('admin.pesanan*') ? 'pesanan' :
+(request()->routeIs('admin.escrow*') ? 'escrow' :
+(request()->routeIs('admin.refund*') ? 'refund' :
+(request()->routeIs('admin.laporan*') ? 'laporan' : '')))))))));
 
 $links = $links ?? [
-    ['key' => 'dashboard', 'route' => 'dashboard', 'icon' => 'dashboard', 'label' => 'Dashboard'],
-    ['key' => 'pengguna', 'route' => 'pengguna', 'icon' => 'group', 'label' => 'Pengguna'],
-    ['key' => 'kategori', 'route' => 'kategori', 'icon' => 'category', 'label' => 'Categories'],
-    ['key' => 'kota', 'route' => 'kota', 'icon' => 'location_city', 'label' => 'Cities'],
-    ['key' => 'kupon', 'route' => 'kupon', 'icon' => 'local_offer', 'label' => 'Coupons'],
-    ['key' => 'pesanan', 'route' => 'pesanan', 'icon' => 'shopping_cart', 'label' => 'Orders'],
-    ['key' => 'escrow', 'route' => 'escrow', 'icon' => 'gavel', 'label' => 'Escrow'],
-    ['key' => 'refund', 'route' => 'refund', 'icon' => 'keyboard_return', 'label' => 'Refunds'],
-    ['key' => 'laporan', 'route' => 'laporan', 'icon' => 'bar_chart', 'label' => 'Reports'],
+['key' => 'dashboard', 'route' => 'admin.dashboard', 'icon' => 'dashboard', 'label' => 'Dashboard'],
+['key' => 'pengguna', 'route' => 'admin.pengguna', 'icon' => 'group', 'label' => 'Pengguna'],
+['key' => 'kategori', 'route' => 'admin.kategori', 'icon' => 'category', 'label' => 'Kategori'],
+['key' => 'kota', 'route' => 'admin.kota', 'icon' => 'location_city', 'label' => 'Kota'],
+['key' => 'kupon', 'route' => 'admin.kupon', 'icon' => 'local_offer', 'label' => 'Kupon'],
+['key' => 'pesanan', 'route' => 'admin.pesanan', 'icon' => 'shopping_cart', 'label' => 'Pesanan'],
+['key' => 'escrow', 'route' => 'admin.escrow', 'icon' => 'gavel', 'label' => 'Escrow'],
+['key' => 'refund', 'route' => 'admin.refund', 'icon' => 'keyboard_return', 'label' => 'Refund'],
+['key' => 'laporan', 'route' => 'admin.laporan', 'icon' => 'bar_chart', 'label' => 'Laporan'],
 ];
 @endphp
 
@@ -47,17 +47,20 @@ $links = $links ?? [
     <nav class="flex-1 overflow-y-auto py-6">
 
         @foreach($links as $link)
-            <a class="sidebar-link {{ ($active ?? '') == $link['key'] ? 'sidebar-link-active' : '' }}" href="{{ route($link['route']) }}">
-                <span class="material-symbols-outlined">{{ $link['icon'] }}</span>
-                <span class="font-heading font-medium text-sm">{{ $link['label'] }}</span>
-            </a>
+        <a class="sidebar-link {{ ($active ?? '') == $link['key'] ? 'sidebar-link-active' : '' }}" href="{{ route($link['route']) }}">
+            <span class="material-symbols-outlined">{{ $link['icon'] }}</span>
+            <span class="font-heading font-medium text-sm">{{ $link['label'] }}</span>
+        </a>
         @endforeach
     </nav>
 
     <div class="p-4 border-t border-white/5">
-        <a class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:text-white transition-colors" href="#">
-            <span class="material-symbols-outlined">logout</span>
-            <span class="font-heading font-medium text-sm">Logout</span>
-        </a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="w-full flex items-center gap-3 px-6 py-3 text-gray-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="font-heading font-medium text-sm">Logout</span>
+            </button>
+        </form>
     </div>
 </aside>

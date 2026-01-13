@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
+
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -54,6 +55,7 @@
     </style>
     @stack('styles')
 </head>
+
 <body class="bg-background text-text-dark antialiased">
     <div class="flex min-h-screen">
         @php
@@ -82,7 +84,7 @@
             @yield('content')
         </main>
     </div>
-    
+
     @stack('scripts')
 </body>
 </html>

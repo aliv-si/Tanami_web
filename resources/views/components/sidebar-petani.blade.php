@@ -1,7 +1,7 @@
 <!-- @props(['active' => 'dashboard'])
 
 @php
-    $user = auth()->user();
+$user = auth()->user();
 @endphp
 
 <aside class="w-64 bg-sidebar text-white flex flex-col fixed h-full z-50">
@@ -10,23 +10,23 @@
         <span class="text-xl font-extrabold font-heading tracking-tight text-white">TANAMI</span>
     </a>
     <nav class="flex-1 mt-6 px-4 space-y-2">
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'dashboard' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/dashboard">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'dashboard' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/petani/dashboard">
             <span class="material-symbols-outlined">dashboard</span>
             Dashboard
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'produk' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/produk">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'produk' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/petani/produk">
             <span class="material-symbols-outlined">inventory_2</span>
             Produk
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'pesanan' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/pesanan">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'pesanan' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/petani/pesanan">
             <span class="material-symbols-outlined">shopping_cart</span>
             Pesanan
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'rekening' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/rekening">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'rekening' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/petani/rekening">
             <span class="material-symbols-outlined">account_balance</span>
             Rekening
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'ulasan' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/ulasan">
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg font-heading font-semibold text-[16px] {{ $active === 'ulasan' ? 'active-nav' : 'text-gray-400 hover:text-white hover:bg-white/5' }} transition-all" href="/petani/ulasan">
             <span class="material-symbols-outlined">reviews</span>
             Ulasan
         </a>

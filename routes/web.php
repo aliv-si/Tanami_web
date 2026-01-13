@@ -28,6 +28,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ============================================================================
+// LOGOUT
+// ============================================================================
+Route::get('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/')->with('success', 'Berhasil logout');
+})->name('logout');
+
+// ============================================================================
 // PUBLIC PAGES
 // ============================================================================
 
@@ -168,6 +178,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/pesanan/{id}/tolak', [PetaniPesananController::class, 'tolak'])->name('pesanan.tolak');
         Route::post('/pesanan/{id}/proses', [PetaniPesananController::class, 'proses'])->name('pesanan.proses');
         Route::post('/pesanan/{id}/kirim', [PetaniPesananController::class, 'kirim'])->name('pesanan.kirim');
+        Route::get('/pesanan/{id}/invoice', [PetaniPesananController::class, 'invoice'])->name('pesanan.invoice');
 
         // Rekening
         Route::get('/rekening', [PetaniRekeningController::class, 'index'])->name('rekening');

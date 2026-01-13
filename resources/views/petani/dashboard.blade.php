@@ -12,10 +12,45 @@
                 <input class="pl-10 pr-4 py-2 bg-gray-50 border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-64" placeholder="Cari pesanan, produk..." type="text" />
             </div>
             <div class="flex items-center gap-4">
-                <button class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full">
-                    <span class="material-symbols-outlined">notifications</span>
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-                </button>
+                <!-- Notification Popup -->
+                <div class="relative" id="notification-container">
+                    <button onclick="toggleNotification()" class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full" title="Notifikasi">
+                        <span class="material-symbols-outlined">notifications</span>
+                        @if($pendingVerification > 0)
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                        @endif
+                    </button>
+                    
+                    <!-- Popup Dropdown -->
+                    <div id="notification-popup" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-100 z-50">
+                        <div class="p-4 border-b border-gray-100">
+                            <h3 class="font-bold font-heading text-text-dark">Notifikasi</h3>
+                        </div>
+                        <div class="p-4">
+                            @if($pendingVerification > 0)
+                                <div class="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg border border-yellow-100">
+                                    <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="material-symbols-outlined text-yellow-600">pending_actions</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-semibold text-text-dark">Verifikasi Pembayaran</p>
+                                        <p class="text-xs text-gray-500 mt-1">Ada <strong class="text-yellow-600">{{ $pendingVerification }} pesanan</strong> yang menunggu verifikasi pembayaran dari Anda.</p>
+                                        <a href="{{ route('petani.pesanan', ['status' => 'menunggu_verifikasi']) }}" class="inline-flex items-center gap-1 text-xs text-primary font-semibold mt-2 hover:underline">
+                                            Lihat Sekarang
+                                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="flex flex-col items-center justify-center py-6 text-gray-400">
+                                    <span class="material-symbols-outlined text-4xl mb-2">notifications_off</span>
+                                    <p class="text-sm">Tidak ada notifikasi</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                
                 <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-full">
                     <span class="material-symbols-outlined">settings</span>
                 </button>
@@ -178,4 +213,22 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    function toggleNotification() {
+        const popup = document.getElementById('notification-popup');
+        popup.classList.toggle('hidden');
+    }
+
+    // Close popup when clicking outside
+    document.addEventListener('click', function(e) {
+        const container = document.getElementById('notification-container');
+        const popup = document.getElementById('notification-popup');
+        if (container && !container.contains(e.target)) {
+            popup.classList.add('hidden');
+        }
+    });
+</script>
+@endpush
 @endsection

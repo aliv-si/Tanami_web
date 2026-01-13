@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             KuponSeeder::class,
             ProdukSeeder::class,
             RekeningPetaniSeeder::class,
+            PesananSeeder::class,
+            UlasanSeeder::class,
         ]);
     }
 }

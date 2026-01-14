@@ -69,7 +69,7 @@ class KuponController extends Controller
             'limit_total' => $validated['limit_total'] ?? null,
             'tgl_mulai' => $validated['tgl_mulai'],
             'tgl_selesai' => $validated['tgl_selesai'],
-            'is_aktif' => $request->boolean('is_aktif', true),
+            'is_aktif' => $request->boolean('is_aktif'),
         ]);
 
         return back()->with('success', 'Kupon "' . $validated['kode_kupon'] . '" berhasil ditambahkan.');
@@ -113,7 +113,7 @@ class KuponController extends Controller
             'limit_total' => $validated['limit_total'] ?? null,
             'tgl_mulai' => $validated['tgl_mulai'],
             'tgl_selesai' => $validated['tgl_selesai'],
-            'is_aktif' => $request->boolean('is_aktif', true),
+            'is_aktif' => $request->boolean('is_aktif'),
         ]);
 
         return back()->with('success', 'Kupon "' . $kupon->kode_kupon . '" berhasil diperbarui.');

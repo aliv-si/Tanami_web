@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\PemakaianKupon;
 use App\Models\Kupon;
 use App\Models\Pesanan;
-use App\Models\Pengguna;
 use Illuminate\Database\Seeder;
 
 class PemakaianKuponSeeder extends Seeder
@@ -16,10 +15,10 @@ class PemakaianKuponSeeder extends Seeder
      */
     public function run(): void
     {
-        $kupon = Kupon::where('is_aktif', true)->get();
+        $kuponList = Kupon::where('is_aktif', true)->get();
         $pesananWithDiskon = Pesanan::where('diskon', '>', 0)->get();
 
-        if ($kupon->isEmpty()) {
+        if ($kuponList->isEmpty()) {
             $this->command->warn('Tidak ada kupon aktif!');
             return;
         }
@@ -32,16 +31,15 @@ class PemakaianKuponSeeder extends Seeder
                 continue;
             }
 
-            $selectedKupon = $kupon->random();
+            $selectedKupon = $kuponList->random();
             PemakaianKupon::create([
                 'id_kupon' => $selectedKupon->id_kupon,
                 'id_pengguna' => $order->id_pembeli,
                 'id_pesanan' => $order->id_pesanan,
                 'diskon_dipakai' => $order->diskon,
-                'tgl_pakai' => $order->tgl_dibuat,
             ]);
 
-            $this->command->line("  ✓ Pesanan #{$order->id_pesanan} - kupon {$selectedKupon->kode}");
+            $this->command->line("  ✓ Pesanan #{$order->id_pesanan} - kupon {$selectedKupon->kode_kupon}");
         }
 
         // Create some usage for completed orders without discount (simulate past usage)
@@ -55,13 +53,20 @@ class PemakaianKuponSeeder extends Seeder
                 continue;
             }
 
-            $selectedKupon = $kupon->random();
-            $diskon = min($selectedKupon->nilai_diskon, $order->subtotal * 0.2); // Max 20% of subtotal
+            $selectedKupon = $kuponList->random();
+
+            // Calculate discount based on kupon type
+            $diskon = $selectedKupon->hitungDiskon($order->subtotal);
+
+            // Skip if no discount calculated
+            if ($diskon <= 0) {
+                continue;
+            }
 
             // Update order with discount
             $order->update([
                 'diskon' => $diskon,
-                'total_bayar' => $order->subtotal + $order->ongkir - $diskon,
+                'total_bayar' => max(0, $order->subtotal + $order->ongkir - $diskon),
             ]);
 
             PemakaianKupon::create([
@@ -69,10 +74,9 @@ class PemakaianKuponSeeder extends Seeder
                 'id_pengguna' => $order->id_pembeli,
                 'id_pesanan' => $order->id_pesanan,
                 'diskon_dipakai' => $diskon,
-                'tgl_pakai' => $order->tgl_dibuat,
             ]);
 
-            $this->command->line("  ✓ Updated Pesanan #{$order->id_pesanan} with kupon {$selectedKupon->kode}");
+            $this->command->line("  ✓ Updated Pesanan #{$order->id_pesanan} with kupon {$selectedKupon->kode_kupon}");
         }
 
         $count = PemakaianKupon::count();

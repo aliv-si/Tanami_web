@@ -16,7 +16,7 @@ class KeranjangSeeder extends Seeder
     public function run(): void
     {
         $pembeli = Pengguna::where('role_pengguna', 'pembeli')->get();
-        $produk = Produk::where('status_produk', 'aktif')->get();
+        $produk = Produk::where('is_aktif', true)->get();
 
         if ($pembeli->isEmpty() || $produk->isEmpty()) {
             $this->command->warn('Pastikan sudah ada Pembeli dan Produk!');
@@ -34,13 +34,13 @@ class KeranjangSeeder extends Seeder
                 $qty = rand(1, 3);
 
                 // Check if already exists
-                $existing = Keranjang::where('id_pembeli', $buyer->id_pengguna)
+                $existing = Keranjang::where('id_pengguna', $buyer->id_pengguna)
                     ->where('id_produk', $prod->id_produk)
                     ->first();
 
                 if (!$existing) {
                     Keranjang::create([
-                        'id_pembeli' => $buyer->id_pengguna,
+                        'id_pengguna' => $buyer->id_pengguna,
                         'id_produk' => $prod->id_produk,
                         'jumlah' => $qty,
                     ]);

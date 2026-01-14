@@ -162,7 +162,7 @@ class Pesanan extends Model
      */
     public function bisaDikonfirmasi(): bool
     {
-        return in_array($this->status_pesanan, [self::STATUS_DIKIRIM, self::STATUS_TERKIRIM]);
+        return in_array($this->status_pesanan, [self::STATUS_TERKIRIM, self::STATUS_DIKIRIM]);
     }
 
     /**

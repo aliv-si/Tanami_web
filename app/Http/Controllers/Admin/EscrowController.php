@@ -20,8 +20,9 @@ class EscrowController extends Controller
     public function index(Request $request): View
     {
         $query = Escrow::with([
-            'pesanan:id_pesanan,status_pesanan,total_bayar,tgl_dibuat',
+            'pesanan:id_pesanan,id_pembeli,status_pesanan,total_bayar,tgl_dibuat',
             'pesanan.pembeli:id_pengguna,nama_lengkap',
+            'pesanan.items.produk.petani:id_pengguna,nama_lengkap',
             'penerima:id_pengguna,nama_lengkap',
         ]);
 

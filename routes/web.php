@@ -19,6 +19,9 @@ use App\Http\Controllers\Admin\EscrowController as AdminEscrowController;
 use App\Http\Controllers\Admin\RefundController as AdminRefundController;
 use App\Http\Controllers\Admin\PesananController as AdminPesananController;
 use App\Http\Controllers\Admin\LaporanController as AdminLaporanController;
+use App\Models\Pengguna;
+use App\Models\Produk;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +45,7 @@ Route::get('/logout', function () {
 // ============================================================================
 
 Route::get('/', function () {
-    $featuredProducts = \App\Models\Produk::with(['kategori', 'petani'])
+    $featuredProducts = Produk::with(['kategori', 'petani'])
         ->where('stok', '>', 0)
         ->orderBy('tgl_dibuat', 'desc')
         ->take(4)
@@ -81,9 +84,9 @@ if (app()->environment('local')) {
     Route::prefix('dev')->name('dev.')->group(function () {
         // Auto-login as petani for testing
         Route::get('/login-petani', function () {
-            $petani = \App\Models\Pengguna::where('role_pengguna', 'petani')->first();
+            $petani = Pengguna::where('role_pengguna', 'petani')->first();
             if ($petani) {
-                \Illuminate\Support\Facades\Auth::login($petani);
+                Auth::login($petani);
                 return redirect()->route('petani.dashboard');
             }
             return 'No petani found. Run php artisan db:seed first.';
@@ -91,9 +94,9 @@ if (app()->environment('local')) {
 
         // Auto-login as admin for testing
         Route::get('/login-admin', function () {
-            $admin = \App\Models\Pengguna::where('role_pengguna', 'admin')->first();
+            $admin = Pengguna::where('role_pengguna', 'admin')->first();
             if ($admin) {
-                \Illuminate\Support\Facades\Auth::login($admin);
+                Auth::login($admin);
                 return redirect()->route('admin.dashboard');
             }
             return 'No admin found. Run php artisan db:seed first.';
@@ -101,9 +104,9 @@ if (app()->environment('local')) {
 
         // Auto-login as pembeli for testing
         Route::get('/login-pembeli', function () {
-            $pembeli = \App\Models\Pengguna::where('role_pengguna', 'pembeli')->first();
+            $pembeli = Pengguna::where('role_pengguna', 'pembeli')->first();
             if ($pembeli) {
-                \Illuminate\Support\Facades\Auth::login($pembeli);
+                Auth::login($pembeli);
                 return redirect()->route('pesanan');
             }
             return 'No pembeli found. Run php artisan db:seed first.';
@@ -236,6 +239,11 @@ Route::middleware('auth')->group(function () {
         // Pesanan
         Route::get('/pesanan', [AdminPesananController::class, 'index'])->name('pesanan');
         Route::get('/pesanan/{id}', [AdminPesananController::class, 'show'])->name('pesanan.detail');
+        Route::post('/pesanan/{id}/verifikasi', [AdminPesananController::class, 'verifikasi'])->name('pesanan.verifikasi');
+        Route::post('/pesanan/{id}/tolak', [AdminPesananController::class, 'tolak'])->name('pesanan.tolak');
+        Route::post('/pesanan/{id}/proses', [AdminPesananController::class, 'proses'])->name('pesanan.proses');
+        Route::post('/pesanan/{id}/kirim', [AdminPesananController::class, 'kirim'])->name('pesanan.kirim');
+        Route::get('/pesanan/{id}/invoice', [AdminPesananController::class, 'invoice'])->name('pesanan.invoice');
 
         // Escrow
         Route::get('/escrow', [AdminEscrowController::class, 'index'])->name('escrow');

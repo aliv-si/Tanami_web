@@ -158,18 +158,20 @@ class Pesanan extends Model
 
     /**
      * Cek apakah bisa dikonfirmasi selesai oleh pembeli
+     * Simplified flow: pembeli bisa confirm saat dikirim atau terkirim
      */
     public function bisaDikonfirmasi(): bool
     {
-        return $this->status_pesanan === self::STATUS_TERKIRIM;
+        return in_array($this->status_pesanan, [self::STATUS_DIKIRIM, self::STATUS_TERKIRIM]);
     }
 
     /**
      * Cek apakah bisa request refund
+     * Bisa request refund saat dikirim atau terkirim
      */
     public function bisaRefund(): bool
     {
-        return $this->status_pesanan === self::STATUS_TERKIRIM;
+        return in_array($this->status_pesanan, [self::STATUS_DIKIRIM, self::STATUS_TERKIRIM]);
     }
 
     // ==================== RELATIONSHIPS ====================
@@ -237,4 +239,7 @@ class Pesanan extends Model
     {
         return $this->hasOne(PemakaianKupon::class, 'id_pesanan', 'id_pesanan');
     }
+
+    // Note: Ulasan is accessed via items.ulasan relationship
+    // since ulasan table uses id_item_pesanan not id_pesanan
 }

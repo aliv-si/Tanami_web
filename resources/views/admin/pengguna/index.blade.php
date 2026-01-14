@@ -108,6 +108,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         {{-- Tabel Utama --}}
         <div class="bg-white rounded-xl border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] overflow-hidden">

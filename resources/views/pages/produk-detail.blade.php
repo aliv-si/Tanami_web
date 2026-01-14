@@ -266,7 +266,7 @@
                     <div class="flex items-start gap-4">
                         <div class="size-10 rounded-full overflow-hidden bg-gray-100 dark:bg-[#253220] flex items-center justify-center shrink-0">
                             @if($ulasan->pengguna && $ulasan->pengguna->foto_profil)
-                            <img alt="{{ $ulasan->pengguna->nama }}" class="w-full h-full object-cover" src="{{ Storage::url($ulasan->pengguna->foto_profil) }}" />
+                            <img alt="{{ $ulasan->pengguna->nama_lengkap }}" class="w-full h-full object-cover" src="{{ Storage::url($ulasan->pengguna->foto_profil) }}" />
                             @else
                             <span class="material-symbols-outlined text-xl text-gray-400">person</span>
                             @endif
@@ -274,7 +274,16 @@
                         <div class="flex-1">
                             <div class="flex items-center justify-between mb-1">
                                 <span class="font-heading font-semibold text-text-main dark:text-white">
-                                    {{ $ulasan->pengguna ? $ulasan->pengguna->nama : 'Pengguna' }}
+                                    @php
+                                    $nama = $ulasan->pengguna ? $ulasan->pengguna->nama_lengkap : 'Pengguna';
+                                    $words = explode(' ', $nama);
+                                    $masked = array_map(function($word) {
+                                    $len = mb_strlen($word);
+                                    if ($len <= 5) return $word[0] . str_repeat('*', $len - 1);
+                                        return mb_substr($word, 0, 2) . str_repeat('*', $len - 4) . mb_substr($word, -2);
+                                        }, $words);
+                                        echo implode(' ', $masked);
+                                    @endphp
                                 </span>
                                 <span class="text-xs text-gray-500 dark:text-gray-400 font-display">
                                     {{ $ulasan->tgl_dibuat->diffForHumans() }}
@@ -422,45 +431,45 @@
 
 <script>
     function decreaseQty() {
-        const input = document.getElementById('qty-input');
-        if (parseInt(input.value) > 1) {
-            input.value = parseInt(input.value) - 1;
-        }
-    }
+        const input = document.getElementById(' qty-input');
+                                        if (parseInt(input.value)> 1) {
+                                        input.value = parseInt(input.value) - 1;
+                                        }
+                                        }
 
-    function increaseQty() {
-        const input = document.getElementById('qty-input');
-        const max = parseInt(document.getElementById('btn-increase').dataset.max);
-        if (parseInt(input.value) < max) {
-            input.value = parseInt(input.value) + 1;
-        }
-    }
+                                        function increaseQty() {
+                                        const input = document.getElementById('qty-input');
+                                        const max = parseInt(document.getElementById('btn-increase').dataset.max);
+                                        if (parseInt(input.value) < max) {
+                                            input.value=parseInt(input.value) + 1;
+                                            }
+                                            }
 
-    function showTab(tab) {
-        // Hide all content
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-        // Reset all tabs
-        document.querySelectorAll('.tab-btn').forEach(el => {
-            el.classList.remove('border-primary', 'text-primary');
-            el.classList.add('border-transparent', 'text-gray-500');
-        });
-        // Show selected content
-        document.getElementById('content-' + tab).classList.remove('hidden');
-        // Activate selected tab
-        const activeTab = document.getElementById('tab-' + tab);
-        activeTab.classList.remove('border-transparent', 'text-gray-500');
-        activeTab.classList.add('border-primary', 'text-primary');
-    }
+                                            function showTab(tab) {
+                                            // Hide all content
+                                            document.querySelectorAll('.tab-content').forEach(el=> el.classList.add('hidden'));
+                                            // Reset all tabs
+                                            document.querySelectorAll('.tab-btn').forEach(el => {
+                                            el.classList.remove('border-primary', 'text-primary');
+                                            el.classList.add('border-transparent', 'text-gray-500');
+                                            });
+                                            // Show selected content
+                                            document.getElementById('content-' + tab).classList.remove('hidden');
+                                            // Activate selected tab
+                                            const activeTab = document.getElementById('tab-' + tab);
+                                            activeTab.classList.remove('border-transparent', 'text-gray-500');
+                                            activeTab.classList.add('border-primary', 'text-primary');
+                                            }
 
-    function adjustQty(btn, delta, max) {
-        const container = btn.closest('.flex');
-        const input = container.querySelector('input[name="jumlah"]');
-        let value = parseInt(input.value) + delta;
+                                            function adjustQty(btn, delta, max) {
+                                            const container = btn.closest('.flex');
+                                            const input = container.querySelector('input[name="jumlah"]');
+                                            let value = parseInt(input.value) + delta;
 
-        if (value < 1) value = 1;
-        if (value > max) value = max;
+                                            if (value < 1) value=1;
+                                                if (value> max) value = max;
 
-        input.value = value;
-    }
-</script>
-@endsection
+                                                input.value = value;
+                                                }
+                                                </script>
+                                                @endsection

@@ -37,6 +37,7 @@
             h1,h2,h3,h4 { @apply font-heading; }
         }
     </style>
+    @stack('head')
 </head>
 
 <body class="@yield('body-class','bg-background-body antialiased flex h-screen overflow-hidden')">
@@ -178,6 +179,7 @@
         </main>
 
     </div>
+    @stack('scripts')
 </body>
 
 </html>

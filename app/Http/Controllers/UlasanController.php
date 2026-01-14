@@ -13,12 +13,12 @@ class UlasanController extends Controller
 {
     /**
      * Store a review for a product from completed order
+     * Uses id_item_pesanan as per database schema
      */
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'id_pesanan' => ['required', 'exists:pesanan,id_pesanan'],
-            'id_produk' => ['required', 'exists:produk,id_produk'],
+            'id_item_pesanan' => ['required', 'exists:item_pesanan,id_item'],
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
             'komentar' => ['nullable', 'string', 'max:1000'],
         ], [
@@ -28,37 +28,22 @@ class UlasanController extends Controller
         ]);
 
         $userId = Auth::id();
-        $pesananId = $validated['id_pesanan'];
-        $produkId = $validated['id_produk'];
+        $itemId = $validated['id_item_pesanan'];
 
-        // Verify order belongs to this user
-        $pesanan = Pesanan::where('id_pesanan', $pesananId)
-            ->where('id_pembeli', $userId)
-            ->first();
+        // Find the item and verify ownership
+        $item = ItemPesanan::with('pesanan')->find($itemId);
 
-        if (!$pesanan) {
-            return back()->with('error', 'Pesanan tidak ditemukan.');
+        if (!$item || $item->pesanan->id_pembeli !== $userId) {
+            return back()->with('error', 'Item pesanan tidak ditemukan.');
         }
 
         // Verify order is completed
-        if ($pesanan->status_pesanan !== Pesanan::STATUS_SELESAI) {
+        if ($item->pesanan->status_pesanan !== Pesanan::STATUS_SELESAI) {
             return back()->with('error', 'Ulasan hanya bisa diberikan untuk pesanan yang sudah selesai.');
         }
 
-        // Verify product is in this order
-        $itemExists = ItemPesanan::where('id_pesanan', $pesananId)
-            ->where('id_produk', $produkId)
-            ->exists();
-
-        if (!$itemExists) {
-            return back()->with('error', 'Produk tidak ditemukan dalam pesanan ini.');
-        }
-
-        // Check if already reviewed this product for this order
-        $existingReview = Ulasan::where('id_pesanan', $pesananId)
-            ->where('id_produk', $produkId)
-            ->where('id_pengguna', $userId)
-            ->exists();
+        // Check if already reviewed this item
+        $existingReview = Ulasan::where('id_item_pesanan', $itemId)->exists();
 
         if ($existingReview) {
             return back()->with('error', 'Anda sudah memberikan ulasan untuk produk ini.');
@@ -66,9 +51,9 @@ class UlasanController extends Controller
 
         // Create the review
         Ulasan::create([
-            'id_produk' => $produkId,
+            'id_item_pesanan' => $itemId,
             'id_pengguna' => $userId,
-            'id_pesanan' => $pesananId,
+            'id_produk' => $item->id_produk,
             'rating' => $validated['rating'],
             'komentar' => $validated['komentar'] ?? null,
         ]);

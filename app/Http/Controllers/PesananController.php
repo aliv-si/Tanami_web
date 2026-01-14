@@ -248,7 +248,7 @@ class PesananController extends Controller
         $pesanan = Pesanan::with([
             'pembeli',
             'kota',
-            'items.produk.petani',
+            'items.produk.petani.rekening' => fn($q) => $q->where('is_utama', true),
             'historiStatus.pengubah',
             'pemakaianKupon.kupon',
         ])
@@ -287,10 +287,14 @@ class PesananController extends Controller
             ]);
         }
 
-        // Simpan file
+        // Simpan file ke disk public
         $file = $request->file('bukti_bayar');
         $filename = 'bukti_' . $pesanan->id_pesanan . '_' . time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/bukti-bayar', $filename);
+        $stored = $file->storeAs('bukti-bayar', $filename, 'public');
+
+        if (!$stored) {
+            return back()->withErrors(['bukti_bayar' => 'Gagal menyimpan file. Silakan coba lagi.']);
+        }
 
         // Update pesanan
         $pesanan->update([
@@ -455,5 +459,35 @@ class PesananController extends Controller
         }
 
         return back()->with('success', 'Permintaan refund berhasil dikirim. Admin akan meninjau permintaan Anda.');
+    }
+
+    /**
+     * View payment proof image
+     * - Serve file directly to bypass symlink issues
+     */
+    public function viewBuktiBayar(int $id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+
+        // Check authorization - only owner or related petani can view
+        $userId = Auth::id();
+        $isPembeli = $pesanan->id_pembeli === $userId;
+        $isPetani = $pesanan->items()->whereHas('produk', fn($q) => $q->where('id_petani', $userId))->exists();
+
+        if (!$isPembeli && !$isPetani && Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
+
+        if (!$pesanan->bukti_bayar) {
+            abort(404, 'Payment proof not found');
+        }
+
+        $path = storage_path('app/public/' . $pesanan->bukti_bayar);
+
+        if (!file_exists($path)) {
+            abort(404, 'File not found');
+        }
+
+        return response()->file($path);
     }
 }

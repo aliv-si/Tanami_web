@@ -151,6 +151,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/pesanan/{id}/batal', [PesananController::class, 'batal'])->name('pesanan.batal');
     Route::post('/pesanan/{id}/konfirmasi', [PesananController::class, 'konfirmasi'])->name('pesanan.konfirmasi');
     Route::post('/pesanan/{id}/refund', [PesananController::class, 'mintaRefund'])->name('pesanan.refund');
+    Route::get('/pesanan/{id}/bukti-bayar', [PesananController::class, 'viewBuktiBayar'])->name('pesanan.bukti-bayar');
 
     // --------------------- ULASAN ---------------------
     Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
@@ -233,6 +234,8 @@ Route::middleware('auth')->group(function () {
 
         // Escrow
         Route::get('/escrow', [AdminEscrowController::class, 'index'])->name('escrow');
+        Route::post('/escrow/{id}/release', [AdminEscrowController::class, 'releaseToPetani'])->name('escrow.release');
+        Route::post('/escrow/{id}/refund', [AdminEscrowController::class, 'refundToPembeli'])->name('escrow.refund');
 
         // Refund
         Route::get('/refund', [AdminRefundController::class, 'index'])->name('refund');

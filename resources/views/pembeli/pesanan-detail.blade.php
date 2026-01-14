@@ -79,7 +79,7 @@
                         Track Courier
                     </button>
                     @endif
-                    @if($pesanan->status_pesanan === 'terkirim')
+                    @if(in_array($pesanan->status_pesanan, ['terkirim', 'dikirim']))
                     <form action="{{ route('pesanan.konfirmasi', $pesanan->id_pesanan) }}" method="POST">
                         @csrf
                         <button type="submit"
@@ -134,13 +134,19 @@
                                             <p class="text-sm text-gray-500 dark:text-gray-400 font-sans mb-1">{{ Str::limit($item->produk->deskripsi, 60) }}</p>
                                             <div class="text-sm text-[#1e3f1b] dark:text-gray-300 font-medium">Farmer: {{ $item->produk->petani->nama_lengkap ?? 'N/A' }}</div>
                                         </div>
-                                        <div class="text-lg font-bold font-heading text-[#1e3f1b] dark:text-white whitespace-nowrap">
-                                            Rp {{ number_format($item->subtotal, 0, ',', '.') }}</div>
+                                        <div class="text-right">
+                                            <div class="text-lg font-bold font-heading text-[#1e3f1b] dark:text-white whitespace-nowrap">
+                                                Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+                                            </div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                {{ $item->jumlah }} × Rp {{ number_format((float)$item->harga_snapshot, 0, ',', '.') }}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mt-4 flex items-center text-sm font-sans text-gray-500 dark:text-gray-400">
-                                        <span>Qty: {{ $item->jumlah }}</span>
+                                    <div class="mt-3 flex items-center text-sm font-sans text-gray-500 dark:text-gray-400">
+                                        <span class="bg-gray-100 dark:bg-white/10 px-2 py-0.5 rounded">Unit Price: Rp {{ number_format((float)$item->harga_snapshot, 0, ',', '.') }}</span>
                                         <span class="mx-2">•</span>
-                                        <span>@ Rp {{ number_format($item->harga_snapshot, 0, ',', '.') }}</span>
+                                        <span class="bg-gray-100 dark:bg-white/10 px-2 py-0.5 rounded">Qty: {{ $item->jumlah }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -260,10 +266,36 @@
                                     {{ $paymentStatus }}
                                 </span>
                             </div>
+
+                            {{-- Farmer Bank Account Info --}}
+                            @php
+                                $petani = $pesanan->items->first()?->produk?->petani;
+                                $rekening = $petani?->rekening?->first();
+                            @endphp
+                            @if($rekening && $pesanan->status_pesanan === 'pending')
+                            <div class="pt-4 border-t border-gray-100 dark:border-white/10">
+                                <p class="text-sm font-semibold text-[#1e3f1b] dark:text-white mb-3">Transfer to:</p>
+                                <div class="bg-gray-50 dark:bg-white/5 rounded-lg p-4 space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Bank</span>
+                                        <span class="text-sm font-bold text-[#1e3f1b] dark:text-white">{{ $rekening->nama_bank }}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Account Number</span>
+                                        <span class="text-sm font-bold text-[#1e3f1b] dark:text-white font-mono">{{ $rekening->no_rekening }}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Account Name</span>
+                                        <span class="text-sm font-bold text-[#1e3f1b] dark:text-white">{{ $rekening->atas_nama }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
                             @if($pesanan->bukti_bayar)
                             <div class="pt-4 border-t border-gray-100 dark:border-white/10">
                                 <p class="text-sm text-gray-500 mb-2">Payment Proof:</p>
-                                <a href="{{ asset('storage/' . $pesanan->bukti_bayar) }}" target="_blank" class="text-[#53be20] text-sm hover:underline">View Image</a>
+                                <a href="{{ route('pesanan.bukti-bayar', $pesanan->id_pesanan) }}" target="_blank" class="text-[#53be20] text-sm hover:underline">View Image</a>
                             </div>
                             @endif
                         </div>

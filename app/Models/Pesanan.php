@@ -161,7 +161,7 @@ class Pesanan extends Model
      */
     public function bisaDikonfirmasi(): bool
     {
-        return $this->status_pesanan === self::STATUS_TERKIRIM;
+        return in_array($this->status_pesanan, [self::STATUS_TERKIRIM, self::STATUS_DIKIRIM]);
     }
 
     /**

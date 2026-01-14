@@ -289,11 +289,5 @@
         </div>
     </div>
 
-    @if(session('success'))
-    <script>
-        setTimeout(() => {
-            alert('{{ session('success') }}');
-        }, 100);
-    </script>
-    @endif
+
 @endsection

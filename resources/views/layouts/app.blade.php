@@ -70,6 +70,7 @@
 
 <body class="bg-background-light dark:bg-background-dark font-sans text-content-dark">
     <x-navbar />
+    @include('components.alert')
 
     <main>
         @yield('content')

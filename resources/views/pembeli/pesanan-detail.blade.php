@@ -120,8 +120,8 @@ $statusIcons = [
                         @foreach($pesanan->items as $item)
                         <div class="flex gap-4 md:gap-6 items-start {{ !$loop->last ? 'border-b border-gray-100 dark:border-white/10 pb-6' : '' }}">
                             <div class="size-24 bg-[#f7f7f7] dark:bg-white/5 rounded-lg flex items-center justify-center shrink-0 border border-gray-50 dark:border-white/5 overflow-hidden">
-                                @if($item->produk->foto_utama)
-                                <img src="{{ asset('storage/' . $item->produk->foto_utama) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
+                                @if($item->produk->foto)
+                                <img src="{{ asset('storage/' . $item->produk->foto) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
                                 @else
                                 <span class="material-symbols-outlined text-4xl text-primary">inventory_2</span>
                                 @endif
@@ -190,8 +190,8 @@ $statusIcons = [
                         <div class="p-4 bg-gray-50 dark:bg-white/5 rounded-xl {{ !$loop->last ? 'border-b border-gray-100 dark:border-white/10' : '' }}">
                             <div class="flex gap-4 items-start mb-4">
                                 <div class="size-16 bg-white dark:bg-white/10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
-                                    @if($item->produk->foto_utama)
-                                    <img src="{{ asset('storage/' . $item->produk->foto_utama) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
+                                    @if($item->produk->foto)
+                                    <img src="{{ asset('storage/' . $item->produk->foto) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
                                     @else
                                     <span class="material-symbols-outlined text-2xl text-primary">inventory_2</span>
                                     @endif
@@ -433,7 +433,8 @@ $statusIcons = [
 @if(session('success'))
 <script>
     setTimeout(() => {
-        alert('{{ session('success ') }}');
+        alert('{{ session('
+            success ') }}');
     }, 100);
 </script>
 @endif
@@ -441,7 +442,8 @@ $statusIcons = [
 @if(session('error'))
 <script>
     setTimeout(() => {
-        alert('{{ session('error ') }}');
+        alert('{{ session('
+            error ') }}');
     }, 100);
 </script>
 @endif

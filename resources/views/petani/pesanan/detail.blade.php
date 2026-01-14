@@ -13,26 +13,26 @@
                 <h1 class="text-2xl font-bold font-heading text-text-dark">Detail Pesanan</h1>
                 <span class="text-gray-400 font-medium font-heading">#{{ $pesanan->id_pesanan }}</span>
                 @switch($pesanan->status_pesanan)
-                    @case('menunggu_verifikasi')
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-700">Menunggu Verifikasi</span>
-                        @break
-                    @case('dibayar')
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">Dibayar</span>
-                        @break
-                    @case('diproses')
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700">Diproses</span>
-                        @break
-                    @case('dikirim')
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-700">Dikirim</span>
-                        @break
-                    @case('selesai')
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-[#53be20]/10 text-[#53be20]">Selesai</span>
-                        @break
-                    @case('dibatalkan')
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-700">Dibatalkan</span>
-                        @break
-                    @default
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-700">{{ ucfirst(str_replace('_', ' ', $pesanan->status_pesanan)) }}</span>
+                @case('menunggu_verifikasi')
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-700">Menunggu Verifikasi</span>
+                @break
+                @case('dibayar')
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">Dibayar</span>
+                @break
+                @case('diproses')
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700">Diproses</span>
+                @break
+                @case('dikirim')
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-700">Dikirim</span>
+                @break
+                @case('selesai')
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-[#53be20]/10 text-[#53be20]">Selesai</span>
+                @break
+                @case('dibatalkan')
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-700">Dibatalkan</span>
+                @break
+                @default
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-700">{{ ucfirst(str_replace('_', ' ', $pesanan->status_pesanan)) }}</span>
                 @endswitch
             </div>
         </div>
@@ -46,17 +46,17 @@
 
 <div class="p-8 max-w-[1400px] mx-auto">
     @if(session('success'))
-        <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">check_circle</span>
-            {{ session('success') }}
-        </div>
+    <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
+        <span class="material-symbols-outlined">check_circle</span>
+        {{ session('success') }}
+    </div>
     @endif
 
     @if(session('error'))
-        <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">error</span>
-            {{ session('error') }}
-        </div>
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
+        <span class="material-symbols-outlined">error</span>
+        {{ session('error') }}
+    </div>
     @endif
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -105,11 +105,11 @@
                     <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                         <div class="flex items-center gap-4">
                             @if($item->produk && $item->produk->foto)
-                                <img alt="{{ $item->produk->nama_produk }}" class="w-16 h-16 rounded-lg object-cover" src="{{ asset('storage/produk/' . $item->produk->foto) }}"/>
+                            <img alt="{{ $item->produk->nama_produk }}" class="w-16 h-16 rounded-lg object-cover" src="{{ asset('storage/' . $item->produk->foto) }}" />
                             @else
-                                <div class="w-16 h-16 rounded-lg bg-gray-200 flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-gray-400">image</span>
-                                </div>
+                            <div class="w-16 h-16 rounded-lg bg-gray-200 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-gray-400">image</span>
+                            </div>
                             @endif
                             <div>
                                 <h3 class="font-bold font-heading text-text-dark">{{ $item->produk->nama_produk ?? 'Produk' }}</h3>
@@ -144,7 +144,7 @@
                                 <p class="font-bold text-sm text-text-dark">{{ ucfirst(str_replace('_', ' ', $histori->status_baru)) }}</p>
                                 <p class="text-xs text-gray-500 mt-1">{{ $histori->tgl_diubah ? $histori->tgl_diubah->format('d M Y - H:i') : '-' }}</p>
                                 @if($histori->alasan)
-                                    <p class="text-xs text-gray-400 mt-1">{{ $histori->alasan }}</p>
+                                <p class="text-xs text-gray-400 mt-1">{{ $histori->alasan }}</p>
                                 @endif
                             </div>
                         </div>
@@ -192,71 +192,71 @@
                 </div>
                 <div class="p-6 space-y-4">
                     @if($pesanan->status_pesanan == 'menunggu_verifikasi')
-                        <!-- Bukti Pembayaran -->
-                        @if($pesanan->bukti_transfer)
-                        <div class="mb-4">
-                            <p class="text-sm font-semibold text-gray-700 mb-2">Bukti Pembayaran:</p>
-                            <a href="{{ asset('storage/bukti_transfer/' . $pesanan->bukti_transfer) }}" target="_blank" class="block">
-                                <img src="{{ asset('storage/bukti_transfer/' . $pesanan->bukti_transfer) }}" alt="Bukti Transfer" class="w-full max-h-48 object-contain rounded-lg border border-gray-200"/>
-                            </a>
-                        </div>
-                        @endif
+                    <!-- Bukti Pembayaran -->
+                    @if($pesanan->bukti_transfer)
+                    <div class="mb-4">
+                        <p class="text-sm font-semibold text-gray-700 mb-2">Bukti Pembayaran:</p>
+                        <a href="{{ asset('storage/bukti_transfer/' . $pesanan->bukti_transfer) }}" target="_blank" class="block">
+                            <img src="{{ asset('storage/bukti_transfer/' . $pesanan->bukti_transfer) }}" alt="Bukti Transfer" class="w-full max-h-48 object-contain rounded-lg border border-gray-200" />
+                        </a>
+                    </div>
+                    @endif
 
-                        <form action="{{ route('petani.pesanan.verifikasi', $pesanan->id_pesanan) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold font-heading hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-xl">check_circle</span>
-                                Verifikasi Pembayaran
-                            </button>
-                        </form>
-                        <button type="button" onclick="document.getElementById('tolak-modal').classList.remove('hidden')" class="w-full py-3 rounded-xl font-bold font-heading text-red-500 border border-red-200 hover:bg-red-50 transition-all">
-                            Tolak Pembayaran
+                    <form action="{{ route('petani.pesanan.verifikasi', $pesanan->id_pesanan) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold font-heading hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-xl">check_circle</span>
+                            Verifikasi Pembayaran
                         </button>
+                    </form>
+                    <button type="button" onclick="document.getElementById('tolak-modal').classList.remove('hidden')" class="w-full py-3 rounded-xl font-bold font-heading text-red-500 border border-red-200 hover:bg-red-50 transition-all">
+                        Tolak Pembayaran
+                    </button>
 
                     @elseif($pesanan->status_pesanan == 'dibayar')
-                        <form action="{{ route('petani.pesanan.proses', $pesanan->id_pesanan) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold font-heading hover:bg-blue-700 transition-all shadow-md flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-xl">sync</span>
-                                Proses Pesanan
-                            </button>
-                        </form>
+                    <form action="{{ route('petani.pesanan.proses', $pesanan->id_pesanan) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold font-heading hover:bg-blue-700 transition-all shadow-md flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-xl">sync</span>
+                            Proses Pesanan
+                        </button>
+                    </form>
 
                     @elseif($pesanan->status_pesanan == 'diproses')
-                        <form action="{{ route('petani.pesanan.kirim', $pesanan->id_pesanan) }}" method="POST">
-                            @csrf
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="no_resi">Nomor Resi</label>
-                                <input class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" id="no_resi" name="no_resi" placeholder="Masukkan nomor resi..." type="text" required/>
-                            </div>
-                            <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold font-heading hover:bg-purple-700 transition-all shadow-md flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-xl">local_shipping</span>
-                                Kirim Pesanan
-                            </button>
-                        </form>
+                    <form action="{{ route('petani.pesanan.kirim', $pesanan->id_pesanan) }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="no_resi">Nomor Resi</label>
+                            <input class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" id="no_resi" name="no_resi" placeholder="Masukkan nomor resi..." type="text" required />
+                        </div>
+                        <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold font-heading hover:bg-purple-700 transition-all shadow-md flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-xl">local_shipping</span>
+                            Kirim Pesanan
+                        </button>
+                    </form>
 
                     @elseif($pesanan->status_pesanan == 'dikirim')
-                        <div class="p-4 bg-purple-50 rounded-lg">
-                            <p class="text-sm font-semibold text-purple-700 mb-1">Pesanan Dalam Pengiriman</p>
-                            @if($pesanan->no_resi)
-                                <p class="text-xs text-purple-600">Nomor Resi: <span class="font-bold">{{ $pesanan->no_resi }}</span></p>
-                            @endif
-                            <p class="text-xs text-purple-600 mt-2">Menunggu konfirmasi penerimaan dari pembeli</p>
-                        </div>
+                    <div class="p-4 bg-purple-50 rounded-lg">
+                        <p class="text-sm font-semibold text-purple-700 mb-1">Pesanan Dalam Pengiriman</p>
+                        @if($pesanan->no_resi)
+                        <p class="text-xs text-purple-600">Nomor Resi: <span class="font-bold">{{ $pesanan->no_resi }}</span></p>
+                        @endif
+                        <p class="text-xs text-purple-600 mt-2">Menunggu konfirmasi penerimaan dari pembeli</p>
+                    </div>
 
                     @elseif($pesanan->status_pesanan == 'selesai')
-                        <div class="p-4 bg-green-50 rounded-lg">
-                            <p class="text-sm font-semibold text-green-700 mb-1">Pesanan Selesai</p>
-                            <p class="text-xs text-green-600">Dana telah/akan dicairkan ke rekening Anda</p>
-                        </div>
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <p class="text-sm font-semibold text-green-700 mb-1">Pesanan Selesai</p>
+                        <p class="text-xs text-green-600">Dana telah/akan dicairkan ke rekening Anda</p>
+                    </div>
 
                     @elseif($pesanan->status_pesanan == 'dibatalkan')
-                        <div class="p-4 bg-red-50 rounded-lg">
-                            <p class="text-sm font-semibold text-red-700 mb-1">Pesanan Dibatalkan</p>
-                            @if($pesanan->alasan_batal)
-                                <p class="text-xs text-red-600">{{ $pesanan->alasan_batal }}</p>
-                            @endif
-                        </div>
+                    <div class="p-4 bg-red-50 rounded-lg">
+                        <p class="text-sm font-semibold text-red-700 mb-1">Pesanan Dibatalkan</p>
+                        @if($pesanan->alasan_batal)
+                        <p class="text-xs text-red-600">{{ $pesanan->alasan_batal }}</p>
+                        @endif
+                    </div>
                     @endif
                 </div>
             </div>

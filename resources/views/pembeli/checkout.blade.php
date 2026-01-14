@@ -124,8 +124,8 @@
                                 @foreach($items as $item)
                                 <div class="flex gap-4">
                                     <div class="size-16 bg-[#f7f7f7] dark:bg-white/5 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
-                                        @if($item->produk->foto_utama)
-                                        <img src="{{ asset('storage/' . $item->produk->foto_utama) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
+                                        @if($item->produk->foto)
+                                        <img src="{{ asset('storage/' . $item->produk->foto) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
                                         @else
                                         <span class="material-symbols-outlined text-2xl text-primary">inventory_2</span>
                                         @endif

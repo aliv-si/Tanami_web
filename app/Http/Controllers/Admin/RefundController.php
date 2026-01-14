@@ -43,18 +43,25 @@ class RefundController extends Controller
             ->limit(20)
             ->get();
 
-        // Stats
+        // Stats - menggunakan data yang sama seperti di PesananController
         $stats = [
             'pending_count' => Pesanan::where('status_pesanan', Pesanan::STATUS_MINTA_REFUND)->count(),
             'pending_amount' => Pesanan::where('status_pesanan', Pesanan::STATUS_MINTA_REFUND)->sum('total_bayar'),
             'completed_count' => Pesanan::where('status_pesanan', Pesanan::STATUS_DIREFUND)->count(),
-            'completed_amount' => Escrow::where('status_escrow', Escrow::STATUS_DIREFUND_KE_PEMBELI)->sum('jumlah'),
+            'completed_amount' => Pesanan::where('status_pesanan', Pesanan::STATUS_DIREFUND)->sum('total_bayar'),
+        ];
+
+        // Juga kirim statusCounts yang sama seperti di pesanan index untuk konsistensi
+        $statusCounts = [
+            'minta_refund' => $stats['pending_count'],
+            'direfund' => $stats['completed_count'],
         ];
 
         return view('admin.refund', [
             'refundRequests' => $refundRequests,
             'refundHistory' => $refundHistory,
             'stats' => $stats,
+            'statusCounts' => $statusCounts,
         ]);
     }
 

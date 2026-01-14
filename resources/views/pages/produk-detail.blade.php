@@ -151,14 +151,14 @@
             <div class="bg-white dark:bg-[#1e2a1a] p-4 rounded-xl border border-gray-100 dark:border-[#2a3825] shadow-sm flex items-center gap-4">
                 <div class="size-12 rounded-full overflow-hidden bg-gray-100 dark:bg-[#253220] flex items-center justify-center">
                     @if($produk->petani->foto_profil)
-                    <img alt="{{ $produk->petani->nama }}" class="w-full h-full object-cover" src="{{ Storage::url($produk->petani->foto_profil) }}" />
+                    <img alt="{{ $produk->petani->nama_lengkap }}" class="w-full h-full object-cover" src="{{ Storage::url($produk->petani->foto_profil) }}" />
                     @else
                     <span class="material-symbols-outlined text-2xl text-gray-400">person</span>
                     @endif
                 </div>
                 <div>
                     <div class="flex items-center gap-1">
-                        <span class="font-heading font-bold text-text-main dark:text-white">{{ $produk->petani->nama }}</span>
+                        <span class="font-heading font-bold text-text-main dark:text-white">{{ $produk->petani->nama_lengkap }}</span>
                         @if($produk->petani->terverifikasi)
                         <span class="material-symbols-outlined text-primary text-base">verified</span>
                         @endif
@@ -377,7 +377,7 @@
     <div class="mb-16">
         <div class="flex justify-between items-end mb-8">
             <div>
-                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Produk Lain dari {{ $produk->petani->nama }}</h2>
+                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Produk Lain dari {{ $produk->petani->nama_lengkap }}</h2>
                 <p class="text-gray-500 dark:text-gray-400 font-display">Jelajahi produk lainnya dari petani yang sama.</p>
             </div>
         </div>

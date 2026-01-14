@@ -107,21 +107,24 @@ $statusIcons = [
                     </button>
                     @endif
                 </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-                <div class="lg:col-span-2 space-y-6">
-                    <!-- Ordered Items -->
-                    <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
-                        <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-6 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[#53be20]">inventory_2</span>
-                            Ordered Items
-                        </h3>
-                        <div class="space-y-6">
-                            @foreach($pesanan->items as $item)
-                            <div class="flex gap-4 md:gap-6 items-start {{ !$loop->last ? 'border-b border-gray-100 dark:border-white/10 pb-6' : '' }}">
-                                <div class="size-24 bg-[#f7f7f7] dark:bg-white/5 rounded-lg flex items-center justify-center shrink-0 border border-gray-50 dark:border-white/5 overflow-hidden">
-                                    @if($item->produk->foto_utama)
-                                    <img src="{{ asset('storage/' . $item->produk->foto_utama) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
+
+                <!-- Review Section (only for completed orders) -->
+                @if($pesanan->status_pesanan === 'selesai')
+                <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
+                    <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#53be20]">star</span>
+                        Rate Your Products
+                    </h3>
+                    <div class="space-y-6">
+                        @foreach($pesanan->items as $item)
+                        @php
+                        $existingReview = $item->ulasan;
+                        @endphp
+                        <div class="p-4 bg-gray-50 dark:bg-white/5 rounded-xl {{ !$loop->last ? 'border-b border-gray-100 dark:border-white/10' : '' }}">
+                            <div class="flex gap-4 items-start mb-4">
+                                <div class="size-16 bg-white dark:bg-white/10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
+                                    @if($item->produk->foto)
+                                    <img src="{{ asset('storage/' . $item->produk->foto) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
                                     @else
                                     <span class="material-symbols-outlined text-4xl text-primary">inventory_2</span>
                                     @endif
@@ -385,6 +388,24 @@ $statusIcons = [
         </div>
     </div>
 </div>
+@endif
+
+@if(session('success'))
+<script>
+    setTimeout(() => {
+        alert('{{ session('
+            success ') }}');
+    }, 100);
+</script>
+@endif
+
+@if(session('error'))
+<script>
+    setTimeout(() => {
+        alert('{{ session('
+            error ') }}');
+    }, 100);
+</script>
 @endif
 
 <!-- Star Rating JavaScript -->

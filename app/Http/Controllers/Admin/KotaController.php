@@ -45,7 +45,7 @@ class KotaController extends Controller
             'nama_kota' => $validated['nama_kota'],
             'provinsi' => $validated['provinsi'] ?? null,
             'ongkir' => $validated['ongkir'],
-            'is_aktif' => $request->boolean('is_aktif', true),
+            'is_aktif' => $request->boolean('is_aktif'),
         ]);
 
         return back()->with('success', 'Kota "' . $validated['nama_kota'] . '" berhasil ditambahkan.');
@@ -72,7 +72,7 @@ class KotaController extends Controller
             'nama_kota' => $validated['nama_kota'],
             'provinsi' => $validated['provinsi'] ?? null,
             'ongkir' => $validated['ongkir'],
-            'is_aktif' => $request->boolean('is_aktif', true),
+            'is_aktif' => $request->boolean('is_aktif'),
         ]);
 
         return back()->with('success', 'Kota "' . $kota->nama_kota . '" berhasil diperbarui.');

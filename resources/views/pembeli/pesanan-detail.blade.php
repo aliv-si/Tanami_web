@@ -3,44 +3,44 @@
 @section('title', 'Detail Pesanan #TNM-' . str_pad($pesanan->id_pesanan, 5, '0', STR_PAD_LEFT) . ' | Tanami')
 
 @section('content')
-    @php
-        $statusColors = [
-            'pending' => 'bg-yellow-500',
-            'menunggu_verifikasi' => 'bg-orange-500',
-            'dibayar' => 'bg-blue-500',
-            'diproses' => 'bg-cyan-500',
-            'dikirim' => 'bg-purple-500',
-            'terkirim' => 'bg-[#53be20]',
-            'selesai' => 'bg-[#1e3f1b]',
-            'dibatalkan' => 'bg-red-500',
-            'minta_refund' => 'bg-orange-600',
-            'direfund' => 'bg-gray-500',
-        ];
-        $statusLabels = [
-            'pending' => 'Pending Payment',
-            'menunggu_verifikasi' => 'Waiting Verification',
-            'dibayar' => 'Paid',
-            'diproses' => 'Processing',
-            'dikirim' => 'Shipped',
-            'terkirim' => 'Delivered',
-            'selesai' => 'Completed',
-            'dibatalkan' => 'Cancelled',
-            'minta_refund' => 'Refund Requested',
-            'direfund' => 'Refunded',
-        ];
-        $statusIcons = [
-            'pending' => 'schedule',
-            'menunggu_verifikasi' => 'hourglass_top',
-            'dibayar' => 'paid',
-            'diproses' => 'precision_manufacturing',
-            'dikirim' => 'local_shipping',
-            'terkirim' => 'inventory',
-            'selesai' => 'check_circle',
-            'dibatalkan' => 'cancel',
-            'minta_refund' => 'assignment_return',
-            'direfund' => 'money_off',
-        ];
-    @endphp
+@php
+$statusColors = [
+'pending' => 'bg-yellow-500',
+'menunggu_verifikasi' => 'bg-orange-500',
+'dibayar' => 'bg-blue-500',
+'diproses' => 'bg-cyan-500',
+'dikirim' => 'bg-purple-500',
+'terkirim' => 'bg-[#53be20]',
+'selesai' => 'bg-[#1e3f1b]',
+'dibatalkan' => 'bg-red-500',
+'minta_refund' => 'bg-orange-600',
+'direfund' => 'bg-gray-500',
+];
+$statusLabels = [
+'pending' => 'Pending Payment',
+'menunggu_verifikasi' => 'Waiting Verification',
+'dibayar' => 'Paid',
+'diproses' => 'Processing',
+'dikirim' => 'Shipped',
+'terkirim' => 'Delivered',
+'selesai' => 'Completed',
+'dibatalkan' => 'Cancelled',
+'minta_refund' => 'Refund Requested',
+'direfund' => 'Refunded',
+];
+$statusIcons = [
+'pending' => 'schedule',
+'menunggu_verifikasi' => 'hourglass_top',
+'dibayar' => 'paid',
+'diproses' => 'precision_manufacturing',
+'dikirim' => 'local_shipping',
+'terkirim' => 'inventory',
+'selesai' => 'check_circle',
+'dibatalkan' => 'cancel',
+'minta_refund' => 'assignment_return',
+'direfund' => 'money_off',
+];
+@endphp
 
     <main class="flex-1 py-10">
         <div class="container mx-auto px-4 md:px-10 max-w-[1200px]">
@@ -205,44 +205,44 @@
                             </div>
                             @endforeach
 
-                            @if($pesanan->historiStatus->isEmpty())
-                            <div class="flex gap-4 relative z-10">
-                                <div class="flex flex-col items-center">
-                                    <div class="size-8 rounded-full bg-[#53be20] ring-4 ring-[#53be20]/20 text-white flex items-center justify-center shrink-0 z-10">
-                                        <span class="material-symbols-outlined text-sm">schedule</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 class="font-heading font-bold text-[#53be20] text-sm">Order Placed</h4>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ $pesanan->tgl_dibuat->format('d M, h:i A') }}</p>
+                        @if($pesanan->historiStatus->isEmpty())
+                        <div class="flex gap-4 relative z-10">
+                            <div class="flex flex-col items-center">
+                                <div class="size-8 rounded-full bg-[#53be20] ring-4 ring-[#53be20]/20 text-white flex items-center justify-center shrink-0 z-10">
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
                                 </div>
                             </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-[#53be20] text-sm">Order Placed</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ $pesanan->tgl_dibuat->format('d M, h:i A') }}</p>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Shipping Information -->
+                <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
+                    <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-4">Shipping Information</h3>
+                    <div class="flex gap-4 items-start">
+                        <div class="mt-1">
+                            <span class="material-symbols-outlined text-gray-400">person_pin_circle</span>
+                        </div>
+                        <div>
+                            <p class="font-heading font-semibold text-[#1e3f1b] dark:text-white">{{ $pesanan->pembeli->nama_lengkap }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+                                {{ $pesanan->pembeli->alamat ?? '-' }}<br>
+                                {{ $pesanan->kota->nama_kota ?? '' }}
+                            </p>
+                            @if($pesanan->pembeli->no_hp)
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">{{ $pesanan->pembeli->no_hp }}</p>
+                            @endif
+                            @if($pesanan->no_resi)
+                            <p class="text-sm text-[#53be20] mt-2 font-medium">Resi: {{ $pesanan->no_resi }}</p>
                             @endif
                         </div>
                     </div>
-
-                    <!-- Shipping Information -->
-                    <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
-                        <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-4">Shipping Information</h3>
-                        <div class="flex gap-4 items-start">
-                            <div class="mt-1">
-                                <span class="material-symbols-outlined text-gray-400">person_pin_circle</span>
-                            </div>
-                            <div>
-                                <p class="font-heading font-semibold text-[#1e3f1b] dark:text-white">{{ $pesanan->pembeli->nama_lengkap }}</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
-                                    {{ $pesanan->pembeli->alamat ?? '-' }}<br>
-                                    {{ $pesanan->kota->nama_kota ?? '' }}
-                                </p>
-                                @if($pesanan->pembeli->no_hp)
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">{{ $pesanan->pembeli->no_hp }}</p>
-                                @endif
-                                @if($pesanan->no_resi)
-                                <p class="text-sm text-[#53be20] mt-2 font-medium">Resi: {{ $pesanan->no_resi }}</p>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
                     <!-- Payment Information -->
                     <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
@@ -305,101 +305,151 @@
         </div>
     </main>
 
-    <!-- Upload Payment Modal -->
-    @if($pesanan->status_pesanan === 'pending')
-    <div id="upload-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
-            <div class="inline-block align-bottom bg-white dark:bg-[#1f2b1b] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
-                <form action="{{ route('pesanan.upload-bukti', $pesanan->id_pesanan) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
-                        <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white">Upload Payment Proof</h3>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-4">Total: Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</p>
-                        <input type="file" name="bukti_bayar" accept="image/jpeg,image/png" required
-                            class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm">
-                        <p class="text-xs text-gray-500 mt-2">Format: JPG, PNG. Max: 2MB</p>
-                    </div>
-                    <div class="px-6 py-4 border-t border-gray-100 dark:border-white/5 flex justify-end gap-3">
-                        <button type="button" onclick="this.closest('[role=dialog]').classList.add('hidden')"
-                            class="px-5 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-[#1e3f1b] dark:text-white font-semibold text-sm">Cancel</button>
-                        <button type="submit" class="px-5 py-2.5 bg-[#53be20] text-white rounded-lg font-semibold text-sm hover:bg-[#45a01b]">Upload</button>
-                    </div>
-                </form>
-            </div>
+<!-- Upload Payment Modal -->
+@if($pesanan->status_pesanan === 'pending')
+<div id="upload-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
+        <div class="inline-block align-bottom bg-white dark:bg-[#1f2b1b] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+            <form action="{{ route('pesanan.upload-bukti', $pesanan->id_pesanan) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
+                    <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white">Upload Payment Proof</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-lg font-bold text-[#1e3f1b] dark:text-white mb-4">Total: Rp {{ number_format($pesanan->total_bayar, 0, ',', '.') }}</p>
+                    <input type="file" name="bukti_bayar" accept="image/jpeg,image/png" required
+                        class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm">
+                    <p class="text-xs text-gray-500 mt-2">Format: JPG, PNG. Max: 2MB</p>
+                </div>
+                <div class="px-6 py-4 border-t border-gray-100 dark:border-white/5 flex justify-end gap-3">
+                    <button type="button" onclick="this.closest('[role=dialog]').classList.add('hidden')"
+                        class="px-5 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-[#1e3f1b] dark:text-white font-semibold text-sm">Cancel</button>
+                    <button type="submit" class="px-5 py-2.5 bg-[#53be20] text-white rounded-lg font-semibold text-sm hover:bg-[#45a01b]">Upload</button>
+                </div>
+            </form>
         </div>
     </div>
-    @endif
+</div>
+@endif
 
-    <!-- Cancel Modal -->
-    @if(in_array($pesanan->status_pesanan, ['pending', 'menunggu_verifikasi']))
-    <div id="cancel-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
-            <div class="inline-block align-bottom bg-white dark:bg-[#1f2b1b] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
-                <form action="{{ route('pesanan.batal', $pesanan->id_pesanan) }}" method="POST">
-                    @csrf
-                    <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
-                        <h3 class="font-heading font-bold text-lg text-red-600">Cancel Order</h3>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Are you sure you want to cancel this order?</p>
-                        <textarea name="alasan_batal" rows="3" required placeholder="Reason for cancellation..."
-                            class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm resize-none"></textarea>
-                    </div>
-                    <div class="px-6 py-4 border-t border-gray-100 dark:border-white/5 flex justify-end gap-3">
-                        <button type="button" onclick="this.closest('[role=dialog]').classList.add('hidden')"
-                            class="px-5 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-[#1e3f1b] dark:text-white font-semibold text-sm">Keep Order</button>
-                        <button type="submit" class="px-5 py-2.5 bg-red-600 text-white rounded-lg font-semibold text-sm hover:bg-red-700">Cancel Order</button>
-                    </div>
-                </form>
-            </div>
+<!-- Cancel Modal -->
+@if(in_array($pesanan->status_pesanan, ['pending', 'menunggu_verifikasi']))
+<div id="cancel-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
+        <div class="inline-block align-bottom bg-white dark:bg-[#1f2b1b] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+            <form action="{{ route('pesanan.batal', $pesanan->id_pesanan) }}" method="POST">
+                @csrf
+                <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
+                    <h3 class="font-heading font-bold text-lg text-red-600">Cancel Order</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Are you sure you want to cancel this order?</p>
+                    <textarea name="alasan_batal" rows="3" required placeholder="Reason for cancellation..."
+                        class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm resize-none"></textarea>
+                </div>
+                <div class="px-6 py-4 border-t border-gray-100 dark:border-white/5 flex justify-end gap-3">
+                    <button type="button" onclick="this.closest('[role=dialog]').classList.add('hidden')"
+                        class="px-5 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-[#1e3f1b] dark:text-white font-semibold text-sm">Keep Order</button>
+                    <button type="submit" class="px-5 py-2.5 bg-red-600 text-white rounded-lg font-semibold text-sm hover:bg-red-700">Cancel Order</button>
+                </div>
+            </form>
         </div>
     </div>
-    @endif
+</div>
+@endif
 
-    <!-- Refund Modal -->
-    @if($pesanan->status_pesanan === 'terkirim')
-    <div id="refund-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
-            <div class="inline-block align-bottom bg-white dark:bg-[#1f2b1b] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
-                <form action="{{ route('pesanan.refund', $pesanan->id_pesanan) }}" method="POST">
-                    @csrf
-                    <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
-                        <h3 class="font-heading font-bold text-lg text-orange-600">Request Refund</h3>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Please describe why you want a refund:</p>
-                        <textarea name="alasan_refund" rows="3" required placeholder="Reason for refund request..."
-                            class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm resize-none"></textarea>
-                    </div>
-                    <div class="px-6 py-4 border-t border-gray-100 dark:border-white/5 flex justify-end gap-3">
-                        <button type="button" onclick="this.closest('[role=dialog]').classList.add('hidden')"
-                            class="px-5 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-[#1e3f1b] dark:text-white font-semibold text-sm">Cancel</button>
-                        <button type="submit" class="px-5 py-2.5 bg-orange-600 text-white rounded-lg font-semibold text-sm hover:bg-orange-700">Submit Request</button>
-                    </div>
-                </form>
-            </div>
+<!-- Refund Modal -->
+@if($pesanan->status_pesanan === 'terkirim')
+<div id="refund-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
+        <div class="inline-block align-bottom bg-white dark:bg-[#1f2b1b] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+            <form action="{{ route('pesanan.refund', $pesanan->id_pesanan) }}" method="POST">
+                @csrf
+                <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
+                    <h3 class="font-heading font-bold text-lg text-orange-600">Request Refund</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Please describe why you want a refund:</p>
+                    <textarea name="alasan_refund" rows="3" required placeholder="Reason for refund request..."
+                        class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm resize-none"></textarea>
+                </div>
+                <div class="px-6 py-4 border-t border-gray-100 dark:border-white/5 flex justify-end gap-3">
+                    <button type="button" onclick="this.closest('[role=dialog]').classList.add('hidden')"
+                        class="px-5 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-[#1e3f1b] dark:text-white font-semibold text-sm">Cancel</button>
+                    <button type="submit" class="px-5 py-2.5 bg-orange-600 text-white rounded-lg font-semibold text-sm hover:bg-orange-700">Submit Request</button>
+                </div>
+            </form>
         </div>
     </div>
-    @endif
+</div>
+@endif
 
-    @if(session('success'))
-    <script>
-        setTimeout(() => {
-            alert('{{ session('success') }}');
-        }, 100);
-    </script>
-    @endif
+@if(session('success'))
+<script>
+    setTimeout(() => {
+        alert('{{ session('success ') }}');
+    }, 100);
+</script>
+@endif
 
-    @if(session('error'))
-    <script>
-        setTimeout(() => {
-            alert('{{ session('error') }}');
-        }, 100);
-    </script>
-    @endif
+@if(session('error'))
+<script>
+    setTimeout(() => {
+        alert('{{ session('error ') }}');
+    }, 100);
+</script>
+@endif
+
+<!-- Star Rating JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.star-rating').forEach(function(container) {
+            const stars = container.querySelectorAll('.star-icon');
+            const inputs = container.querySelectorAll('input[type="radio"]');
+
+            stars.forEach(function(star, index) {
+                star.addEventListener('click', function() {
+                    // Update visual
+                    stars.forEach(function(s, i) {
+                        if (i <= index) {
+                            s.classList.remove('text-gray-300');
+                            s.classList.add('text-yellow-400');
+                        } else {
+                            s.classList.remove('text-yellow-400');
+                            s.classList.add('text-gray-300');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseenter', function() {
+                    stars.forEach(function(s, i) {
+                        if (i <= index) {
+                            s.classList.add('text-yellow-400');
+                            s.classList.remove('text-gray-300');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseleave', function() {
+                    // Restore to selected state
+                    const checkedInput = container.querySelector('input:checked');
+                    const checkedValue = checkedInput ? parseInt(checkedInput.value) : 0;
+
+                    stars.forEach(function(s, i) {
+                        if (i < checkedValue) {
+                            s.classList.add('text-yellow-400');
+                            s.classList.remove('text-gray-300');
+                        } else {
+                            s.classList.remove('text-yellow-400');
+                            s.classList.add('text-gray-300');
+                        }
+                    });
+                });
+            });
+        });
+    });
+</script>
 @endsection

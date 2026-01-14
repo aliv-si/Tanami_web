@@ -13,10 +13,12 @@ use App\Models\Pengguna;
 use App\Models\Pesanan;
 use App\Models\ItemPesanan;
 use App\Models\PemakaianKupon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
@@ -188,17 +190,17 @@ class PesananController extends Controller
         // Send order created emails
         try {
             $pesanan->load(['pembeli', 'items.produk.petani']);
-            
+
             // Email to pembeli
             Mail::to($pesanan->pembeli->email)->queue(new OrderCreatedMail($pesanan, 'pembeli'));
-            
+
             // Email to each petani
             $petaniEmails = $pesanan->items->pluck('produk.petani.email')->unique()->filter();
             foreach ($petaniEmails as $email) {
                 Mail::to($email)->queue(new OrderCreatedMail($pesanan, 'petani'));
             }
-        } catch (\Exception $e) {
-            \Log::error('Failed to send order created email: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('Failed to send order created email: ' . $e->getMessage());
         }
 
         return redirect()->route('pesanan.detail', $pesanan->id_pesanan)
@@ -255,6 +257,10 @@ class PesananController extends Controller
             ->where('id_pembeli', Auth::id())
             ->findOrFail($id);
 
+        // echo "<pre>";
+        // print_r($pesanan);
+        // die;
+
         return view('pembeli.pesanan-detail', compact('pesanan'));
     }
 
@@ -309,8 +315,8 @@ class PesananController extends Controller
             foreach ($petaniEmails as $email) {
                 Mail::to($email)->queue(new PaymentUploadedMail($pesanan));
             }
-        } catch (\Exception $e) {
-            \Log::error('Failed to send payment uploaded email: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('Failed to send payment uploaded email: ' . $e->getMessage());
         }
 
         return back()->with('success', 'Bukti pembayaran berhasil diupload. Menunggu verifikasi dari petani.');
@@ -399,17 +405,17 @@ class PesananController extends Controller
         // Send order completed emails
         try {
             $pesanan->load(['pembeli', 'items.produk.petani']);
-            
+
             // Email to pembeli
             Mail::to($pesanan->pembeli->email)->queue(new OrderCompletedMail($pesanan, 'pembeli'));
-            
+
             // Email to petani
             $petaniEmails = $pesanan->items->pluck('produk.petani.email')->unique()->filter();
             foreach ($petaniEmails as $email) {
                 Mail::to($email)->queue(new OrderCompletedMail($pesanan, 'petani'));
             }
-        } catch (\Exception $e) {
-            \Log::error('Failed to send order completed email: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('Failed to send order completed email: ' . $e->getMessage());
         }
 
         return redirect()->route('pesanan.detail', $id)
@@ -454,8 +460,8 @@ class PesananController extends Controller
             foreach ($adminEmails as $email) {
                 Mail::to($email)->queue(new RefundRequestedMail($pesanan));
             }
-        } catch (\Exception $e) {
-            \Log::error('Failed to send refund requested email: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('Failed to send refund requested email: ' . $e->getMessage());
         }
 
         return back()->with('success', 'Permintaan refund berhasil dikirim. Admin akan meninjau permintaan Anda.');

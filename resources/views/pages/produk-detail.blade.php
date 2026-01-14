@@ -1,232 +1,475 @@
 @extends('layouts.app')
 
-@section('title', 'Product Detail | Tanami')
+@section('title', $produk->nama_produk . ' | Tanami')
 
 @section('content')
-    <main class="flex-1 w-full max-w-[1280px] mx-auto px-4 md:px-10 py-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div class="flex flex-col gap-4">
-                <div class="aspect-square bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-                    <div class="w-full h-full bg-cover bg-center"
-                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxE7eDcmYVVRGHOds0-yQE0wN8X4BG-1WAhWX5edH3o-hvl90YBhbCj9xJyoYvOOZqRmGeFsSLT-849teLlLI3XLXA8jDQ_gmM9uKcjO89rd1mnpKePJMDZJPdyYdJ0hGsJjDZabupvl75x6YtT7hR_3L_nMpLMIDX_WzyF_YaJfmKg1zO5Bf6wR3es-4PlVFynehLRmEK2msfjyBRTacH_TVeUvdhWJwNdUDeKyP253ri4eggaQJGa29HHREL71yDQIkZLcIYqJhX");'>
-                    </div>
+<main class="flex-1 w-full max-w-[1280px] mx-auto px-4 md:px-10 py-6">
+    {{-- Breadcrumb --}}
+    <div class="flex flex-wrap gap-2 mb-6 font-display">
+        <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('home') }}">Home</a>
+        <span class="text-text-secondary text-sm font-medium">/</span>
+        <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('katalog') }}">Katalog</a>
+        <span class="text-text-secondary text-sm font-medium">/</span>
+        @if($produk->kategori)
+        <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('katalog', ['kategori' => $produk->kategori->slug_kategori]) }}">{{ $produk->kategori->nama_kategori }}</a>
+        <span class="text-text-secondary text-sm font-medium">/</span>
+        @endif
+        <span class="text-text-main dark:text-white text-sm font-medium">{{ $produk->nama_produk }}</span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        {{-- Product Images --}}
+        <div class="flex flex-col gap-4">
+            {{-- Main Image --}}
+            <div class="aspect-square bg-white dark:bg-[#1e2a1a] rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-[#2a3825]">
+                @if($produk->foto)
+                <img id="main-product-image" alt="{{ $produk->nama_produk }}" class="w-full h-full object-cover" src="{{ Storage::url($produk->foto) }}" />
+                @else
+                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-[#253220]">
+                    <span class="material-symbols-outlined text-8xl text-gray-400">image</span>
                 </div>
-                <div class="grid grid-cols-4 gap-4">
-                    <div
-                        class="aspect-square bg-white rounded-lg border-2 border-primary overflow-hidden cursor-pointer shadow-sm">
-                        <div class="w-full h-full bg-cover bg-center"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxE7eDcmYVVRGHOds0-yQE0wN8X4BG-1WAhWX5edH3o-hvl90YBhbCj9xJyoYvOOZqRmGeFsSLT-849teLlLI3XLXA8jDQ_gmM9uKcjO89rd1mnpKePJMDZJPdyYdJ0hGsJjDZabupvl75x6YtT7hR_3L_nMpLMIDX_WzyF_YaJfmKg1zO5Bf6wR3es-4PlVFynehLRmEK2msfjyBRTacH_TVeUvdhWJwNdUDeKyP253ri4eggaQJGa29HHREL71yDQIkZLcIYqJhX");'>
-                        </div>
-                    </div>
-                    <div
-                        class="aspect-square bg-white rounded-lg border border-gray-100 overflow-hidden cursor-pointer hover:border-primary/50 shadow-sm transition-colors">
-                        <div class="w-full h-full bg-cover bg-center opacity-80"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzb0JT1LObIMcoqQyyxEOilNQgBtHve9FeMiE-hZUkxa8jtBQsRotdSddt6mYag-jlm1gomXcEPMClEq-m6f5IbiasG-rEzGPjF78HWcqBtKyvEz-nK8ELdfPzm7g7dSMhms3hP_ea5p5FyFr6UdKNWaNP6JKWDAH3J3xB62UiHEKiGQCd-bPDUeL8N_ij3k78cNWjntmNrZAE3yXLyhgrksXyEJdlR9WgRY9PN6Klc7MEDiO1AazO2o324MyRqkdVBgjqTSKIcbiz");'>
-                        </div>
-                    </div>
-                    <div
-                        class="aspect-square bg-white rounded-lg border border-gray-100 overflow-hidden cursor-pointer hover:border-primary/50 shadow-sm transition-colors">
-                        <div class="w-full h-full bg-cover bg-center opacity-80"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaLCCN1sb3pO-D-22LaE4c-H_DkorMbIeBoGCFQ8jRkMz2mnOPkhw3_Kl4aMJ0tVj5mCogMct_x1Ma0D2nC1VY-yRB8ERrxEiTXc7SFI9vn2qGn1iudpc4Wzu33yN4TRhtxJxwf1L79lqzemLTMNY8b4LQM-ThDhhn-SnW6P4iA6_Bd09WWZYLQcfULMmWVkhmWK5L63vam0dbAArX64sfXkoNCu3KYPZ8rL78Mr2FCAbA-OVcTZvgYxV65omcZeSjZtVlZ864Qo42");'>
-                        </div>
-                    </div>
-                    <div
-                        class="aspect-square bg-white rounded-lg border border-gray-100 overflow-hidden cursor-pointer hover:border-primary/50 shadow-sm transition-colors">
-                        <div class="w-full h-full bg-cover bg-center opacity-80"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBdqyAY8cOXgiqLGVnXKz7Ty9ZXwMqO9eD9mTQ044jZM4jj0_zYGu0kT-0d-EY6tSOBYVtsY3n7FwsfdfQHNRpwm7dHtkglJv9CTtpKcNkmHUKjIUs2gAC197gDvTXGtDSYTWiJARnolNz5DfCUwnQT3Bzs2nEZaMwiyUYoIVioTJDRezoE0D0gTcyfyWhT2FwghIrX1w1TYigKHD9DKXB6U-q2r2btlpVETmHk34YX7FQ6OJwWHrPNI8rOOXoxosI9fLzhyoqKgxPx");'>
-                        </div>
-                    </div>
+                @endif
+            </div>
+
+            {{-- Thumbnail Previews --}}
+            @if($produk->foto)
+            <div class="grid grid-cols-4 gap-4">
+                <div class="aspect-square bg-white dark:bg-[#1e2a1a] rounded-lg border-2 border-primary overflow-hidden cursor-pointer shadow-sm">
+                    <img alt="Preview 1" class="w-full h-full object-cover" src="{{ Storage::url($produk->foto) }}" />
+                </div>
+                <div class="aspect-square bg-white dark:bg-[#1e2a1a] rounded-lg border border-gray-100 dark:border-[#2a3825] overflow-hidden cursor-pointer hover:border-primary/50 shadow-sm transition-colors">
+                    <img alt="Preview 2" class="w-full h-full object-cover object-top opacity-80" src="{{ Storage::url($produk->foto) }}" />
+                </div>
+                <div class="aspect-square bg-white dark:bg-[#1e2a1a] rounded-lg border border-gray-100 dark:border-[#2a3825] overflow-hidden cursor-pointer hover:border-primary/50 shadow-sm transition-colors">
+                    <img alt="Preview 3" class="w-full h-full object-cover object-bottom opacity-80" src="{{ Storage::url($produk->foto) }}" />
+                </div>
+                <div class="aspect-square bg-white dark:bg-[#1e2a1a] rounded-lg border border-gray-100 dark:border-[#2a3825] overflow-hidden cursor-pointer hover:border-primary/50 shadow-sm transition-colors">
+                    <img alt="Preview 4" class="w-full h-full object-cover scale-110 opacity-80" src="{{ Storage::url($produk->foto) }}" />
                 </div>
             </div>
-            <div class="flex flex-col">
-                <div class="text-[12px] font-heading font-bold uppercase tracking-widest text-primary mb-2">TECH</div>
-                <h1 class="text-[36px] font-heading font-bold leading-tight mb-2">Smart Soil Sensor Pro</h1>
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="flex items-center text-yellow-400">
-                        <span class="material-symbols-outlined fill-1">star</span>
-                        <span class="material-symbols-outlined fill-1">star</span>
-                        <span class="material-symbols-outlined fill-1">star</span>
-                        <span class="material-symbols-outlined fill-1">star</span>
-                        <span class="material-symbols-outlined fill-1">star</span>
-                    </div>
-                    <span class="text-sm text-gray-500 font-sans">(48 reviews)</span>
+            @endif
+        </div>
+
+        {{-- Product Info --}}
+        <div class="flex flex-col">
+            {{-- Category Badge --}}
+            @if($produk->kategori)
+            <div class="text-[12px] font-heading font-bold uppercase tracking-widest text-primary mb-2">{{ $produk->kategori->nama_kategori }}</div>
+            @endif
+
+            {{-- Product Name --}}
+            <h1 class="text-[36px] font-heading font-bold leading-tight mb-2 text-text-main dark:text-white">{{ $produk->nama_produk }}</h1>
+
+            {{-- Rating --}}
+            <div class="flex items-center gap-4 mb-6">
+                <div class="flex items-center">
+                    @php
+                    $avgRating = $ratingStats['rata_rata'];
+                    $fullStars = floor($avgRating);
+                    $hasHalfStar = ($avgRating - $fullStars) >= 0.5;
+                    $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
+                    @endphp
+
+                    @for ($i = 0; $i < $fullStars; $i++)
+                        <span class="fa-solid fa-star text-amber-400 text-lg"></span>
+                        @endfor
+
+                        @if ($hasHalfStar)
+                        <span class="fa-solid fa-star-half-stroke text-amber-400 text-lg"></span>
+                        @endif
+
+                        @for ($i = 0; $i < $emptyStars; $i++)
+                            <span class="fa-regular fa-star text-gray-300 dark:text-gray-600 text-lg"></span>
+                            @endfor
                 </div>
-                <div class="text-[32px] font-heading font-bold text-content-dark mb-6">$129.00</div>
-                <p class="text-gray-600 mb-8 max-w-lg">
-                    Monitor your crop health in real-time with industrial-grade precision. This sensor tracks soil moisture,
-                    temperature, and pH levels, delivering data directly to your mobile device for optimized irrigation and
-                    fertilization.
-                </p>
-                <div class="flex flex-col gap-4 mb-8">
-                    <div class="flex items-center gap-4">
-                        <div class="flex items-center border border-gray-200 rounded-lg bg-white h-12">
-                            <button class="px-4 text-gray-500 hover:text-primary"><span
-                                    class="material-symbols-outlined text-lg">remove</span></button>
-                            <span class="px-2 font-heading font-bold w-8 text-center">1</span>
-                            <button class="px-4 text-gray-500 hover:text-primary"><span
-                                    class="material-symbols-outlined text-lg">add</span></button>
-                        </div>
-                        <button
-                            class="flex-1 bg-primary text-white h-12 rounded-lg btn-text hover:bg-opacity-90 shadow-lg shadow-primary/20 transition-all">
-                            Add to Cart
+                @if($avgRating > 0)
+                <span class="text-sm font-semibold text-amber-500">{{ number_format($avgRating, 1) }}</span>
+                @endif
+                <span class="text-sm text-gray-500 font-display">({{ $ratingStats['total'] }} ulasan)</span>
+            </div>
+
+            {{-- Price --}}
+            <div class="text-[32px] font-heading font-bold text-[#53be20] mb-6">Rp {{ number_format($produk->harga, 0, ',', '.') }} <span class="text-sm text-text-secondary font-display font-normal">/ {{ $produk->satuan }}</span></div>
+
+            {{-- Description --}}
+            <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-lg font-display leading-relaxed">
+                {{ $produk->deskripsi }}
+            </p>
+
+            {{-- Add to Cart --}}
+            <div class="flex flex-col gap-4 mb-8">
+                @if($produk->stok > 0)
+                <form action="{{ route('keranjang.store') }}" method="POST" class="flex items-center gap-4">
+                    @csrf
+                    <input type="hidden" name="id_produk" value="{{ $produk->id_produk }}">
+                    <div class="flex items-center border border-gray-200 dark:border-[#2a3825] rounded-lg bg-white dark:bg-[#1e2a1a] h-12">
+                        <button type="button" onclick="decreaseQty()" class="px-4 text-gray-500 hover:text-primary">
+                            <span class="material-symbols-outlined text-lg">remove</span>
+                        </button>
+                        <input type="number" name="jumlah" id="qty-input" value="1" min="1" max="{{ $produk->stok }}"
+                            class="w-16 text-center font-heading font-bold bg-transparent border-0 focus:ring-0 text-text-main dark:text-white" />
+                        <button type="button" onclick="increaseQty()" data-max="{{ $produk->stok }}" class="px-4 text-gray-500 hover:text-primary" id="btn-increase">
+                            <span class="material-symbols-outlined text-lg">add</span>
                         </button>
                     </div>
-                    <button
-                        class="w-full border-2 border-content-dark text-content-dark h-12 rounded-lg btn-text hover:bg-content-dark hover:text-white transition-all flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-xl">favorite</span>
-                        Add to Wishlist
+                    <button type="submit"
+                        class="flex-1 bg-primary text-white h-12 rounded-lg font-heading font-semibold hover:bg-opacity-90 shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">add_shopping_cart</span>
+                        Tambah ke Keranjang
+                    </button>
+                </form>
+                @else
+                <div class="flex items-center gap-4">
+                    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-sm font-medium">
+                        <span class="material-symbols-outlined text-base">cancel</span>
+                        Stok habis
+                    </span>
+                    <button disabled class="flex-1 bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 h-12 rounded-lg font-heading font-semibold cursor-not-allowed">
+                        Stok Habis
                     </button>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4">
-                    <div class="size-12 rounded-full overflow-hidden bg-gray-100">
-                        <img alt="Farmer Agus" class="w-full h-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9SVueF3UMWNfWLzenfaGJDjZ5FjdH1dkWBpxUdXWxjDnk9QZdGQVoySw8yNjVcFCUotHZpkb0sFo2IdAitrd_kCyyIHWug0_slETCUJbp5YGYrUVR_p-Gkmj21NlreBkTV7glmL9KVBVIE-d_5K5TKeeVl-BxQXf3bgseYOChCbWsHCf1D8w3ngIwXAV63PNsBQ_mmK4vNBl04encGshKcdr8qiM-RE7EDn2nWgki-h6WA6XHxPo2DGb1QQaeW3VjXV8-eh9B7xGW" />
+                @endif
+
+                {{-- Stock Info --}}
+                @if($produk->stok > 0)
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-medium w-fit">
+                    <span class="material-symbols-outlined text-base">check_circle</span>
+                    Stok tersedia ({{ $produk->stok }} {{ $produk->satuan }})
+                </span>
+                @endif
+
+                {{-- Wishlist Button --}}
+                <button
+                    class="w-full border-2 border-text-main dark:border-gray-600 text-text-main dark:text-white h-12 rounded-lg font-heading font-semibold hover:bg-text-main hover:text-white dark:hover:bg-gray-600 transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-xl">favorite</span>
+                    Tambah ke Wishlist
+                </button>
+            </div>
+
+            {{-- Seller Info --}}
+            @if($produk->petani)
+            <div class="bg-white dark:bg-[#1e2a1a] p-4 rounded-xl border border-gray-100 dark:border-[#2a3825] shadow-sm flex items-center gap-4">
+                <div class="size-12 rounded-full overflow-hidden bg-gray-100 dark:bg-[#253220] flex items-center justify-center">
+                    @if($produk->petani->foto_profil)
+                    <img alt="{{ $produk->petani->nama }}" class="w-full h-full object-cover" src="{{ Storage::url($produk->petani->foto_profil) }}" />
+                    @else
+                    <span class="material-symbols-outlined text-2xl text-gray-400">person</span>
+                    @endif
+                </div>
+                <div>
+                    <div class="flex items-center gap-1">
+                        <span class="font-heading font-bold text-text-main dark:text-white">{{ $produk->petani->nama }}</span>
+                        @if($produk->petani->terverifikasi)
+                        <span class="material-symbols-outlined text-primary text-base">verified</span>
+                        @endif
                     </div>
-                    <div>
-                        <div class="flex items-center gap-1">
-                            <span class="font-heading font-bold text-content-dark">Agus Setiawan</span>
-                            <span class="material-symbols-outlined text-primary text-base">verified</span>
-                        </div>
-                        <div class="text-xs text-gray-500 font-sans">Lembang, West Java • Verified Farmer</div>
+                    <div class="text-xs text-gray-500 dark:text-gray-400 font-display">
+                        {{ $produk->petani->alamat ?? 'Petani Lokal' }}
+                        @if($produk->petani->terverifikasi) • Petani Terverifikasi @endif
                     </div>
                 </div>
+            </div>
+            @endif
+        </div>
+    </div>
+
+    {{-- Product Description Section --}}
+    <div class="mb-16">
+        <div class="border-b border-gray-200 dark:border-[#2a3825] mb-8">
+            <div class="flex gap-10">
+                <button id="tab-desc" onclick="showTab('desc')"
+                    class="tab-btn pb-4 border-b-2 border-primary text-primary font-heading font-semibold text-[16px]">Deskripsi</button>
+                <button id="tab-ulasan" onclick="showTab('ulasan')"
+                    class="tab-btn pb-4 border-b-2 border-transparent text-gray-500 hover:text-text-main dark:hover:text-white font-heading font-semibold text-[16px] transition-colors">
+                    Ulasan ({{ $ratingStats['total'] }})
+                </button>
             </div>
         </div>
-        <div class="mb-16">
-            <div class="border-b border-gray-200 mb-8">
-                <div class="flex gap-10">
-                    <button
-                        class="pb-4 border-b-2 border-primary text-primary font-heading font-semibold text-[16px]">Description</button>
-                    <button
-                        class="pb-4 border-b-2 border-transparent text-gray-500 hover:text-content-dark font-heading font-semibold text-[16px] transition-colors">Specifications</button>
-                    <button
-                        class="pb-4 border-b-2 border-transparent text-gray-500 hover:text-content-dark font-heading font-semibold text-[16px] transition-colors">Benefits</button>
-                </div>
-            </div>
+
+        {{-- Description Tab Content --}}
+        <div id="content-desc" class="tab-content">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="md:col-span-2 space-y-4">
-                    <h3 class="text-xl font-heading font-bold">Industrial Grade Monitoring</h3>
-                    <p class="text-gray-600">
-                        The Smart Soil Sensor Pro represents the pinnacle of modern agritech. Engineered to withstand harsh
-                        outdoor environments while maintaining laboratory-level accuracy, it provides continuous monitoring
-                        of the essential pillars of soil health.
-                    </p>
-                    <p class="text-gray-600">
-                        With integrated LoRaWAN and WiFi connectivity, data is transmitted every 15 minutes to the Tanami
-                        Cloud, allowing you to visualize trends and receive instant alerts if moisture or pH levels fall
-                        outside of your custom-defined parameters.
-                    </p>
+                    <h3 class="text-xl font-heading font-bold text-text-main dark:text-white">Detail Produk</h3>
+                    <p class="text-gray-600 dark:text-gray-400 font-display leading-relaxed whitespace-pre-line">{{ $produk->deskripsi }}</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm h-fit">
-                    <h4 class="font-heading font-bold mb-4">What's in the box?</h4>
-                    <ul class="space-y-3 text-sm font-sans text-gray-600">
-                        <li class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-primary text-base">check_circle</span> 1x Smart Soil
-                            Sensor Pro</li>
-                        <li class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-primary text-base">check_circle</span> Calibration Kit
+                <div class="bg-white dark:bg-[#1e2a1a] p-6 rounded-xl border border-gray-100 dark:border-[#2a3825] shadow-sm h-fit">
+                    <h4 class="font-heading font-bold mb-4 text-text-main dark:text-white">Informasi Produk</h4>
+                    <ul class="space-y-3 text-sm font-display text-gray-600 dark:text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+                            Kategori: {{ $produk->kategori->nama_kategori ?? 'Umum' }}
                         </li>
-                        <li class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-primary text-base">check_circle</span> Solar Charging
-                            Panel</li>
-                        <li class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-primary text-base">check_circle</span> Quick Start
-                            Guide</li>
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+                            Satuan: {{ $produk->satuan }}
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+                            Stok: {{ $produk->stok }} {{ $produk->satuan }}
+                        </li>
+                        @if($produk->petani)
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+                            Petani: {{ $produk->petani->nama }}
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="mb-16">
-            <div class="flex justify-between items-end mb-8">
-                <div>
-                    <h2 class="text-[36px] font-heading font-semibold">Related Products</h2>
-                    <p class="text-gray-500 font-sans">Complement your smart farm setup.</p>
+
+        {{-- Reviews Tab Content --}}
+        <div id="content-ulasan" class="tab-content hidden">
+            {{-- Rating Summary --}}
+            <div class="bg-white dark:bg-[#1e2a1a] rounded-xl border border-gray-100 dark:border-[#2a3825] p-6 mb-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex flex-col items-center justify-center md:w-48">
+                        <div class="text-5xl font-bold text-text-main dark:text-white font-heading">{{ number_format($ratingStats['rata_rata'], 1) }}</div>
+                        <div class="flex items-center mt-2">
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($i < floor($ratingStats['rata_rata']))
+                                <span class="fa-solid fa-star text-amber-400"></span>
+                                @elseif ($i == floor($ratingStats['rata_rata']) && ($ratingStats['rata_rata'] - floor($ratingStats['rata_rata'])) >= 0.5)
+                                <span class="fa-solid fa-star-half-stroke text-amber-400"></span>
+                                @else
+                                <span class="fa-regular fa-star text-gray-300 dark:text-gray-600"></span>
+                                @endif
+                                @endfor
+                        </div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mt-1 font-display">{{ $ratingStats['total'] }} ulasan</div>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        @for ($i = 5; $i >= 1; $i--)
+                        @php
+                        $count = $ratingStats['distribusi'][$i];
+                        $percentage = $ratingStats['total'] > 0 ? ($count / $ratingStats['total']) * 100 : 0;
+                        @endphp
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm text-gray-600 dark:text-gray-400 font-display w-3">{{ $i }}</span>
+                            <span class="fa-solid fa-star text-amber-400 text-sm"></span>
+                            <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-amber-400 rounded-full" style="width: {{ $percentage }}%"></div>
+                            </div>
+                            <span class="text-sm text-gray-500 dark:text-gray-400 font-display w-8">{{ $count }}</span>
+                        </div>
+                        @endfor
+                    </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div
-                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBdqyAY8cOXgiqLGVnXKz7Ty9ZXwMqO9eD9mTQ044jZM4jj0_zYGu0kT-0d-EY6tSOBYVtsY3n7FwsfdfQHNRpwm7dHtkglJv9CTtpKcNkmHUKjIUs2gAC197gDvTXGtDSYTWiJARnolNz5DfCUwnQT3Bzs2nEZaMwiyUYoIVioTJDRezoE0D0gTcyfyWhT2FwghIrX1w1TYigKHD9DKXB6U-q2r2btlpVETmHk34YX7FQ6OJwWHrPNI8rOOXoxosI9fLzhyoqKgxPx");'>
+
+            {{-- Reviews List --}}
+            @if($produk->ulasan->count() > 0)
+            <div class="space-y-4">
+                @foreach($produk->ulasan as $ulasan)
+                <div class="bg-white dark:bg-[#1e2a1a] rounded-xl border border-gray-100 dark:border-[#2a3825] p-5">
+                    <div class="flex items-start gap-4">
+                        <div class="size-10 rounded-full overflow-hidden bg-gray-100 dark:bg-[#253220] flex items-center justify-center shrink-0">
+                            @if($ulasan->pengguna && $ulasan->pengguna->foto_profil)
+                            <img alt="{{ $ulasan->pengguna->nama_lengkap }}" class="w-full h-full object-cover" src="{{ Storage::url($ulasan->pengguna->foto_profil) }}" />
+                            @else
+                            <span class="material-symbols-outlined text-xl text-gray-400">person</span>
+                            @endif
                         </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">Nutrients
-                        </div>
-                        <h3 class="text-lg font-heading font-bold text-content-dark truncate">Organic Nitrogen Boost</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-xl font-heading font-bold">$24.99</span>
-                            <button
-                                class="bg-primary hover:bg-opacity-90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaLCCN1sb3pO-D-22LaE4c-H_DkorMbIeBoGCFQ8jRkMz2mnOPkhw3_Kl4aMJ0tVj5mCogMct_x1Ma0D2nC1VY-yRB8ERrxEiTXc7SFI9vn2qGn1iudpc4Wzu33yN4TRhtxJxwf1L79lqzemLTMNY8b4LQM-ThDhhn-SnW6P4iA6_Bd09WWZYLQcfULMmWVkhmWK5L63vam0dbAArX64sfXkoNCu3KYPZ8rL78Mr2FCAbA-OVcTZvgYxV65omcZeSjZtVlZ864Qo42");'>
-                        </div>
-                        <div
-                            class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded font-heading">
-                            Popular</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">Irrigation
-                        </div>
-                        <h3 class="text-lg font-heading font-bold text-content-dark truncate">Auto-Drip Kit (50ft)</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-xl font-heading font-bold">$45.50</span>
-                            <button
-                                class="bg-primary hover:bg-opacity-90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgTyX_gVdzneCxbC9fIWFWD50Fz2PNZcUiCmyJDicozr7VfjOQVT9tM0bnXe9ghgn2UzrjK60xGEph67kjI3-9xRtOsqH1R3NgYuEu5NAvbwBpMSfdU31gerbOTevgkBA13JAnq5IP85bFKxBEc4ruzFBezmOja3gl6FzS_YmWZTpyRQe4uvZS3ayWoaAv5FvgbEzi7hoX8qhGVzIXQviVfX1Gs38QzXnHI_8vvbtj0QN99mQtdBZzYigkOFDex9qCXLWTWIfpYIB6");'>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">Seeds</div>
-                        <h3 class="text-lg font-heading font-bold text-content-dark truncate">Heirloom Tomato Seeds</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-xl font-heading font-bold">$5.99</span>
-                            <button
-                                class="bg-primary hover:bg-opacity-90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="font-heading font-semibold text-text-main dark:text-white">
+                                    @php
+                                    $nama = $ulasan->pengguna ? $ulasan->pengguna->nama_lengkap : 'Pengguna';
+                                    $words = explode(' ', $nama);
+                                    $masked = array_map(function($word) {
+                                    $len = mb_strlen($word);
+                                    if ($len <= 5) return $word[0] . str_repeat('*', $len - 1);
+                                        return mb_substr($word, 0, 2) . str_repeat('*', $len - 4) . mb_substr($word, -2);
+                                        }, $words);
+                                        echo implode(' ', $masked);
+                                    @endphp
+                                </span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400 font-display">
+                                    {{ $ulasan->tgl_dibuat->diffForHumans() }}
+                                </span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                @for ($i = 0; $i < 5; $i++)
+                                    @if ($i < $ulasan->rating)
+                                    <span class="fa-solid fa-star text-amber-400 text-xs"></span>
+                                    @else
+                                    <span class="fa-regular fa-star text-gray-300 dark:text-gray-600 text-xs"></span>
+                                    @endif
+                                    @endfor
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-display">{{ $ulasan->komentar }}</p>
                         </div>
                     </div>
                 </div>
-                <div
-                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-gray-100">
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzb0JT1LObIMcoqQyyxEOilNQgBtHve9FeMiE-hZUkxa8jtBQsRotdSddt6mYag-jlm1gomXcEPMClEq-m6f5IbiasG-rEzGPjF78HWcqBtKyvEz-nK8ELdfPzm7g7dSMhms3hP_ea5p5FyFr6UdKNWaNP6JKWDAH3J3xB62UiHEKiGQCd-bPDUeL8N_ij3k78cNWjntmNrZAE3yXLyhgrksXyEJdlR9WgRY9PN6Klc7MEDiO1AazO2o324MyRqkdVBgjqTSKIcbiz");'>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">Tools</div>
-                        <h3 class="text-lg font-heading font-bold text-content-dark truncate">Precision Soil pH Meter</h3>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-xl font-heading font-bold">$89.00</span>
-                            <button
-                                class="bg-primary hover:bg-opacity-90 text-white p-2 rounded-lg transition-colors flex items-center justify-center">
-                                <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+            </div>
+            @else
+            <div class="text-center py-12">
+                <span class="material-symbols-outlined text-5xl text-gray-300 dark:text-gray-600 mb-4">rate_review</span>
+                <p class="text-gray-500 dark:text-gray-400 font-display">Belum ada ulasan untuk produk ini.</p>
+            </div>
+            @endif
+        </div>
+    </div>
+
+    {{-- Related Products --}}
+    @if($produkTerkait->count() > 0)
+    <div class="mb-16">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Produk Terkait</h2>
+                <p class="text-gray-500 dark:text-gray-400 font-display">Produk lain dari kategori yang sama.</p>
             </div>
         </div>
-    </main>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($produkTerkait as $item)
+            <div class="group bg-white dark:bg-[#1e2a1a] rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 dark:border-[#2a3825] transition-all duration-300 hover:-translate-y-1">
+                <a href="{{ route('produk.detail', $item->slug_produk) }}" class="block relative aspect-square overflow-hidden bg-gray-100 dark:bg-[#253220]">
+                    @if($item->foto)
+                    <img alt="{{ $item->nama_produk }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="{{ Storage::url($item->foto) }}" />
+                    @else
+                    <div class="w-full h-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl text-gray-400">image</span>
+                    </div>
+                    @endif
+                </a>
+                <div class="p-4">
+                    @if($item->kategori)
+                    <div class="text-xs text-primary font-bold uppercase tracking-wider mb-1 font-heading">{{ $item->kategori->nama_kategori }}</div>
+                    @endif
+                    <a href="{{ route('produk.detail', $item->slug_produk) }}">
+                        <h3 class="text-lg font-heading font-bold text-text-main dark:text-white truncate transition-colors">{{ $item->nama_produk }}</h3>
+                    </a>
+                    <div class="flex items-baseline gap-1 mt-2">
+                        <span class="text-lg font-heading font-bold text-[#53be20]">Rp {{ number_format($item->harga, 0, ',', '.') }}</span>
+                        <span class="text-xs text-text-secondary font-display">/{{ $item->satuan }}</span>
+                    </div>
+                    <form action="{{ route('keranjang.store') }}" method="POST" class="mt-3">
+                        @csrf
+                        <input type="hidden" name="id_produk" value="{{ $item->id_produk }}">
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center border border-gray-200 dark:border-[#2a3825] rounded-lg bg-white dark:bg-[#253220] h-9">
+                                <button type="button" onclick="adjustQty(this, -1, {{ $item->stok }})" class="px-2 text-gray-500 hover:text-primary">
+                                    <span class="material-symbols-outlined text-sm">remove</span>
+                                </button>
+                                <input type="number" name="jumlah" value="1" min="1" max="{{ $item->stok }}"
+                                    class="w-10 text-center text-sm font-heading font-bold bg-transparent border-0 focus:ring-0 text-text-main dark:text-white p-0" />
+                                <button type="button" onclick="adjustQty(this, 1, {{ $item->stok }})" class="px-2 text-gray-500 hover:text-primary">
+                                    <span class="material-symbols-outlined text-sm">add</span>
+                                </button>
+                            </div>
+                            <button type="submit" class="flex-1 bg-primary hover:bg-opacity-90 text-white h-9 rounded-lg transition-colors flex items-center justify-center gap-1 text-sm font-heading font-semibold">
+                                <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+                                <span class="hidden sm:inline">Tambah</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
 
-@endsection
+    {{-- Products from same seller --}}
+    @if($produkPetani->count() > 0)
+    <div class="mb-16">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Produk Lain dari {{ $produk->petani->nama }}</h2>
+                <p class="text-gray-500 dark:text-gray-400 font-display">Jelajahi produk lainnya dari petani yang sama.</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($produkPetani as $item)
+            <div class="group bg-white dark:bg-[#1e2a1a] rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 dark:border-[#2a3825] transition-all duration-300 hover:-translate-y-1">
+                <a href="{{ route('produk.detail', $item->slug_produk) }}" class="block relative aspect-square overflow-hidden bg-gray-100 dark:bg-[#253220]">
+                    @if($item->foto)
+                    <img alt="{{ $item->nama_produk }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="{{ Storage::url($item->foto) }}" />
+                    @else
+                    <div class="w-full h-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl text-gray-400">image</span>
+                    </div>
+                    @endif
+                </a>
+                <div class="p-4">
+                    <a href="{{ route('produk.detail', $item->slug_produk) }}">
+                        <h3 class="text-lg font-heading font-bold text-text-main dark:text-white truncate transition-colors">{{ $item->nama_produk }}</h3>
+                    </a>
+                    <div class="flex items-baseline gap-1 mt-2">
+                        <span class="text-lg font-heading font-bold text-[#53be20]">Rp {{ number_format($item->harga, 0, ',', '.') }}</span>
+                        <span class="text-xs text-text-secondary font-display">/{{ $item->satuan }}</span>
+                    </div>
+                    <form action="{{ route('keranjang.store') }}" method="POST" class="mt-3">
+                        @csrf
+                        <input type="hidden" name="id_produk" value="{{ $item->id_produk }}">
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center border border-gray-200 dark:border-[#2a3825] rounded-lg bg-white dark:bg-[#253220] h-9">
+                                <button type="button" onclick="adjustQty(this, -1, {{ $item->stok }})" class="px-2 text-gray-500 hover:text-primary">
+                                    <span class="material-symbols-outlined text-sm">remove</span>
+                                </button>
+                                <input type="number" name="jumlah" value="1" min="1" max="{{ $item->stok }}"
+                                    class="w-10 text-center text-sm font-heading font-bold bg-transparent border-0 focus:ring-0 text-text-main dark:text-white p-0" />
+                                <button type="button" onclick="adjustQty(this, 1, {{ $item->stok }})" class="px-2 text-gray-500 hover:text-primary">
+                                    <span class="material-symbols-outlined text-sm">add</span>
+                                </button>
+                            </div>
+                            <button type="submit" class="flex-1 bg-primary hover:bg-opacity-90 text-white h-9 rounded-lg transition-colors flex items-center justify-center gap-1 text-sm font-heading font-semibold">
+                                <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+                                <span class="hidden sm:inline">Tambah</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
+</main>
+
+<script>
+    function decreaseQty() {
+        const input = document.getElementById(' qty-input');
+                                        if (parseInt(input.value)> 1) {
+                                        input.value = parseInt(input.value) - 1;
+                                        }
+                                        }
+
+                                        function increaseQty() {
+                                        const input = document.getElementById('qty-input');
+                                        const max = parseInt(document.getElementById('btn-increase').dataset.max);
+                                        if (parseInt(input.value) < max) {
+                                            input.value=parseInt(input.value) + 1;
+                                            }
+                                            }
+
+                                            function showTab(tab) {
+                                            // Hide all content
+                                            document.querySelectorAll('.tab-content').forEach(el=> el.classList.add('hidden'));
+                                            // Reset all tabs
+                                            document.querySelectorAll('.tab-btn').forEach(el => {
+                                            el.classList.remove('border-primary', 'text-primary');
+                                            el.classList.add('border-transparent', 'text-gray-500');
+                                            });
+                                            // Show selected content
+                                            document.getElementById('content-' + tab).classList.remove('hidden');
+                                            // Activate selected tab
+                                            const activeTab = document.getElementById('tab-' + tab);
+                                            activeTab.classList.remove('border-transparent', 'text-gray-500');
+                                            activeTab.classList.add('border-primary', 'text-primary');
+                                            }
+
+                                            function adjustQty(btn, delta, max) {
+                                            const container = btn.closest('.flex');
+                                            const input = container.querySelector('input[name="jumlah"]');
+                                            let value = parseInt(input.value) + delta;
+
+                                            if (value < 1) value=1;
+                                                if (value> max) value = max;
+
+                                                input.value = value;
+                                                }
+                                                </script>
+                                                @endsection

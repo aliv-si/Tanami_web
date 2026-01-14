@@ -33,6 +33,10 @@
                     class="pb-4 border-b-2 {{ request('status') === 'selesai' ? 'border-[#53be20] text-[#53be20]' : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600 text-gray-500 dark:text-gray-400 hover:text-[#1e3f1b] dark:hover:text-white' }} font-heading font-semibold text-[14px] whitespace-nowrap transition-colors">
                     Completed
                 </a>
+                <a href="{{ route('pesanan', ['status' => 'direfund']) }}"
+                    class="pb-4 border-b-2 {{ in_array(request('status'), ['direfund', 'minta_refund']) ? 'border-[#53be20] text-[#53be20]' : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600 text-gray-500 dark:text-gray-400 hover:text-[#1e3f1b] dark:hover:text-white' }} font-heading font-semibold text-[14px] whitespace-nowrap transition-colors">
+                    Refunded
+                </a>
             </div>
 
             <!-- Orders List -->
@@ -93,7 +97,7 @@
                                 <span class="text-[#1e3f1b] dark:text-gray-300">Farmer: <span class="font-medium">{{ $item->produk->petani->nama_lengkap ?? 'N/A' }}</span></span>
                             </div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">
-                                Rp {{ number_format($item->harga_satuan, 0, ',', '.') }} x {{ $item->jumlah }}
+                                Rp {{ number_format((float)$item->harga_snapshot, 0, ',', '.') }} x {{ $item->jumlah }}
                             </div>
                         </div>
                     </div>
@@ -236,19 +240,5 @@
         </div>
     </main>
 
-    @if(session('success'))
-    <script>
-        setTimeout(() => {
-            alert('{{ session('success') }}');
-        }, 100);
-    </script>
-    @endif
 
-    @if(session('error'))
-    <script>
-        setTimeout(() => {
-            alert('{{ session('error') }}');
-        }, 100);
-    </script>
-    @endif
 @endsection

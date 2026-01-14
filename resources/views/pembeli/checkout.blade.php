@@ -221,19 +221,5 @@
         }
     </script>
 
-    @if(session('error'))
-    <script>
-        setTimeout(() => {
-            alert('{{ session('error') }}');
-        }, 100);
-    </script>
-    @endif
 
-    @if($errors->any())
-    <script>
-        setTimeout(() => {
-            alert('{{ $errors->first() }}');
-        }, 100);
-    </script>
-    @endif
 @endsection

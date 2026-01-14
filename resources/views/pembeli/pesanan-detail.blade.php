@@ -99,7 +99,7 @@ $statusIcons = [
                     </button>
                     @endif
 
-                    @if($pesanan->status_pesanan === 'terkirim')
+                    @if(in_array($pesanan->status_pesanan, ['terkirim', 'selesai']))
                     <button type="button" onclick="document.getElementById('refund-modal').classList.remove('hidden')"
                         class="px-6 py-2.5 rounded-lg border border-orange-300 dark:border-orange-700 text-orange-600 dark:text-orange-400 font-heading font-semibold text-sm hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors flex items-center gap-2">
                         <span class="material-symbols-outlined text-lg">assignment_return</span>
@@ -361,7 +361,7 @@ $statusIcons = [
 @endif
 
 <!-- Refund Modal -->
-@if($pesanan->status_pesanan === 'terkirim')
+@if(in_array($pesanan->status_pesanan, ['terkirim', 'selesai']))
 <div id="refund-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
@@ -385,22 +385,6 @@ $statusIcons = [
         </div>
     </div>
 </div>
-@endif
-
-@if(session('success'))
-<script>
-    setTimeout(() => {
-        alert('{{ session('success ') }}');
-    }, 100);
-</script>
-@endif
-
-@if(session('error'))
-<script>
-    setTimeout(() => {
-        alert('{{ session('error ') }}');
-    }, 100);
-</script>
 @endif
 
 <!-- Star Rating JavaScript -->

@@ -33,10 +33,6 @@
                     class="pb-4 border-b-2 {{ request('status') === 'selesai' ? 'border-[#53be20] text-[#53be20]' : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600 text-gray-500 dark:text-gray-400 hover:text-[#1e3f1b] dark:hover:text-white' }} font-heading font-semibold text-[14px] whitespace-nowrap transition-colors">
                     Completed
                 </a>
-                <a href="{{ route('pesanan', ['status' => 'direfund']) }}"
-                    class="pb-4 border-b-2 {{ in_array(request('status'), ['direfund', 'minta_refund']) ? 'border-[#53be20] text-[#53be20]' : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600 text-gray-500 dark:text-gray-400 hover:text-[#1e3f1b] dark:hover:text-white' }} font-heading font-semibold text-[14px] whitespace-nowrap transition-colors">
-                    Refunded
-                </a>
             </div>
 
             <!-- Orders List -->
@@ -132,12 +128,20 @@
                                     Confirm Receipt
                                 </button>
                             </form>
-                            @elseif($order->status_pesanan === 'selesai' && !$order->ulasan)
-                            <!-- Buy Again / Review -->
+                            @elseif($order->status_pesanan === 'selesai')
+                            <!-- Buy Again - links to first product -->
+                            @php $firstItem = $order->items->first(); @endphp
+                            @if($firstItem && $firstItem->produk && $firstItem->produk->slug_produk)
+                            <a href="{{ route('produk.detail', $firstItem->produk->slug_produk) }}"
+                                class="flex-1 sm:flex-none px-6 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 font-heading font-semibold text-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-colors text-center">
+                                Buy Again
+                            </a>
+                            @else
                             <a href="{{ route('katalog') }}"
                                 class="flex-1 sm:flex-none px-6 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 font-heading font-semibold text-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-colors text-center">
                                 Buy Again
                             </a>
+                            @endif
                             @endif
 
                             <!-- Cancel Button (for pending/waiting verification) -->

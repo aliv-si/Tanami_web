@@ -142,6 +142,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/profil', [AuthController::class, 'updateProfil'])->name('profil.update');
     Route::put('/profil/password', [AuthController::class, 'updatePassword'])->name('profil.password');
     Route::post('/profil/foto', [AuthController::class, 'updateFoto'])->name('profil.foto');
+    Route::delete('/profil/foto', [AuthController::class, 'deleteFoto'])->name('profil.foto.hapus');
 
     // --------------------- KERANJANG ---------------------
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');

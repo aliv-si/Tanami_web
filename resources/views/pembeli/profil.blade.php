@@ -71,11 +71,24 @@
                                 @csrf
                                 <input type="file" name="foto" id="foto-input" accept="image/jpeg,image/png" onchange="document.getElementById('foto-form').submit()">
                             </form>
-                            <button type="button" onclick="document.getElementById('foto-input').click()"
-                                class="absolute bottom-0 right-0 bg-[#53be20] text-white p-1.5 rounded-full border-2 border-white dark:border-[#1f2b1b] shadow-sm hover:bg-[#45a01b] transition-colors"
-                                title="Change Avatar">
-                                <span class="material-symbols-outlined text-sm leading-none">photo_camera</span>
-                            </button>
+                            <div class="absolute -bottom-1 right-0 flex gap-1">
+                                <button type="button" onclick="document.getElementById('foto-input').click()"
+                                    class="bg-[#53be20] text-white p-1.5 rounded-full border-2 border-white dark:border-[#1f2b1b] shadow-sm hover:bg-[#45a01b] transition-colors"
+                                    title="Change Avatar">
+                                    <span class="material-symbols-outlined text-sm leading-none">photo_camera</span>
+                                </button>
+                                @if($user->foto)
+                                <form action="{{ route('profil.foto.hapus') }}" method="POST" onsubmit="return confirm('Hapus foto profil?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="bg-red-500 text-white p-1.5 rounded-full border-2 border-white dark:border-[#1f2b1b] shadow-sm hover:bg-red-600 transition-colors"
+                                        title="Delete Avatar">
+                                        <span class="material-symbols-outlined text-sm leading-none">delete</span>
+                                    </button>
+                                </form>
+                                @endif
+                            </div>
                         </div>
                         <div class="flex-1 text-center md:text-left z-10">
                             <div class="flex flex-col md:flex-row md:items-center gap-2 mb-2">

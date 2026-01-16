@@ -49,6 +49,8 @@ $statusIcons = [
                 <span class="material-symbols-outlined text-sm">chevron_right</span>
                 <span class="text-[#1e3f1b] dark:text-white font-medium">Order Details</span>
             </nav>
+            
+            <!-- Header with Status & Actions -->
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
                 <div>
                     <div class="flex items-center gap-4 mb-2">
@@ -73,7 +75,7 @@ $statusIcons = [
                     @elseif(in_array($pesanan->status_pesanan, ['dikirim', 'terkirim']))
                     <!-- Track & Confirm -->
                     @if($pesanan->no_resi)
-                    <button type="button" onclick="alert('Tracking: {{ $pesanan->no_resi }}')"
+                    <button type="button" onclick="copyToClipboard('{{ $pesanan->no_resi }}')"
                         class="px-6 py-2.5 rounded-lg border border-[#1e3f1b] dark:border-white text-[#1e3f1b] dark:text-white font-heading font-semibold text-sm hover:bg-gray-50 dark:hover:bg-white/5 transition-colors flex items-center gap-2">
                         <span class="material-symbols-outlined text-lg">location_on</span>
                         Track Courier
@@ -98,51 +100,44 @@ $statusIcons = [
                         Cancel Order
                     </button>
                     @endif
-
-                    @if(in_array($pesanan->status_pesanan, ['terkirim', 'selesai']))
-                    <button type="button" onclick="document.getElementById('refund-modal').classList.remove('hidden')"
-                        class="px-6 py-2.5 rounded-lg border border-orange-300 dark:border-orange-700 text-orange-600 dark:text-orange-400 font-heading font-semibold text-sm hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors flex items-center gap-2">
-                        <span class="material-symbols-outlined text-lg">assignment_return</span>
-                        Request Refund
-                    </button>
-                    @endif
                 </div>
+            </div>
 
-                <!-- Review Section (only for completed orders) -->
-                @if($pesanan->status_pesanan === 'selesai')
-                <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
-                    <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[#53be20]">star</span>
-                        Rate Your Products
-                    </h3>
-                    <div class="space-y-6">
-                        @foreach($pesanan->items as $item)
-                        @php
-                        $existingReview = $item->ulasan;
-                        @endphp
-                        <div class="p-4 bg-gray-50 dark:bg-white/5 rounded-xl {{ !$loop->last ? 'border-b border-gray-100 dark:border-white/10' : '' }}">
-                            <div class="flex gap-4 items-start mb-4">
-                                <div class="size-16 bg-white dark:bg-white/10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
-                                    @if($item->produk->foto)
-                                    <img src="{{ asset('storage/' . $item->produk->foto) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
+            <!-- Main Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Left Column (2/3) -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Ordered Items -->
+                    <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
+                        <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[#53be20]">shopping_bag</span>
+                            Ordered Items
+                        </h3>
+                        <div class="space-y-6">
+                            @foreach($pesanan->items as $item)
+                            <div class="flex gap-4 items-start {{ !$loop->last ? 'border-b border-gray-100 dark:border-white/10 pb-6' : '' }}">
+                                <div class="size-20 bg-gray-50 dark:bg-white/5 rounded-lg flex items-center justify-center shrink-0 border border-gray-100 dark:border-white/10 overflow-hidden">
+                                    @if($item->produk->foto_utama)
+                                    <img src="{{ asset('storage/' . $item->produk->foto_utama) }}" alt="{{ $item->produk->nama_produk }}" class="w-full h-full object-cover">
                                     @else
-                                    <span class="material-symbols-outlined text-4xl text-primary">inventory_2</span>
+                                    <span class="material-symbols-outlined text-3xl text-primary">inventory_2</span>
                                     @endif
                                 </div>
                                 <div class="flex-1">
                                     <div class="flex justify-between items-start gap-4">
                                         <div>
                                             <h4 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-1">
-                                                {{ $item->produk->nama_produk }}</h4>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400 font-sans mb-1">{{ Str::limit($item->produk->deskripsi, 60) }}</p>
-                                            <div class="text-sm text-[#1e3f1b] dark:text-gray-300 font-medium">Farmer: {{ $item->produk->petani->nama_lengkap ?? 'N/A' }}</div>
+                                                {{ $item->produk->nama_produk }}
+                                            </h4>
+                                            <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400 font-sans mb-1">
+                                                <span>{{ $item->produk->kategori->nama_kategori ?? 'Uncategorized' }}</span>
+                                                <span>•</span>
+                                                <span class="text-[#1e3f1b] dark:text-gray-300">Farmer: {{ $item->produk->petani->nama_lengkap ?? 'N/A' }}</span>
+                                            </div>
                                         </div>
                                         <div class="text-right">
                                             <div class="text-lg font-bold font-heading text-[#1e3f1b] dark:text-white whitespace-nowrap">
                                                 Rp {{ number_format($item->subtotal, 0, ',', '.') }}
-                                            </div>
-                                            <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                {{ $item->jumlah }} × Rp {{ number_format((float)$item->harga_snapshot, 0, ',', '.') }}
                                             </div>
                                         </div>
                                     </div>
@@ -183,6 +178,8 @@ $statusIcons = [
                         </div>
                     </div>
                 </div>
+
+                <!-- Right Column (1/3) -->
                 <div class="space-y-6">
                     <!-- Order Timeline -->
                     <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
@@ -247,62 +244,62 @@ $statusIcons = [
                     </div>
                 </div>
 
-                    <!-- Payment Information -->
-                    <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
-                        <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-4">Payment Information</h3>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-3">
-                                    <div class="size-10 rounded-lg bg-gray-50 dark:bg-white/5 flex items-center justify-center border border-gray-100 dark:border-white/10">
-                                        <span class="material-symbols-outlined text-gray-600 dark:text-gray-300">account_balance</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-heading font-semibold text-[#1e3f1b] dark:text-white text-sm">Bank Transfer</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ $pesanan->metode_pembayaran ?? 'Manual Transfer' }}</p>
-                                    </div>
+                <!-- Payment Information -->
+                <div class="bg-white dark:bg-[#1f2b1b] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
+                    <h3 class="font-heading font-bold text-lg text-[#1e3f1b] dark:text-white mb-4">Payment Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <div class="size-10 rounded-lg bg-gray-50 dark:bg-white/5 flex items-center justify-center border border-gray-100 dark:border-white/10">
+                                    <span class="material-symbols-outlined text-gray-600 dark:text-gray-300">account_balance</span>
                                 </div>
-                                @php
-                                    $paymentStatus = in_array($pesanan->status_pesanan, ['pending']) ? 'Unpaid' : 'Paid';
-                                    $paymentClass = $paymentStatus === 'Paid' ? 'bg-[#1e3f1b]/10 dark:bg-white/10 text-[#1e3f1b] dark:text-white' : 'bg-yellow-100 text-yellow-700';
-                                @endphp
-                                <span class="px-2.5 py-1 rounded-full text-xs font-bold {{ $paymentClass }}">
-                                    {{ $paymentStatus }}
-                                </span>
+                                <div>
+                                    <p class="font-heading font-semibold text-[#1e3f1b] dark:text-white text-sm">Bank Transfer</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ $pesanan->metode_pembayaran ?? 'Manual Transfer' }}</p>
+                                </div>
                             </div>
-
-                            {{-- Farmer Bank Account Info --}}
                             @php
-                                $petani = $pesanan->items->first()?->produk?->petani;
-                                $rekening = $petani?->rekening?->first();
+                                $paymentStatus = in_array($pesanan->status_pesanan, ['pending']) ? 'Unpaid' : 'Paid';
+                                $paymentClass = $paymentStatus === 'Paid' ? 'bg-[#1e3f1b]/10 dark:bg-white/10 text-[#1e3f1b] dark:text-white' : 'bg-yellow-100 text-yellow-700';
                             @endphp
-                            @if($rekening && $pesanan->status_pesanan === 'pending')
-                            <div class="pt-4 border-t border-gray-100 dark:border-white/10">
-                                <p class="text-sm font-semibold text-[#1e3f1b] dark:text-white mb-3">Transfer to:</p>
-                                <div class="bg-gray-50 dark:bg-white/5 rounded-lg p-4 space-y-2">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-xs text-gray-500 dark:text-gray-400">Bank</span>
-                                        <span class="text-sm font-bold text-[#1e3f1b] dark:text-white">{{ $rekening->nama_bank }}</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-xs text-gray-500 dark:text-gray-400">Account Number</span>
-                                        <span class="text-sm font-bold text-[#1e3f1b] dark:text-white font-mono">{{ $rekening->no_rekening }}</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-xs text-gray-500 dark:text-gray-400">Account Name</span>
-                                        <span class="text-sm font-bold text-[#1e3f1b] dark:text-white">{{ $rekening->atas_nama }}</span>
-                                    </div>
+                            <span class="px-2.5 py-1 rounded-full text-xs font-bold {{ $paymentClass }}">
+                                {{ $paymentStatus }}
+                            </span>
+                        </div>
+
+                        {{-- Farmer Bank Account Info --}}
+                        @php
+                            $petani = $pesanan->items->first()?->produk?->petani;
+                            $rekening = $petani?->rekening?->first();
+                        @endphp
+                        @if($rekening && $pesanan->status_pesanan === 'pending')
+                        <div class="pt-4 border-t border-gray-100 dark:border-white/10">
+                            <p class="text-sm font-semibold text-[#1e3f1b] dark:text-white mb-3">Transfer to:</p>
+                            <div class="bg-gray-50 dark:bg-white/5 rounded-lg p-4 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-500 dark:text-gray-400">Bank</span>
+                                    <span class="text-sm font-bold text-[#1e3f1b] dark:text-white">{{ $rekening->nama_bank }}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-500 dark:text-gray-400">Account Number</span>
+                                    <span class="text-sm font-bold text-[#1e3f1b] dark:text-white font-mono">{{ $rekening->no_rekening }}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-500 dark:text-gray-400">Account Name</span>
+                                    <span class="text-sm font-bold text-[#1e3f1b] dark:text-white">{{ $rekening->atas_nama }}</span>
                                 </div>
                             </div>
-                            @endif
-
-                            @if($pesanan->bukti_bayar)
-                            <div class="pt-4 border-t border-gray-100 dark:border-white/10">
-                                <p class="text-sm text-gray-500 mb-2">Payment Proof:</p>
-                                <a href="{{ route('pesanan.bukti-bayar', $pesanan->id_pesanan) }}" target="_blank" class="text-[#53be20] text-sm hover:underline">View Image</a>
-                            </div>
-                            @endif
                         </div>
+                        @endif
+
+                        @if($pesanan->bukti_bayar)
+                        <div class="pt-4 border-t border-gray-100 dark:border-white/10">
+                            <p class="text-sm text-gray-500 mb-2">Payment Proof:</p>
+                            <a href="{{ route('pesanan.bukti-bayar', $pesanan->id_pesanan) }}" target="_blank" class="text-[#53be20] text-sm hover:underline">View Image</a>
+                        </div>
+                        @endif
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -363,98 +360,11 @@ $statusIcons = [
 </div>
 @endif
 
-<!-- Refund Modal -->
-@if(in_array($pesanan->status_pesanan, ['terkirim', 'selesai']))
-<div id="refund-modal" class="hidden fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="this.closest('[role=dialog]').classList.add('hidden')"></div>
-        <div class="inline-block align-bottom bg-white dark:bg-[#1f2b1b] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
-            <form action="{{ route('pesanan.refund', $pesanan->id_pesanan) }}" method="POST">
-                @csrf
-                <div class="px-6 py-4 border-b border-gray-100 dark:border-white/5">
-                    <h3 class="font-heading font-bold text-lg text-orange-600">Request Refund</h3>
-                </div>
-                <div class="p-6">
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Please describe why you want a refund:</p>
-                    <textarea name="alasan_refund" rows="3" required placeholder="Reason for refund request..."
-                        class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-[#1f2b1b] text-sm resize-none"></textarea>
-                </div>
-                <div class="px-6 py-4 border-t border-gray-100 dark:border-white/5 flex justify-end gap-3">
-                    <button type="button" onclick="this.closest('[role=dialog]').classList.add('hidden')"
-                        class="px-5 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-[#1e3f1b] dark:text-white font-semibold text-sm">Cancel</button>
-                    <button type="submit" class="px-5 py-2.5 bg-orange-600 text-white rounded-lg font-semibold text-sm hover:bg-orange-700">Submit Request</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endif
-
-@if(session('success'))
 <script>
-    setTimeout(() => {
-        alert('{{ session('
-            success ') }}');
-    }, 100);
-</script>
-@endif
-
-@if(session('error'))
-<script>
-    setTimeout(() => {
-        alert('{{ session('
-            error ') }}');
-    }, 100);
-</script>
-@endif
-
-<!-- Star Rating JavaScript -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.star-rating').forEach(function(container) {
-            const stars = container.querySelectorAll('.star-icon');
-            const inputs = container.querySelectorAll('input[type="radio"]');
-
-            stars.forEach(function(star, index) {
-                star.addEventListener('click', function() {
-                    // Update visual
-                    stars.forEach(function(s, i) {
-                        if (i <= index) {
-                            s.classList.remove('text-gray-300');
-                            s.classList.add('text-yellow-400');
-                        } else {
-                            s.classList.remove('text-yellow-400');
-                            s.classList.add('text-gray-300');
-                        }
-                    });
-                });
-
-                star.addEventListener('mouseenter', function() {
-                    stars.forEach(function(s, i) {
-                        if (i <= index) {
-                            s.classList.add('text-yellow-400');
-                            s.classList.remove('text-gray-300');
-                        }
-                    });
-                });
-
-                star.addEventListener('mouseleave', function() {
-                    // Restore to selected state
-                    const checkedInput = container.querySelector('input:checked');
-                    const checkedValue = checkedInput ? parseInt(checkedInput.value) : 0;
-
-                    stars.forEach(function(s, i) {
-                        if (i < checkedValue) {
-                            s.classList.add('text-yellow-400');
-                            s.classList.remove('text-gray-300');
-                        } else {
-                            s.classList.remove('text-yellow-400');
-                            s.classList.add('text-gray-300');
-                        }
-                    });
-                });
-            });
-        });
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Optional: show a toast notification
     });
+}
 </script>
 @endsection

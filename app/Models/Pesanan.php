@@ -167,11 +167,12 @@ class Pesanan extends Model
 
     /**
      * Cek apakah bisa request refund
-     * Bisa request refund saat dikirim, terkirim, atau selesai
+     * DISABLED: Buyer refund is disabled, always returns false
+     * Note: Admin can still process refunds directly
      */
     public function bisaRefund(): bool
     {
-        return in_array($this->status_pesanan, [self::STATUS_DIKIRIM, self::STATUS_TERKIRIM, self::STATUS_SELESAI]);
+        return false;
     }
 
     // ==================== RELATIONSHIPS ====================

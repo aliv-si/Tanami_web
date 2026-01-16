@@ -173,20 +173,4 @@
     </div>
 </main>
 
-@if(session('success'))
-<script>
-    setTimeout(() => {
-        alert('{{ session('
-            success ') }}');
-    }, 100);
-</script>
-@endif
-
-@if($errors->any())
-<script>
-    setTimeout(() => {
-        alert('{{ $errors->first() }}');
-    }, 100);
-</script>
-@endif
 @endsection

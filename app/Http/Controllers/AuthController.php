@@ -259,4 +259,22 @@ class AuthController extends Controller
 
         return back()->with('success', 'Foto profil berhasil diperbarui.');
     }
+
+    /**
+     * Delete profile photo
+     */
+    public function deleteFoto(): RedirectResponse
+    {
+        /** @var \App\Models\Pengguna $user */
+        $user = Auth::user();
+
+        // Delete photo if exists
+        if ($user->foto && \Storage::disk('public')->exists($user->foto)) {
+            \Storage::disk('public')->delete($user->foto);
+        }
+
+        $user->update(['foto' => null]);
+
+        return back()->with('success', 'Foto profil berhasil dihapus.');
+    }
 }

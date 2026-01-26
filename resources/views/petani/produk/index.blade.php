@@ -13,13 +13,13 @@
             <form action="{{ route('petani.produk') }}" method="GET" class="flex items-center gap-3">
                 <div class="relative">
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
-                    <input name="q" value="{{ $currentSearch }}" class="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-64" placeholder="Cari produk..." type="text"/>
+                    <input name="q" value="{{ $currentSearch }}" class="pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-64" placeholder="Cari produk..." type="text" />
                 </div>
                 <div class="relative">
                     <select name="kategori" class="pl-4 pr-10 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary appearance-none cursor-pointer min-w-[140px]" onchange="this.form.submit()">
                         <option value="">Semua Kategori</option>
                         @foreach($kategoriList as $kategori)
-                            <option value="{{ $kategori->id_kategori }}" {{ $currentKategori == $kategori->id_kategori ? 'selected' : '' }}>{{ $kategori->nama_kategori }}</option>
+                        <option value="{{ $kategori->id_kategori }}" {{ $currentKategori == $kategori->id_kategori ? 'selected' : '' }}>{{ $kategori->nama_kategori }}</option>
                         @endforeach
                     </select>
                     <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
@@ -44,17 +44,17 @@
 
 <div class="p-8 max-w-[1400px] mx-auto">
     @if(session('success'))
-        <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">check_circle</span>
-            {{ session('success') }}
-        </div>
+    <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
+        <span class="material-symbols-outlined">check_circle</span>
+        {{ session('success') }}
+    </div>
     @endif
 
     @if(session('error'))
-        <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">error</span>
-            {{ session('error') }}
-        </div>
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
+        <span class="material-symbols-outlined">error</span>
+        {{ session('error') }}
+    </div>
     @endif
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -77,11 +77,11 @@
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-4">
                                 @if($item->foto)
-                                    <img alt="{{ $item->nama_produk }}" class="w-12 h-12 rounded-lg object-cover border border-gray-100" src="{{ asset('storage/produk/' . $item->foto) }}"/>
+                                <img alt="{{ $item->nama_produk }}" class="w-12 h-12 rounded-lg object-cover border border-gray-100" src="{{ asset('storage/' . $item->foto) }}" />
                                 @else
-                                    <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
-                                        <span class="material-symbols-outlined text-gray-400">image</span>
-                                    </div>
+                                <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-gray-400">image</span>
+                                </div>
                                 @endif
                                 <div>
                                     <span class="font-heading font-semibold text-text-dark block">{{ $item->nama_produk }}</span>
@@ -93,23 +93,23 @@
                         <td class="px-6 py-4 font-semibold text-text-dark">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
                         <td class="px-6 py-4">
                             @php
-                                $stokTersedia = $item->stok - $item->stok_direserve;
+                            $stokTersedia = $item->stok - $item->stok_direserve;
                             @endphp
                             <span class="text-sm {{ $stokTersedia <= 0 ? 'text-red-600' : ($stokTersedia <= 10 ? 'text-yellow-600' : 'text-gray-600') }}">
                                 {{ $stokTersedia }} {{ $item->satuan }}
                             </span>
                             @if($item->stok_direserve > 0)
-                                <span class="text-xs text-gray-400 block">({{ $item->stok_direserve }} direserve)</span>
+                            <span class="text-xs text-gray-400 block">({{ $item->stok_direserve }} direserve)</span>
                             @endif
                         </td>
                         <td class="px-6 py-4">
                             @if($stokTersedia <= 0)
                                 <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">Stok Habis</span>
-                            @elseif($item->is_aktif)
+                                @elseif($item->is_aktif)
                                 <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#53be20]/10 text-[#53be20]">Aktif</span>
-                            @else
+                                @else
                                 <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-500">Nonaktif</span>
-                            @endif
+                                @endif
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-2">

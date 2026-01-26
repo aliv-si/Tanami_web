@@ -9,6 +9,7 @@
         </button>
     </div>
 </div>
+@php session()->forget('success'); @endphp
 @endif
 
 @if(session('error'))
@@ -21,6 +22,7 @@
         </button>
     </div>
 </div>
+@php session()->forget('error'); @endphp
 @endif
 
 @if($errors->any())
@@ -35,7 +37,7 @@
         </div>
         <ul class="list-disc list-inside text-sm ml-6">
             @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
+            <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
@@ -43,23 +45,31 @@
 @endif
 
 <style>
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in {
-    animation: fadeIn 0.3s ease-out;
-}
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
 </style>
 
 <script>
-// Auto-hide alerts after 5 seconds
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        ['alert-success', 'alert-error', 'alert-errors'].forEach(function(id) {
-            var el = document.getElementById(id);
-            if (el) el.remove();
-        });
-    }, 5000);
-});
+    // Auto-hide alerts after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            ['alert-success', 'alert-error', 'alert-errors'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.remove();
+            });
+        }, 5000);
+    });
 </script>

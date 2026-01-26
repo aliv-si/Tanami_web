@@ -6,22 +6,22 @@
 <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="flex items-center justify-between px-8 py-5">
         <div class="flex items-center gap-4">
-            <h1 class="text-2xl font-bold font-heading text-text-dark">Ulasan Pelanggan</h1>
+            <h1 class="text-2xl font-bold font-heading text-text-dark">Customer Reviews</h1>
         </div>
         <div class="flex items-center gap-6">
             <div class="flex items-center gap-3">
                 <select class="text-sm font-semibold text-gray-600 bg-gray-50 border-none rounded-lg focus:ring-primary">
-                    <option>Semua Rating</option>
-                    <option>5 Bintang</option>
-                    <option>4 Bintang</option>
-                    <option>3 Bintang</option>
-                    <option>2 Bintang</option>
-                    <option>1 Bintang</option>
+                    <option>All Ratings</option>
+                    <option>5 Stars</option>
+                    <option>4 Stars</option>
+                    <option>3 Stars</option>
+                    <option>2 Stars</option>
+                    <option>1 Star</option>
                 </select>
                 <select class="text-sm font-semibold text-gray-600 bg-gray-50 border-none rounded-lg focus:ring-primary">
-                    <option>Urutkan: Terbaru</option>
-                    <option>Urutkan: Terlama</option>
-                    <option>Urutkan: Rating Tertinggi</option>
+                    <option>Sort: Newest</option>
+                    <option>Sort: Oldest</option>
+                    <option>Sort: Highest Rating</option>
                 </select>
             </div>
         </div>
@@ -43,7 +43,7 @@
                         @endif
                         @endfor
                 </div>
-                <p class="text-sm text-gray-500 mt-2">Berdasarkan {{ $ratingStats['totalReviews'] }} ulasan</p>
+                <p class="text-sm text-gray-500 mt-2">Based on {{ $ratingStats['totalReviews'] }} reviews</p>
             </div>
             <div class="space-y-3">
                 @for($star = 5; $star >= 1; $star--)
@@ -98,7 +98,7 @@
 
                     @if($review['reply'])
                     <div class="mt-4 pl-4 border-l-2 border-primary/30 bg-gray-50 p-3 rounded-r-lg">
-                        <p class="text-xs font-semibold text-primary mb-1">Balasan Anda:</p>
+                        <p class="text-xs font-semibold text-primary mb-1">Your Reply:</p>
                         <p class="text-sm text-gray-600">{{ $review['reply'] }}</p>
                     </div>
                     @else
@@ -117,8 +117,8 @@
         <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="material-symbols-outlined text-gray-400 text-3xl">reviews</span>
         </div>
-        <h3 class="font-heading font-bold text-gray-600 mb-2">Belum ada ulasan</h3>
-        <p class="text-sm text-gray-400">Ulasan dari pelanggan akan muncul di sini</p>
+        <h3 class="font-heading font-bold text-gray-600 mb-2">No reviews yet</h3>
+        <p class="text-sm text-gray-400">Customer reviews will appear here</p>
     </div>
     @endif
 </div>

@@ -75,25 +75,25 @@
 
                     <div>
                         <label class="block text-xs font-medium text-[#1e3f1b] dark:text-gray-200 font-sans mb-1"
-                            for="full-name">Daftar Sebagai</label>
+                            for="full-name">Register As</label>
                         <div class="grid grid-cols-2 gap-3">
                             <label class="relative cursor-pointer">
                                 <input type="radio" name="role_pengguna" value="pembeli" class="peer sr-only" {{ old('role_pengguna', 'pembeli') === 'pembeli' ? 'checked' : '' }} required />
                                 <div class="flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-lg peer-checked:border-[#53be20] peer-checked:bg-green-50 transition-all">
                                     <span class="material-symbols-outlined text-gray-500 peer-checked:text-[#53be20]">shopping_bag</span>
-                                    <span class="text-sm text-gray-700">Pembeli</span>
+                                    <span class="text-sm text-gray-700">Buyer</span>
                                 </div>
                             </label>
                             <label class="relative cursor-pointer">
                                 <input type="radio" name="role_pengguna" value="petani" class="peer sr-only" {{ old('role_pengguna') === 'petani' ? 'checked' : '' }} />
                                 <div class="flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-lg peer-checked:border-[#53be20] peer-checked:bg-green-50 transition-all">
                                     <span class="material-symbols-outlined text-gray-500 peer-checked:text-[#53be20]">agriculture</span>
-                                    <span class="text-sm text-gray-700">Petani</span>
+                                    <span class="text-sm text-gray-700">Farmer</span>
                                 </div>
                             </label>
                         </div>
                         <p class="text-xs text-gray-400 mt-2">
-                            <span class="text-amber-600">⚠️</span> Akun petani memerlukan verifikasi admin (1-2 hari kerja)
+                            <span class="text-amber-600">⚠️</span> Farmer account requires admin verification (1-2 working days)
                         </p>
                     </div>
                     <div>

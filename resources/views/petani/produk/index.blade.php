@@ -1,12 +1,12 @@
 @extends('layouts.petani')
 
-@section('title', 'Produk Saya')
+@section('title', 'My Products')
 
 @section('content')
 <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="flex flex-col md:flex-row md:items-center justify-between px-8 py-4 gap-4">
         <div>
-            <h1 class="text-2xl font-bold font-heading text-text-dark">Produk Saya</h1>
+            <h1 class="text-2xl font-bold font-heading text-text-dark">My Products</h1>
             <p class="text-sm text-gray-500 mt-1">Total {{ $stats['total'] }} produk ({{ $stats['aktif'] }} aktif, {{ $stats['stok_habis'] }} stok habis)</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">

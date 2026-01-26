@@ -69,21 +69,21 @@
                                 @elseif(auth()->user()->isPetani())
                                 <a href="{{ route('petani.dashboard') }}" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
                                     <span class="material-symbols-outlined text-lg">dashboard</span>
-                                    Dashboard Petani
+                                    Dashboard Farmer
                                 </a>
                                 <a href="{{ route('petani.produk') }}" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
                                     <span class="material-symbols-outlined text-lg">inventory_2</span>
-                                    Produk Saya
+                                    Products
                                 </a>
                                 @else
                                 <a href="{{ route('pesanan') }}" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
                                     <span class="material-symbols-outlined text-lg">receipt_long</span>
-                                    Pesanan Saya
+                                        Orders
                                 </a>
                                 @endif
                                 <a href="{{ route('profil') }}" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
                                     <span class="material-symbols-outlined text-lg">person</span>
-                                    Profil
+                                    Profile
                                 </a>
                             </div>
                             <div class="p-2 border-t border-gray-100 dark:border-gray-700">

@@ -20,11 +20,11 @@
     <div class="no-print mb-6 flex items-center justify-between">
         <a href="{{ route('petani.pesanan.detail', $pesanan->id_pesanan) }}" class="flex items-center gap-2 text-gray-600 hover:text-gray-900">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-            Kembali
+            Back
         </a>
         <button onclick="window.print()" class="flex items-center gap-2 px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-all">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-            Cetak Invoice
+            Print Invoice
         </button>
     </div>
 
@@ -51,7 +51,7 @@
         <div class="px-8 py-6 grid grid-cols-2 gap-8 border-b border-gray-200">
             <!-- Pembeli -->
             <div>
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Ditagihkan Kepada</h3>
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Billed To</h3>
                 <p class="font-semibold text-gray-900">{{ $pesanan->pembeli->nama_lengkap ?? '-' }}</p>
                 <p class="text-sm text-gray-600">{{ $pesanan->pembeli->email ?? '-' }}</p>
                 <p class="text-sm text-gray-600">{{ $pesanan->pembeli->no_hp ?? '-' }}</p>
@@ -62,9 +62,9 @@
             </div>
             <!-- Detail Invoice -->
             <div class="text-right">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Detail Invoice</h3>
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Invoice Details</h3>
                 <div class="space-y-1 text-sm">
-                    <p><span class="text-gray-500">Tanggal:</span> <span class="font-medium">{{ $pesanan->tgl_dibuat->format('d M Y') }}</span></p>
+                    <p><span class="text-gray-500">Date:</span> <span class="font-medium">{{ $pesanan->tgl_dibuat->format('d M Y') }}</span></p>
                     <p><span class="text-gray-500">Status:</span> 
                         <span class="inline-flex px-2 py-0.5 rounded-full text-xs font-semibold
                             @if($pesanan->status_pesanan == 'selesai') bg-green-100 text-green-700
@@ -75,7 +75,7 @@
                         </span>
                     </p>
                     @if($pesanan->no_resi)
-                        <p><span class="text-gray-500">No. Resi:</span> <span class="font-medium">{{ $pesanan->no_resi }}</span></p>
+                        <p><span class="text-gray-500">Resi Number:</span> <span class="font-medium">{{ $pesanan->no_resi }}</span></p>
                     @endif
                 </div>
             </div>
@@ -86,9 +86,9 @@
             <table class="w-full">
                 <thead>
                     <tr class="border-b border-gray-200">
-                        <th class="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-3">Produk</th>
+                        <th class="text-left text-xs font-bold text-gray-500 uppercase tracking-wider pb-3">Product</th>
                         <th class="text-center text-xs font-bold text-gray-500 uppercase tracking-wider pb-3">Qty</th>
-                        <th class="text-right text-xs font-bold text-gray-500 uppercase tracking-wider pb-3">Harga</th>
+                        <th class="text-right text-xs font-bold text-gray-500 uppercase tracking-wider pb-3">Price</th>
                         <th class="text-right text-xs font-bold text-gray-500 uppercase tracking-wider pb-3">Subtotal</th>
                     </tr>
                 </thead>
@@ -116,12 +116,12 @@
                     <span class="font-medium">Rp {{ number_format($subtotalPetani, 0, ',', '.') }}</span>
                 </div>
                 <div class="flex justify-between text-sm">
-                    <span class="text-gray-500">Ongkir</span>
+                    <span class="text-gray-500">Shipping</span>
                     <span class="font-medium">Rp {{ number_format($pesanan->ongkir, 0, ',', '.') }}</span>
                 </div>
                 @if($pesanan->diskon > 0)
                 <div class="flex justify-between text-sm">
-                    <span class="text-gray-500">Diskon</span>
+                    <span class="text-gray-500">Discount</span>
                     <span class="font-medium text-red-600">-Rp {{ number_format($pesanan->diskon, 0, ',', '.') }}</span>
                 </div>
                 @endif
@@ -135,8 +135,8 @@
 
     <!-- Footer -->
     <div class="max-w-3xl mx-auto mt-6 text-center text-sm text-gray-500">
-        <p>Terima kasih telah berbelanja di <strong class="text-green-600">Tanami</strong></p>
-        <p class="mt-1">Invoice ini dicetak pada {{ now()->format('d M Y H:i') }}</p>
+        <p>Thank you for shopping at <strong class="text-green-600">Tanami</strong></p>
+        <p class="mt-1">This invoice was printed on {{ now()->format('d M Y H:i') }}</p>
     </div>
 </body>
 </html>

@@ -22,7 +22,7 @@
                         </div>
                         <div>
                             <h3 class="text-text-heading font-bold text-lg font-inter">Visit Our Farm</h3>
-                            <p class="text-text-body font-inter">123 Green Valley Road,<br />Agritech District, CA 90210
+                            <p class="text-text-body font-inter">Condong Catur, Depok, Sleman<br />Amikom University of Technology
                             </p>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                 <div
                     class="w-full h-64 md:h-72 rounded-xl overflow-hidden shadow-sm border border-gray-200 relative group">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126906.77258079527!2d106.78918451121081!3d-6.152632297127164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f592317f07d1%3A0x3867617498ad1e37!2sCentral%20Jakarta%20City%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1706198400000!5m2!1sen!2sid"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.2818903270895!2d110.4064711757746!3d-7.7598995769579995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599bd3bdc4ef%3A0x6f1714b0c4544586!2sUniversitas%20Amikom%20Yogyakarta!5e0!3m2!1sid!2sid!4v1769420606696!5m2!1sid!2sid"
                         width="100%"
                         height="100%"
                         style="border:0;"

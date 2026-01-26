@@ -8,7 +8,8 @@ request()->routeIs('admin.dashboard') ? 'dashboard' :
 (request()->routeIs('admin.pesanan*') ? 'pesanan' :
 (request()->routeIs('admin.escrow*') ? 'escrow' :
 (request()->routeIs('admin.refund*') ? 'refund' :
-(request()->routeIs('admin.laporan*') ? 'laporan' : '')))))))));
+(request()->routeIs('admin.laporan*') ? 'laporan' :
+(request()->routeIs('admin.pesan-kontak*') ? 'pesan-kontak' : ''))))))))));
 
 $links = $links ?? [
 ['key' => 'dashboard', 'route' => 'admin.dashboard', 'icon' => 'dashboard', 'label' => 'Dashboard'],
@@ -20,6 +21,7 @@ $links = $links ?? [
 ['key' => 'escrow', 'route' => 'admin.escrow', 'icon' => 'gavel', 'label' => 'Escrow'],
 ['key' => 'refund', 'route' => 'admin.refund', 'icon' => 'keyboard_return', 'label' => 'Refund'],
 ['key' => 'laporan', 'route' => 'admin.laporan', 'icon' => 'bar_chart', 'label' => 'Laporan'],
+['key' => 'pesan-kontak', 'route' => 'admin.pesan-kontak', 'icon' => 'mail', 'label' => 'Pesan Kontak'],
 ];
 @endphp
 

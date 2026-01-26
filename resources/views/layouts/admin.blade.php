@@ -53,7 +53,8 @@
     (request()->routeIs('admin.pesanan*') ? 'pesanan' :
     (request()->routeIs('admin.escrow*') ? 'escrow' :
     (request()->routeIs('admin.refund*') ? 'refund' :
-    (request()->routeIs('admin.laporan*') ? 'laporan' : '')))))))));
+    (request()->routeIs('admin.laporan*') ? 'laporan' :
+    (request()->routeIs('admin.pesan-kontak*') ? 'pesan-kontak' : ''))))))))));
 
     $adminNavLinks = $adminNavLinks ?? [
     ['key' => 'dashboard', 'route' => 'admin.dashboard', 'icon' => 'dashboard', 'label' => 'Dashboard'],
@@ -65,6 +66,7 @@
     ['key' => 'escrow', 'route' => 'admin.escrow', 'icon' => 'gavel', 'label' => 'Escrow'],
     ['key' => 'refund', 'route' => 'admin.refund', 'icon' => 'keyboard_return', 'label' => 'Refund'],
     ['key' => 'laporan', 'route' => 'admin.laporan', 'icon' => 'bar_chart', 'label' => 'Laporan'],
+    ['key' => 'pesan-kontak', 'route' => 'admin.pesan-kontak', 'icon' => 'mail', 'label' => 'Pesan Kontak'],
     ];
     @endphp
 
@@ -97,7 +99,7 @@
 
             <div class="flex items-center gap-6">
                 <div class="h-10 w-[1px] bg-gray-100"></div>
-                
+
                 {{-- Profile Dropdown --}}
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex items-center gap-3 p-1 hover:bg-gray-50 rounded-full transition-colors">
@@ -112,17 +114,17 @@
                     </button>
 
                     {{-- Dropdown Menu --}}
-                    <div x-show="open" 
-                         @click.away="open = false"
-                         x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="opacity-0 translate-y-1"
-                         x-transition:enter-end="opacity-100 translate-y-0"
-                         x-transition:leave="transition ease-in duration-150"
-                         x-transition:leave-start="opacity-100 translate-y-0"
-                         x-transition:leave-end="opacity-0 translate-y-1"
-                         class="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50"
-                         style="display: none;">
-                        
+                    <div x-show="open"
+                        @click.away="open = false"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-1"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 translate-y-1"
+                        class="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50"
+                        style="display: none;">
+
                         {{-- Profile Header --}}
                         <div class="p-5 bg-gradient-to-br from-tanami-dark to-green-800">
                             <div class="flex items-center gap-4">

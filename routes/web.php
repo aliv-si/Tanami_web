@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KontakController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KeranjangController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Petani\ProdukController as PetaniProdukController;
 use App\Http\Controllers\Petani\PesananController as PetaniPesananController;
 use App\Http\Controllers\Petani\RekeningController as PetaniRekeningController;
 use App\Http\Controllers\Petani\UlasanController as PetaniUlasanController;
+use App\Http\Controllers\Admin\PesanKontakController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\PenggunaController as AdminPenggunaController;
 use App\Http\Controllers\Admin\KategoriController as AdminKategoriController;
@@ -66,9 +68,8 @@ Route::get('/cara-kerja', function () {
     return view('pages.cara-kerja');
 })->name('cara-kerja');
 
-Route::get('/kontak', function () {
-    return view('pages.kontak');
-})->name('kontak');
+Route::get('/kontak', [KontakController::class, 'show'])->name('kontak');
+Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 
 // Katalog & Produk (Public)
 Route::get('/katalog', [ProdukController::class, 'katalog'])->name('katalog');
@@ -258,5 +259,10 @@ Route::middleware('auth')->group(function () {
 
         // Laporan
         Route::get('/laporan', [AdminLaporanController::class, 'index'])->name('laporan');
+
+        // Pesan Kontak
+        Route::get('/pesan-kontak', [PesanKontakController::class, 'index'])->name('pesan-kontak');
+        Route::get('/pesan-kontak/{id}', [PesanKontakController::class, 'show'])->name('pesan-kontak.show');
+        Route::delete('/pesan-kontak/{id}', [PesanKontakController::class, 'destroy'])->name('pesan-kontak.destroy');
     });
 });

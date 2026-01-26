@@ -4,31 +4,6 @@
 
 @section('content')
 <main class="flex flex-col flex-1">
-    {{-- Flash Messages --}}
-    @if (session('success'))
-    <div class="fixed top-20 right-4 z-50 max-w-sm">
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg shadow-lg flex items-center gap-3" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)">
-            <span class="material-symbols-outlined text-green-500">check_circle</span>
-            <p class="text-sm font-medium">{{ session('success') }}</p>
-            <button onclick="this.parentElement.remove()" class="ml-auto text-green-500 hover:text-green-700">
-                <span class="material-symbols-outlined text-lg">close</span>
-            </button>
-        </div>
-    </div>
-    @endif
-
-    @if (session('error'))
-    <div class="fixed top-20 right-4 z-50 max-w-sm">
-        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg shadow-lg flex items-center gap-3">
-            <span class="material-symbols-outlined text-red-500">error</span>
-            <p class="text-sm font-medium">{{ session('error') }}</p>
-            <button onclick="this.parentElement.remove()" class="ml-auto text-red-500 hover:text-red-700">
-                <span class="material-symbols-outlined text-lg">close</span>
-            </button>
-        </div>
-    </div>
-    @endif
-
     <section class="relative w-full overflow-hidden bg-white dark:bg-background-dark py-12 md:py-24 lg:py-32">
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1625246333195-58197bd47f26?q=80&amp;w=2560&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-5 dark:opacity-10"
             data-alt="Subtle pattern of agricultural fields"></div>

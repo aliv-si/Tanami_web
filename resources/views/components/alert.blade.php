@@ -30,7 +30,7 @@
     <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg shadow-lg">
         <div class="flex items-center gap-3 mb-2">
             <span class="material-symbols-outlined text-red-600">warning</span>
-            <p class="flex-1 text-sm font-bold">Terjadi kesalahan:</p>
+            <p class="flex-1 text-sm font-bold">An error occurred:</p>
             <button onclick="this.closest('#alert-errors').remove()" class="text-red-600 hover:text-red-800">
                 <span class="material-symbols-outlined text-xl">close</span>
             </button>

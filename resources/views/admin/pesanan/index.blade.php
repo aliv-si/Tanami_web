@@ -2,8 +2,8 @@
 
 @php $active = 'pesanan'; @endphp
 
-@section('title', 'Tanami - Manajemen Pesanan')
-@section('header_title', 'Manajemen Pesanan')
+@section('title', 'Tanami - Order Management')
+@section('header_title', 'Order Management')
 
 @section('content')
     <div class="max-w-[1400px] mx-auto space-y-8">
@@ -13,9 +13,9 @@
             <div class="flex items-center gap-2 text-xs font-medium text-gray-400 mb-1">
                 <a href="{{ route('admin.dashboard') }}" class="hover:text-primary transition-colors">Dashboard</a>
                 <span class="material-symbols-outlined text-[10px]">chevron_right</span>
-                <span class="text-primary">Manajemen Pesanan</span>
+                <span class="text-primary">Order Management</span>
             </div>
-            <h2 class="text-2xl font-heading font-extrabold text-tanami-dark">Manajemen Pesanan</h2>
+            <h2 class="text-2xl font-heading font-extrabold text-tanami-dark">Order Management</h2>
         </div>
 
         {{-- Flash Messages --}}

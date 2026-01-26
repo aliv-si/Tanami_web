@@ -43,7 +43,7 @@
             </div>
             <div class="space-y-1">
                 <h3 class="text-2xl font-heading font-extrabold text-tanami-dark">{{ number_format($transactionStats['total_pesanan'] ?? 0) }}</h3>
-                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider">TOTAL PESANAN</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider">TOTAL TRANSACTION</p>
             </div>
         </div>
         <div
@@ -75,7 +75,7 @@
             </div>
             <div class="space-y-1">
                 <h3 class="text-2xl font-heading font-extrabold text-tanami-dark">{{ number_format($userStats['petani_pending'] ?? 0) }}</h3>
-                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider">PETANI PENDING</p>
+                <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider">PENDING FARMER</p>
             </div>
         </div>
     </div>
@@ -163,11 +163,11 @@
                             class="bg-gray-50/50 text-[11px] text-gray-400 font-bold uppercase tracking-wider">
                             <th class="px-6 py-4">No</th>
                             <th class="px-6 py-4">Order ID</th>
-                            <th class="px-6 py-4">Pembeli</th>
-                            <th class="px-6 py-4">Kota</th>
+                            <th class="px-6 py-4">Buyer</th>
+                            <th class="px-6 py-4">City</th>
                             <th class="px-6 py-4">Total</th>
                             <th class="px-6 py-4">Status</th>
-                            <th class="px-6 py-4">Tanggal</th>
+                            <th class="px-6 py-4">Date</th>
                         </tr>
                     </thead>
                     <tbody class="text-sm divide-y divide-gray-50">
@@ -209,7 +209,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-8 text-center text-gray-400">Belum ada pesanan</td>
+                            <td colspan="7" class="px-6 py-8 text-center text-gray-400">No Data</td>
                         </tr>
                         @endforelse
                     </tbody>

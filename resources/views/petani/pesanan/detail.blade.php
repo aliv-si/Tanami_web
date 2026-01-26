@@ -10,26 +10,26 @@
                 <span class="material-symbols-outlined">arrow_back</span>
             </a>
             <div class="flex items-center gap-3">
-                <h1 class="text-2xl font-bold font-heading text-text-dark">Detail Pesanan</h1>
+                <h1 class="text-2xl font-bold font-heading text-text-dark">Order Details</h1>
                 <span class="text-gray-400 font-medium font-heading">#{{ $pesanan->id_pesanan }}</span>
                 @switch($pesanan->status_pesanan)
                 @case('menunggu_verifikasi')
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-700">Menunggu Verifikasi</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-700">Waiting for Verification</span>
                 @break
                 @case('dibayar')
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">Dibayar</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">Paid</span>
                 @break
                 @case('diproses')
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700">Diproses</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700">Processing</span>
                 @break
                 @case('dikirim')
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-700">Dikirim</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-700">Shipped</span>
                 @break
                 @case('selesai')
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-[#53be20]/10 text-[#53be20]">Selesai</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-[#53be20]/10 text-[#53be20]">Completed</span>
                 @break
                 @case('dibatalkan')
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-700">Dibatalkan</span>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-700">Cancelled</span>
                 @break
                 @default
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-700">{{ ucfirst(str_replace('_', ' ', $pesanan->status_pesanan)) }}</span>
@@ -38,7 +38,7 @@
         </div>
         <div class="flex items-center gap-4">
             <a href="{{ route('petani.pesanan.invoice', $pesanan->id_pesanan) }}" target="_blank" class="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-gray-50">
-                <span class="material-symbols-outlined text-lg">print</span> Cetak Invoice
+                <span class="material-symbols-outlined text-lg">print</span> Print Invoice
             </a>
         </div>
     </div>
@@ -65,20 +65,20 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">person</span>
-                    <h2 class="text-lg font-bold font-heading">Informasi Pembeli</h2>
+                    <h2 class="text-lg font-bold font-heading">Buyer Information</h2>
                 </div>
                 <div class="p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Nama Pembeli</p>
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Buyer Name</p>
                             <p class="font-semibold text-text-dark">{{ $pesanan->pembeli->nama_lengkap ?? '-' }}</p>
                         </div>
                         <div>
-                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Nomor Telepon</p>
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Phone Number</p>
                             <p class="font-semibold text-text-dark">{{ $pesanan->pembeli->no_hp ?? '-' }}</p>
                         </div>
                         <div class="md:col-span-2">
-                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Alamat Pengiriman</p>
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Shipping Address</p>
                             <p class="font-semibold text-text-dark leading-relaxed">
                                 {{ $pesanan->alamat_lengkap }}<br>
                                 {{ $pesanan->kota->nama_kota ?? '' }} {{ $pesanan->kode_pos }}
@@ -86,7 +86,7 @@
                         </div>
                         @if($pesanan->catatan_pembeli)
                         <div class="md:col-span-2">
-                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Catatan Pembeli</p>
+                            <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Buyer Notes</p>
                             <p class="font-semibold text-text-dark">{{ $pesanan->catatan_pembeli }}</p>
                         </div>
                         @endif
@@ -98,7 +98,7 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">inventory_2</span>
-                    <h2 class="text-lg font-bold font-heading">Daftar Produk</h2>
+                    <h2 class="text-lg font-bold font-heading">Product List</h2>
                 </div>
                 <div class="p-6 space-y-4">
                     @foreach($pesanan->items as $item)
@@ -130,7 +130,7 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">history</span>
-                    <h2 class="text-lg font-bold font-heading">Riwayat Status</h2>
+                    <h2 class="text-lg font-bold font-heading">Status History</h2>
                 </div>
                 <div class="p-8">
                     <div class="relative space-y-8">
@@ -161,7 +161,7 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">receipt_long</span>
-                    <h2 class="text-lg font-bold font-heading">Ringkasan Pesanan</h2>
+                    <h2 class="text-lg font-bold font-heading">Order Summary</h2>
                 </div>
                 <div class="p-6 space-y-4">
                     <div class="flex justify-between text-sm">
@@ -169,14 +169,14 @@
                         <span class="font-medium text-text-dark">Rp {{ number_format($subtotalPetani, 0, ',', '.') }}</span>
                     </div>
                     <div class="pt-4 border-t border-gray-100 flex justify-between">
-                        <span class="font-bold text-text-dark">Total Bagian Anda</span>
+                        <span class="font-bold text-text-dark">Your Share</span>
                         <span class="font-bold text-2xl text-text-dark">Rp {{ number_format($subtotalPetani, 0, ',', '.') }}</span>
                     </div>
                     @if($pesanan->escrow)
                     <div class="pt-4 border-t border-gray-100">
                         <div class="flex items-center gap-2 text-sm">
                             <span class="material-symbols-outlined text-primary text-lg">lock</span>
-                            <span class="text-gray-500">Status Escrow:</span>
+                            <span class="text-gray-500">Escrow Status:</span>
                             <span class="font-semibold text-primary">{{ ucfirst(str_replace('_', ' ', $pesanan->escrow->status_escrow)) }}</span>
                         </div>
                     </div>
@@ -188,14 +188,14 @@
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">local_shipping</span>
-                    <h2 class="text-lg font-bold font-heading">Aksi Pesanan</h2>
+                    <h2 class="text-lg font-bold font-heading">Order Actions</h2>
                 </div>
                 <div class="p-6 space-y-4">
                     @if($pesanan->status_pesanan == 'menunggu_verifikasi')
                     <!-- Bukti Pembayaran -->
                     @if($pesanan->bukti_transfer)
                     <div class="mb-4">
-                        <p class="text-sm font-semibold text-gray-700 mb-2">Bukti Pembayaran:</p>
+                        <p class="text-sm font-semibold text-gray-700 mb-2">Payment Proof:</p>
                         <a href="{{ asset('storage/bukti_transfer/' . $pesanan->bukti_transfer) }}" target="_blank" class="block">
                             <img src="{{ asset('storage/bukti_transfer/' . $pesanan->bukti_transfer) }}" alt="Bukti Transfer" class="w-full max-h-48 object-contain rounded-lg border border-gray-200" />
                         </a>
@@ -206,11 +206,11 @@
                         @csrf
                         <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold font-heading hover:bg-primary/90 transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-xl">check_circle</span>
-                            Verifikasi Pembayaran
+                            Verify Payment
                         </button>
                     </form>
                     <button type="button" onclick="document.getElementById('tolak-modal').classList.remove('hidden')" class="w-full py-3 rounded-xl font-bold font-heading text-red-500 border border-red-200 hover:bg-red-50 transition-all">
-                        Tolak Pembayaran
+                        Reject Payment
                     </button>
 
                     @elseif($pesanan->status_pesanan == 'dibayar')
@@ -218,7 +218,7 @@
                         @csrf
                         <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold font-heading hover:bg-blue-700 transition-all shadow-md flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-xl">sync</span>
-                            Proses Pesanan
+                            Process Order
                         </button>
                     </form>
 
@@ -226,33 +226,33 @@
                     <form action="{{ route('petani.pesanan.kirim', $pesanan->id_pesanan) }}" method="POST">
                         @csrf
                         <div class="mb-4">
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="no_resi">Nomor Resi</label>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2" for="no_resi">Resi Number</label>
                             <input class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" id="no_resi" name="no_resi" placeholder="Masukkan nomor resi..." type="text" required />
                         </div>
                         <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold font-heading hover:bg-purple-700 transition-all shadow-md flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-xl">local_shipping</span>
-                            Kirim Pesanan
+                            Send Order
                         </button>
                     </form>
 
                     @elseif($pesanan->status_pesanan == 'dikirim')
                     <div class="p-4 bg-purple-50 rounded-lg">
-                        <p class="text-sm font-semibold text-purple-700 mb-1">Pesanan Dalam Pengiriman</p>
+                        <p class="text-sm font-semibold text-purple-700 mb-1">Order In Delivery</p>
                         @if($pesanan->no_resi)
-                        <p class="text-xs text-purple-600">Nomor Resi: <span class="font-bold">{{ $pesanan->no_resi }}</span></p>
+                        <p class="text-xs text-purple-600">Resi Number: <span class="font-bold">{{ $pesanan->no_resi }}</span></p>
                         @endif
-                        <p class="text-xs text-purple-600 mt-2">Menunggu konfirmasi penerimaan dari pembeli</p>
+                        <p class="text-xs text-purple-600 mt-2">Waiting for confirmation of receipt from the buyer</p>
                     </div>
 
                     @elseif($pesanan->status_pesanan == 'selesai')
                     <div class="p-4 bg-green-50 rounded-lg">
-                        <p class="text-sm font-semibold text-green-700 mb-1">Pesanan Selesai</p>
-                        <p class="text-xs text-green-600">Dana telah/akan dicairkan ke rekening Anda</p>
+                        <p class="text-sm font-semibold text-green-700 mb-1">Order Completed</p>
+                        <p class="text-xs text-green-600">Funds have/will be disbursed to your account</p>
                     </div>
 
                     @elseif($pesanan->status_pesanan == 'dibatalkan')
                     <div class="p-4 bg-red-50 rounded-lg">
-                        <p class="text-sm font-semibold text-red-700 mb-1">Pesanan Dibatalkan</p>
+                        <p class="text-sm font-semibold text-red-700 mb-1">Order Cancelled</p>
                         @if($pesanan->alasan_batal)
                         <p class="text-xs text-red-600">{{ $pesanan->alasan_batal }}</p>
                         @endif
@@ -268,19 +268,19 @@
 @if($pesanan->status_pesanan == 'menunggu_verifikasi')
 <div id="tolak-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-xl max-w-md w-full p-6">
-        <h3 class="text-lg font-bold font-heading mb-4">Tolak Pembayaran</h3>
+        <h3 class="text-lg font-bold font-heading mb-4">Reject Payment</h3>
         <form action="{{ route('petani.pesanan.tolak', $pesanan->id_pesanan) }}" method="POST">
             @csrf
             <div class="mb-4">
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Alasan Penolakan <span class="text-red-500">*</span></label>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Reason for Rejection <span class="text-red-500">*</span></label>
                 <textarea name="alasan" required rows="3" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Jelaskan alasan penolakan..."></textarea>
             </div>
             <div class="flex gap-3">
                 <button type="button" onclick="document.getElementById('tolak-modal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-200 rounded-lg font-semibold text-gray-600 hover:bg-gray-50">
-                    Batal
+                    Cancel
                 </button>
                 <button type="submit" class="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600">
-                    Tolak Pembayaran
+                    Reject Payment
                 </button>
             </div>
         </form>

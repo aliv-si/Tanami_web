@@ -15,25 +15,25 @@ $links = [
 'key' => 'produk',
 'url' => route('petani.produk'),
 'icon' => 'inventory_2',
-'label' => 'Produk'
+'label' => 'Products'
 ],
 [
 'key' => 'pesanan',
 'url' => route('petani.pesanan'),
 'icon' => 'shopping_cart',
-'label' => 'Pesanan'
+'label' => 'Orders'
 ],
 [
 'key' => 'rekening',
 'url' => route('petani.rekening'),
 'icon' => 'account_balance',
-'label' => 'Rekening'
+'label' => 'Bank Account'
 ],
 [
 'key' => 'ulasan',
 'url' => route('petani.ulasan'),
 'icon' => 'reviews',
-'label' => 'Ulasan'
+'label' => 'Reviews'
 ],
 ];
 @endphp
@@ -49,9 +49,8 @@ $links = [
         @foreach($links as $link)
         @php
         $isActive = $active === $link['key'];
-        // Class dinamis berdasarkan status active
         $activeClass = $isActive
-        ? 'active-nav' // Class active dari file petani.blade.php
+        ? 'active-nav'
         : 'text-gray-400 hover:text-white hover:bg-white/5';
         @endphp
 
@@ -69,13 +68,13 @@ $links = [
                 <span class="material-symbols-outlined text-primary">person</span>
             </div>
             <div>
-                <p class="text-sm font-heading font-bold">{{ $user->nama_lengkap ?? 'Petani' }}</p>
+                <p class="text-sm font-heading font-bold">{{ $user->nama_lengkap ?? 'Farmer' }}</p>
                 <p class="text-xs text-gray-400">{{ $user->email ?? '' }}</p>
             </div>
         </div>
         <a href="/logout" class="mt-3 flex items-center gap-2 px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">
             <span class="material-symbols-outlined text-lg">logout</span>
-            Keluar
+            Logout
         </a>
     </div>
 </aside>

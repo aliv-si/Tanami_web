@@ -8,25 +8,25 @@
     <div class="flex flex-wrap gap-2 mb-6 font-display">
         <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('home') }}">Home</a>
         <span class="text-text-secondary text-sm font-medium">/</span>
-        <span class="text-text-main dark:text-white text-sm font-medium">Katalog</span>
+        <span class="text-text-main dark:text-white text-sm font-medium">Catalog</span>
     </div>
 
     {{-- Header --}}
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
             <h1 class="text-text-main dark:text-white text-3xl md:text-4xl font-bold font-heading tracking-tight mb-2">
-                Produk Pertanian</h1>
-            <p class="text-text-secondary dark:text-gray-400 font-display">Temukan sayuran, buah, bibit, dan tanaman hias terbaik dari petani lokal.</p>
+                Products</h1>
+            <p class="text-text-secondary dark:text-gray-400 font-display">Find fresh vegetables, fruits, seeds, and ornamental plants from local farmers.</p>
         </div>
         <div class="flex items-center gap-3">
-            <label class="hidden md:block text-sm font-medium text-text-secondary dark:text-gray-400 font-display">Urutkan:</label>
+            <label class="hidden md:block text-sm font-medium text-text-secondary dark:text-gray-400 font-display">Sort:</label>
             <div class="relative">
                 <select id="sort-select" onchange="this.form.submit()" form="filter-form" name="sort"
                     class="appearance-none h-10 pl-4 pr-10 rounded-lg border border-[#dfe5dc] dark:border-[#2a3825] bg-white dark:bg-[#1e2a1a] text-sm text-text-main dark:text-white focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer font-display">
-                    <option value="terbaru" {{ $currentSort == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
-                    <option value="termurah" {{ $currentSort == 'termurah' ? 'selected' : '' }}>Termurah</option>
-                    <option value="termahal" {{ $currentSort == 'termahal' ? 'selected' : '' }}>Termahal</option>
-                    <option value="terlaris" {{ $currentSort == 'terlaris' ? 'selected' : '' }}>Terlaris</option>
+                    <option value="terbaru" {{ $currentSort == 'terbaru' ? 'selected' : '' }}>Newest</option>
+                    <option value="termurah" {{ $currentSort == 'termurah' ? 'selected' : '' }}>Cheapest</option>
+                    <option value="termahal" {{ $currentSort == 'termahal' ? 'selected' : '' }}>Most Expensive</option>
+                    <option value="terlaris" {{ $currentSort == 'terlaris' ? 'selected' : '' }}>Most Popular</option>
                 </select>
                 <span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none text-lg">expand_more</span>
             </div>
@@ -60,7 +60,7 @@
                     {{-- Categories --}}
                     <details class="group border-b border-[#dfe5dc] dark:border-[#2a3825]" open>
                         <summary class="flex cursor-pointer items-center justify-between px-4 py-3 hover:bg-gray-50 dark:hover:bg-[#253220]">
-                            <span class="text-sm font-bold text-text-main dark:text-white font-heading">Kategori</span>
+                            <span class="text-sm font-bold text-text-main dark:text-white font-heading">Categories</span>
                             <span class="material-symbols-outlined text-text-secondary transition-transform group-open:rotate-180">expand_more</span>
                         </summary>
                         <div class="px-4 pb-4 pt-1 space-y-2">
@@ -80,7 +80,7 @@
                     {{-- Price Range --}}
                     <details class="group border-b border-[#dfe5dc] dark:border-[#2a3825]" open>
                         <summary class="flex cursor-pointer items-center justify-between px-4 py-3 hover:bg-gray-50 dark:hover:bg-[#253220]">
-                            <span class="text-sm font-bold text-text-main dark:text-white font-heading">Rentang Harga</span>
+                            <span class="text-sm font-bold text-text-main dark:text-white font-heading">Price Range</span>
                             <span class="material-symbols-outlined text-text-secondary transition-transform group-open:rotate-180">expand_more</span>
                         </summary>
                         <div class="px-4 pb-4 pt-1">
@@ -109,7 +109,7 @@
                     {{-- Apply Button --}}
                     <div class="p-4">
                         <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2 px-4 rounded-lg transition-colors font-heading text-sm">
-                            Terapkan Filter
+                            Apply Filter
                         </button>
                     </div>
                 </div>
@@ -121,8 +121,8 @@
             @if($produk->isEmpty())
             <div class="flex flex-col items-center justify-center py-16 text-center">
                 <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">inventory_2</span>
-                <h3 class="text-xl font-bold text-text-main dark:text-white font-heading mb-2">Produk Tidak Ditemukan</h3>
-                <p class="text-text-secondary dark:text-gray-400 font-display mb-4">Coba ubah filter atau kata kunci pencarian Anda.</p>
+                <h3 class="text-xl font-bold text-text-main dark:text-white font-heading mb-2">Product Not Found</h3>
+                <p class="text-text-secondary dark:text-gray-400 font-display mb-4">Try changing the filter or search keyword.</p>
                 <a href="{{ route('katalog') }}" class="text-primary font-semibold hover:underline font-heading">Reset Filter</a>
             </div>
             @else

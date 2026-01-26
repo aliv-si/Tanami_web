@@ -8,7 +8,7 @@
     <div class="flex flex-wrap gap-2 mb-6 font-display">
         <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('home') }}">Home</a>
         <span class="text-text-secondary text-sm font-medium">/</span>
-        <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('katalog') }}">Katalog</a>
+        <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('katalog') }}">Catalog</a>
         <span class="text-text-secondary text-sm font-medium">/</span>
         @if($produk->kategori)
         <a class="text-text-secondary text-sm font-medium hover:text-primary transition-colors" href="{{ route('katalog', ['kategori' => $produk->kategori->slug_kategori]) }}">{{ $produk->kategori->nama_kategori }}</a>
@@ -85,7 +85,7 @@
                 @if($avgRating > 0)
                 <span class="text-sm font-semibold text-amber-500">{{ number_format($avgRating, 1) }}</span>
                 @endif
-                <span class="text-sm text-gray-500 font-display">({{ $ratingStats['total'] }} ulasan)</span>
+                <span class="text-sm text-gray-500 font-display">({{ $ratingStats['total'] }} reviews)</span>
             </div>
 
             {{-- Price --}}
@@ -115,17 +115,17 @@
                     <button type="submit"
                         class="flex-1 bg-primary text-white h-12 rounded-lg font-heading font-semibold hover:bg-opacity-90 shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
                         <span class="material-symbols-outlined">add_shopping_cart</span>
-                        Tambah ke Keranjang
+                        Add to Cart
                     </button>
                 </form>
                 @else
                 <div class="flex items-center gap-4">
                     <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-sm font-medium">
                         <span class="material-symbols-outlined text-base">cancel</span>
-                        Stok habis
+                        Out of Stock
                     </span>
                     <button disabled class="flex-1 bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 h-12 rounded-lg font-heading font-semibold cursor-not-allowed">
-                        Stok Habis
+                        Out of Stock
                     </button>
                 </div>
                 @endif
@@ -134,7 +134,7 @@
                 @if($produk->stok > 0)
                 <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-medium w-fit">
                     <span class="material-symbols-outlined text-base">check_circle</span>
-                    Stok tersedia ({{ $produk->stok }} {{ $produk->satuan }})
+                    In Stock ({{ $produk->stok }} {{ $produk->satuan }})
                 </span>
                 @endif
 
@@ -142,7 +142,7 @@
                 <button
                     class="w-full border-2 border-text-main dark:border-gray-600 text-text-main dark:text-white h-12 rounded-lg font-heading font-semibold hover:bg-text-main hover:text-white dark:hover:bg-gray-600 transition-all flex items-center justify-center gap-2">
                     <span class="material-symbols-outlined text-xl">favorite</span>
-                    Tambah ke Wishlist
+                    Add to Wishlist
                 </button>
             </div>
 
@@ -164,8 +164,8 @@
                         @endif
                     </div>
                     <div class="text-xs text-gray-500 dark:text-gray-400 font-display">
-                        {{ $produk->petani->alamat ?? 'Petani Lokal' }}
-                        @if($produk->petani->terverifikasi) • Petani Terverifikasi @endif
+                        {{ $produk->petani->alamat ?? 'Local Farmer' }}
+                        @if($produk->petani->terverifikasi) • Verified Farmer @endif
                     </div>
                 </div>
             </div>
@@ -178,10 +178,10 @@
         <div class="border-b border-gray-200 dark:border-[#2a3825] mb-8">
             <div class="flex gap-10">
                 <button id="tab-desc" onclick="showTab('desc')"
-                    class="tab-btn pb-4 border-b-2 border-primary text-primary font-heading font-semibold text-[16px]">Deskripsi</button>
+                    class="tab-btn pb-4 border-b-2 border-primary text-primary font-heading font-semibold text-[16px]">Description</button>
                 <button id="tab-ulasan" onclick="showTab('ulasan')"
                     class="tab-btn pb-4 border-b-2 border-transparent text-gray-500 hover:text-text-main dark:hover:text-white font-heading font-semibold text-[16px] transition-colors">
-                    Ulasan ({{ $ratingStats['total'] }})
+                    Reviews ({{ $ratingStats['total'] }})
                 </button>
             </div>
         </div>
@@ -190,28 +190,28 @@
         <div id="content-desc" class="tab-content">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="md:col-span-2 space-y-4">
-                    <h3 class="text-xl font-heading font-bold text-text-main dark:text-white">Detail Produk</h3>
+                    <h3 class="text-xl font-heading font-bold text-text-main dark:text-white">Product Description</h3>
                     <p class="text-gray-600 dark:text-gray-400 font-display leading-relaxed whitespace-pre-line">{{ $produk->deskripsi }}</p>
                 </div>
                 <div class="bg-white dark:bg-[#1e2a1a] p-6 rounded-xl border border-gray-100 dark:border-[#2a3825] shadow-sm h-fit">
-                    <h4 class="font-heading font-bold mb-4 text-text-main dark:text-white">Informasi Produk</h4>
+                    <h4 class="font-heading font-bold mb-4 text-text-main dark:text-white">Product Information</h4>
                     <ul class="space-y-3 text-sm font-display text-gray-600 dark:text-gray-400">
                         <li class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
-                            Kategori: {{ $produk->kategori->nama_kategori ?? 'Umum' }}
+                            Category: {{ $produk->kategori->nama_kategori ?? 'General' }}
                         </li>
                         <li class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
-                            Satuan: {{ $produk->satuan }}
+                            Unit: {{ $produk->satuan }}
                         </li>
                         <li class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
-                            Stok: {{ $produk->stok }} {{ $produk->satuan }}
+                            Stock: {{ $produk->stok }} {{ $produk->satuan }}
                         </li>
                         @if($produk->petani)
                         <li class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary text-base">check_circle</span>
-                            Petani: {{ $produk->petani->nama }}
+                            Farmer: {{ $produk->petani->nama_lengkap }}
                         </li>
                         @endif
                     </ul>
@@ -237,7 +237,7 @@
                                 @endif
                                 @endfor
                         </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400 mt-1 font-display">{{ $ratingStats['total'] }} ulasan</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mt-1 font-display">{{ $ratingStats['total'] }} reviews</div>
                     </div>
                     <div class="flex-1 space-y-2">
                         @for ($i = 5; $i >= 1; $i--)
@@ -275,7 +275,7 @@
                             <div class="flex items-center justify-between mb-1">
                                 <span class="font-heading font-semibold text-text-main dark:text-white">
                                     @php
-                                    $nama = $ulasan->pengguna ? $ulasan->pengguna->nama_lengkap : 'Pengguna';
+                                    $nama = $ulasan->pengguna ? $ulasan->pengguna->nama_lengkap : 'User';
                                     $words = explode(' ', $nama);
                                     $masked = array_map(function($word) {
                                     $len = mb_strlen($word);
@@ -307,7 +307,7 @@
             @else
             <div class="text-center py-12">
                 <span class="material-symbols-outlined text-5xl text-gray-300 dark:text-gray-600 mb-4">rate_review</span>
-                <p class="text-gray-500 dark:text-gray-400 font-display">Belum ada ulasan untuk produk ini.</p>
+                <p class="text-gray-500 dark:text-gray-400 font-display">No reviews yet.</p>
             </div>
             @endif
         </div>
@@ -318,8 +318,8 @@
     <div class="mb-16">
         <div class="flex justify-between items-end mb-8">
             <div>
-                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Produk Terkait</h2>
-                <p class="text-gray-500 dark:text-gray-400 font-display">Produk lain dari kategori yang sama.</p>
+                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Related Products</h2>
+                <p class="text-gray-500 dark:text-gray-400 font-display">Products from the same category.</p>
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -361,7 +361,7 @@
                             </div>
                             <button type="submit" class="flex-1 bg-primary hover:bg-opacity-90 text-white h-9 rounded-lg transition-colors flex items-center justify-center gap-1 text-sm font-heading font-semibold">
                                 <span class="material-symbols-outlined text-base">add_shopping_cart</span>
-                                <span class="hidden sm:inline">Tambah</span>
+                                <span class="hidden sm:inline">Add to Cart</span>
                             </button>
                         </div>
                     </form>
@@ -377,8 +377,8 @@
     <div class="mb-16">
         <div class="flex justify-between items-end mb-8">
             <div>
-                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Produk Lain dari {{ $produk->petani->nama_lengkap }}</h2>
-                <p class="text-gray-500 dark:text-gray-400 font-display">Jelajahi produk lainnya dari petani yang sama.</p>
+                <h2 class="text-2xl md:text-3xl font-heading font-bold text-text-main dark:text-white">Products from {{ $produk->petani->nama_lengkap }}</h2>
+                <p class="text-gray-500 dark:text-gray-400 font-display">Explore other products from the same farmer.</p>
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -417,7 +417,7 @@
                             </div>
                             <button type="submit" class="flex-1 bg-primary hover:bg-opacity-90 text-white h-9 rounded-lg transition-colors flex items-center justify-center gap-1 text-sm font-heading font-semibold">
                                 <span class="material-symbols-outlined text-base">add_shopping_cart</span>
-                                <span class="hidden sm:inline">Tambah</span>
+                                <span class="hidden sm:inline">Add to Cart</span>
                             </button>
                         </div>
                     </form>
@@ -430,46 +430,54 @@
 </main>
 
 <script>
-    function decreaseQty() {
-        const input = document.getElementById(' qty-input');
-                                        if (parseInt(input.value)> 1) {
-                                        input.value = parseInt(input.value) - 1;
-                                        }
-                                        }
+// prettier-ignore
+/* eslint-disable */
+// Quantity controls for main product
+function decreaseQty() {
+    const input = document.getElementById('qty-input');
+    if (parseInt(input.value) > 1) {
+        input.value = parseInt(input.value) - 1;
+    }
+}
 
-                                        function increaseQty() {
-                                        const input = document.getElementById('qty-input');
-                                        const max = parseInt(document.getElementById('btn-increase').dataset.max);
-                                        if (parseInt(input.value) < max) {
-                                            input.value=parseInt(input.value) + 1;
-                                            }
-                                            }
+function increaseQty() {
+    const input = document.getElementById('qty-input');
+    const max = parseInt(document.getElementById('btn-increase').dataset.max);
+    if (parseInt(input.value) < max) {
+        input.value = parseInt(input.value) + 1;
+    }
+}
 
-                                            function showTab(tab) {
-                                            // Hide all content
-                                            document.querySelectorAll('.tab-content').forEach(el=> el.classList.add('hidden'));
-                                            // Reset all tabs
-                                            document.querySelectorAll('.tab-btn').forEach(el => {
-                                            el.classList.remove('border-primary', 'text-primary');
-                                            el.classList.add('border-transparent', 'text-gray-500');
-                                            });
-                                            // Show selected content
-                                            document.getElementById('content-' + tab).classList.remove('hidden');
-                                            // Activate selected tab
-                                            const activeTab = document.getElementById('tab-' + tab);
-                                            activeTab.classList.remove('border-transparent', 'text-gray-500');
-                                            activeTab.classList.add('border-primary', 'text-primary');
-                                            }
+// Tab switching functionality
+function showTab(tab) {
+    // Hide all content
+    document.querySelectorAll('.tab-content').forEach(el=> el.classList.add('hidden'));
 
-                                            function adjustQty(btn, delta, max) {
-                                            const container = btn.closest('.flex');
-                                            const input = container.querySelector('input[name="jumlah"]');
-                                            let value = parseInt(input.value) + delta;
+    // Reset all tabs
+    document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('border-primary', 'text-primary');
+        el.classList.add('border-transparent', 'text-gray-500');
+    });
 
-                                            if (value < 1) value=1;
-                                                if (value> max) value = max;
+    // Show selected content
+    document.getElementById('content-' + tab).classList.remove('hidden');
 
-                                                input.value = value;
-                                                }
-                                                </script>
-                                                @endsection
+    // Activate selected tab
+    const activeTab = document.getElementById('tab-' + tab);
+    activeTab.classList.remove('border-transparent', 'text-gray-500');
+    activeTab.classList.add('border-primary', 'text-primary');
+}
+
+// Quantity controls for related products
+function adjustQty(btn, delta, max) {
+    const container = btn.closest('.flex');
+    const input = container.querySelector('input[name="jumlah"]');
+    let value = parseInt(input.value) + delta;
+
+    if (value < 1) value=1;
+    if (value> max) value = max;
+
+    input.value = value;
+}
+</script>
+@endsection

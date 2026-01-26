@@ -6,12 +6,12 @@
 <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="flex items-center justify-between px-8 py-5">
         <div class="flex items-center gap-4">
-            <h1 class="text-2xl font-bold font-heading text-text-dark">Rekening Bank</h1>
+            <h1 class="text-2xl font-bold font-heading text-text-dark">Bank Account</h1>
         </div>
         <div class="flex items-center gap-4">
             <button type="button" onclick="document.getElementById('tambah-modal').classList.remove('hidden')" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-bold font-heading flex items-center gap-2 transition-all shadow-sm">
                 <span class="material-symbols-outlined">add</span>
-                Tambah Rekening
+                Add Account
             </button>
         </div>
     </div>
@@ -55,7 +55,7 @@
                         <div class="flex items-center gap-2 mb-1">
                             <h3 class="font-heading font-bold text-text-dark">{{ $rekening->nama_bank }}</h3>
                             @if($rekening->is_utama)
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">Utama</span>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">Primary</span>
                             @endif
                         </div>
                         <p class="text-gray-600 font-mono text-lg">{{ $rekening->no_rekening }}</p>
@@ -67,7 +67,7 @@
                     <form action="{{ url('/rekening/' . $rekening->id_rekening . '/utama') }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="px-3 py-1.5 text-sm text-primary font-semibold hover:bg-primary/10 rounded-lg transition-all" title="Jadikan Utama">
-                            Jadikan Utama
+                            Set as Primary
                         </button>
                     </form>
                     @endif
@@ -89,11 +89,11 @@
             <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span class="material-symbols-outlined text-gray-400 text-3xl">account_balance</span>
             </div>
-            <h3 class="font-heading font-bold text-gray-600 mb-2">Belum ada rekening</h3>
-            <p class="text-sm text-gray-400 mb-4">Tambahkan rekening bank untuk menerima pembayaran</p>
+            <h3 class="font-heading font-bold text-gray-600 mb-2">No bank account</h3>
+            <p class="text-sm text-gray-400 mb-4">Add a bank account to receive payments</p>
             <button type="button" onclick="document.getElementById('tambah-modal').classList.remove('hidden')" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold font-heading transition-all">
                 <span class="material-symbols-outlined">add</span>
-                Tambah Rekening
+                Add Account
             </button>
         </div>
         @endforelse
@@ -104,11 +104,11 @@
         <div class="flex items-start gap-4">
             <span class="material-symbols-outlined text-blue-600 text-2xl">info</span>
             <div>
-                <h3 class="font-heading font-bold text-blue-800 mb-2">Informasi Penting</h3>
+                <h3 class="font-heading font-bold text-blue-800 mb-2">Important Information</h3>
                 <ul class="text-sm text-blue-700 space-y-1">
-                    <li>• Rekening utama akan digunakan untuk menerima pencairan dana dari escrow</li>
-                    <li>• Pastikan nama pemilik rekening sesuai dengan identitas Anda</li>
-                    <li>• Pencairan dana akan diproses setelah pesanan dikonfirmasi selesai oleh pembeli</li>
+                    <li>• The main account will be used to receive funds from escrow</li>
+                    <li>• Make sure the account holder's name matches your identity</li>
+                    <li>• Fund withdrawals will be processed after the order is confirmed complete by the buyer</li>
                 </ul>
             </div>
         </div>
@@ -119,7 +119,7 @@
 <div id="tambah-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-xl max-w-md w-full p-6">
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-lg font-bold font-heading">Tambah Rekening Baru</h3>
+            <h3 class="text-lg font-bold font-heading">Add New Account</h3>
             <button type="button" onclick="document.getElementById('tambah-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -128,30 +128,30 @@
             @csrf
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Bank <span class="text-red-500">*</span></label>
-                    <input type="text" name="nama_bank" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Contoh: BCA, Mandiri, BNI"/>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Bank Name <span class="text-red-500">*</span></label>
+                    <input type="text" name="nama_bank" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Example: BCA, Mandiri, BNI"/>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor Rekening <span class="text-red-500">*</span></label>
-                    <input type="text" name="no_rekening" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Masukkan nomor rekening"/>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Account Number <span class="text-red-500">*</span></label>
+                    <input type="text" name="no_rekening" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter account number"/>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Atas Nama <span class="text-red-500">*</span></label>
-                    <input type="text" name="atas_nama" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Nama pemilik rekening"/>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Account Holder <span class="text-red-500">*</span></label>
+                    <input type="text" name="atas_nama" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Account holder name"/>
                 </div>
                 <div>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="is_utama" value="1" class="w-4 h-4 rounded text-primary focus:ring-primary"/>
-                        <span class="text-sm font-medium text-gray-700">Jadikan rekening utama</span>
+                        <span class="text-sm font-medium text-gray-700">Set as primary account</span>
                     </label>
                 </div>
             </div>
             <div class="flex gap-3 mt-6">
                 <button type="button" onclick="document.getElementById('tambah-modal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-200 rounded-lg font-semibold text-gray-600 hover:bg-gray-50">
-                    Batal
+                    Cancel
                 </button>
                 <button type="submit" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90">
-                    Simpan
+                    Save
                 </button>
             </div>
         </form>
@@ -162,7 +162,7 @@
 <div id="edit-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-xl max-w-md w-full p-6">
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-lg font-bold font-heading">Edit Rekening</h3>
+            <h3 class="text-lg font-bold font-heading">Edit Account</h3>
             <button type="button" onclick="document.getElementById('edit-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -172,21 +172,21 @@
             @method('PUT')
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Bank <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Bank Name <span class="text-red-500">*</span></label>
                     <input type="text" name="nama_bank" id="edit-nama-bank" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary"/>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor Rekening <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Account Number <span class="text-red-500">*</span></label>
                     <input type="text" name="no_rekening" id="edit-no-rekening" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary"/>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Atas Nama <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Account Holder <span class="text-red-500">*</span></label>
                     <input type="text" name="atas_nama" id="edit-atas-nama" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary"/>
                 </div>
             </div>
             <div class="flex gap-3 mt-6">
                 <button type="button" onclick="document.getElementById('edit-modal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-200 rounded-lg font-semibold text-gray-600 hover:bg-gray-50">
-                    Batal
+                    Cancel
                 </button>
                 <button type="submit" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90">
                     Update

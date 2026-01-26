@@ -215,7 +215,7 @@
                         <input type="hidden" name="jumlah" value="1">
                         <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white h-10 rounded-lg transition-colors flex items-center justify-center gap-2 font-heading font-semibold text-sm">
                             <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                            Tambah ke Keranjang
+                            Add to Cart
                         </button>
                     </form>
                 </div>
@@ -223,7 +223,7 @@
             @empty
             <div class="col-span-full text-center py-12">
                 <span class="material-symbols-outlined text-5xl text-gray-300 mb-4">inventory_2</span>
-                <p class="text-gray-500 dark:text-gray-400 font-display">Belum ada produk tersedia.</p>
+                <p class="text-gray-500 dark:text-gray-400 font-display">No products available.</p>
             </div>
             @endforelse
         </div>

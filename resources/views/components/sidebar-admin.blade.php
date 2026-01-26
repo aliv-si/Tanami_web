@@ -13,15 +13,15 @@ request()->routeIs('admin.dashboard') ? 'dashboard' :
 
 $links = $links ?? [
 ['key' => 'dashboard', 'route' => 'admin.dashboard', 'icon' => 'dashboard', 'label' => 'Dashboard'],
-['key' => 'pengguna', 'route' => 'admin.pengguna', 'icon' => 'group', 'label' => 'Pengguna'],
-['key' => 'kategori', 'route' => 'admin.kategori', 'icon' => 'category', 'label' => 'Kategori'],
-['key' => 'kota', 'route' => 'admin.kota', 'icon' => 'location_city', 'label' => 'Kota'],
-['key' => 'kupon', 'route' => 'admin.kupon', 'icon' => 'local_offer', 'label' => 'Kupon'],
-['key' => 'pesanan', 'route' => 'admin.pesanan', 'icon' => 'shopping_cart', 'label' => 'Pesanan'],
+['key' => 'pengguna', 'route' => 'admin.pengguna', 'icon' => 'group', 'label' => 'Users'],
+['key' => 'kategori', 'route' => 'admin.kategori', 'icon' => 'category', 'label' => 'Categories'],
+['key' => 'kota', 'route' => 'admin.kota', 'icon' => 'location_city', 'label' => 'Cities'],
+['key' => 'kupon', 'route' => 'admin.kupon', 'icon' => 'local_offer', 'label' => 'Coupons'],
+['key' => 'pesanan', 'route' => 'admin.pesanan', 'icon' => 'shopping_cart', 'label' => 'Orders'],
 ['key' => 'escrow', 'route' => 'admin.escrow', 'icon' => 'gavel', 'label' => 'Escrow'],
-['key' => 'refund', 'route' => 'admin.refund', 'icon' => 'keyboard_return', 'label' => 'Refund'],
-['key' => 'laporan', 'route' => 'admin.laporan', 'icon' => 'bar_chart', 'label' => 'Laporan'],
-['key' => 'pesan-kontak', 'route' => 'admin.pesan-kontak', 'icon' => 'mail', 'label' => 'Pesan Kontak'],
+['key' => 'refund', 'route' => 'admin.refund', 'icon' => 'keyboard_return', 'label' => 'Refunds'],
+['key' => 'laporan', 'route' => 'admin.laporan', 'icon' => 'bar_chart', 'label' => 'Reports'],
+['key' => 'pesan-kontak', 'route' => 'admin.pesan-kontak', 'icon' => 'mail', 'label' => 'Contact Messages'],
 ];
 @endphp
 

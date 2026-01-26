@@ -14,10 +14,10 @@
     <form method="GET" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
         <div class="flex flex-wrap items-center gap-3">
             <select name="tipe" onchange="this.form.submit()" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm font-semibold focus:ring-primary focus:border-primary">
-                <option value="penjualan" @selected($tipe=='penjualan')>📊 Penjualan</option>
-                <option value="produk" @selected($tipe=='produk')>📦 Produk</option>
-                <option value="petani" @selected($tipe=='petani')>🌾 Petani</option>
-                <option value="pembeli" @selected($tipe=='pembeli')>👥 Pembeli</option>
+                <option value="penjualan" @selected($tipe=='penjualan')>📊 Sales</option>
+                <option value="produk" @selected($tipe=='produk')>📦 Product</option>
+                <option value="petani" @selected($tipe=='petani')>🌾 Farmer</option>
+                <option value="pembeli" @selected($tipe=='pembeli')>👥 Buyer</option>
             </select>
             <div class="flex items-center gap-2">
                 <input type="date" name="dari" value="{{ $dari }}" class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" />
@@ -41,7 +41,7 @@
             </span>
         </div>
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Pesanan Selesai</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Completed Orders</p>
             <h3 class="text-xl font-bold text-[#1e3f1b] font-heading">{{ number_format($data['summary']['pesanan_selesai']) }}</h3>
             <span class="text-xs {{ $data['summary']['pesanan_growth'] >= 0 ? 'text-green-600' : 'text-red-600' }}">
                 {{ $data['summary']['pesanan_growth'] >= 0 ? '↑' : '↓' }} {{ abs($data['summary']['pesanan_growth']) }}%
@@ -57,15 +57,15 @@
         </div>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">Trend Penjualan Harian</h3>
+        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">Daily Sales Trend</h3>
         <canvas id="salesChart" height="100"></canvas>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Detail Harian</h3></div>
+        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Daily Detail</h3></div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
-                    <tr><th class="px-6 py-3 text-left">Tanggal</th><th class="px-6 py-3 text-right">Pesanan</th><th class="px-6 py-3 text-right">Selesai</th><th class="px-6 py-3 text-right">Batal</th><th class="px-6 py-3 text-right">Penjualan</th></tr>
+                    <tr><th class="px-6 py-3 text-left">Date</th><th class="px-6 py-3 text-right">Orders</th><th class="px-6 py-3 text-right">Completed</th><th class="px-6 py-3 text-right">Cancelled</th><th class="px-6 py-3 text-right">Sales</th></tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                     @forelse($data['daily'] as $day)
@@ -77,7 +77,7 @@
                         <td class="px-6 py-3 text-right font-semibold">Rp {{ number_format($day->total_penjualan, 0, ',', '.') }}</td>
                     </tr>
                     @empty
-                    <tr><td colspan="5" class="px-6 py-8 text-center text-gray-400">Tidak ada data</td></tr>
+                    <tr><td colspan="5" class="px-6 py-8 text-center text-gray-400">No Data</td></tr>
                     @endforelse
                 </tbody>
             </table>
@@ -88,28 +88,28 @@
     {{-- PRODUK Summary --}}
     <div class="grid grid-cols-3 gap-4">
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Total Produk Terjual</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Total Product Sold</p>
             <h3 class="text-xl font-bold text-[#1e3f1b] font-heading">{{ number_format($data['summary']['total_produk_terjual']) }}</h3>
         </div>
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Total Pendapatan</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Total Revenue</p>
             <h3 class="text-xl font-bold text-[#1e3f1b] font-heading">Rp {{ number_format($data['summary']['total_pendapatan'], 0, ',', '.') }}</h3>
         </div>
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Produk Unik</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Unique Product</p>
             <h3 class="text-xl font-bold text-[#1e3f1b] font-heading">{{ $data['summary']['unique_produk'] }}</h3>
         </div>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">Penjualan per Kategori</h3>
+        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">Sales per Category</h3>
         <canvas id="categoryChart" height="80"></canvas>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Top 20 Produk Terlaris</h3></div>
+        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Top 20 Products</h3></div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
-                    <tr><th class="px-6 py-3 text-left">#</th><th class="px-6 py-3 text-left">Produk</th><th class="px-6 py-3 text-left">Kategori</th><th class="px-6 py-3 text-right">Terjual</th><th class="px-6 py-3 text-right">Pendapatan</th><th class="px-6 py-3 text-right">Rating</th></tr>
+                    <tr><th class="px-6 py-3 text-left">#</th><th class="px-6 py-3 text-left">Product</th><th class="px-6 py-3 text-left">Category</th><th class="px-6 py-3 text-right">Sold</th><th class="px-6 py-3 text-right">Revenue</th><th class="px-6 py-3 text-right">Rating</th></tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                     @foreach($data['topProducts'] as $i => $product)
@@ -131,33 +131,33 @@
     {{-- PETANI Summary --}}
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Total Petani Verified</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Total Farmer Verified</p>
             <h3 class="text-xl font-bold text-[#1e3f1b] font-heading">{{ $data['summary']['total_petani'] }}</h3>
         </div>
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Petani Aktif</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Farmer Active</p>
             <h3 class="text-xl font-bold text-[#1e3f1b] font-heading">{{ $data['summary']['petani_aktif'] }}</h3>
             <span class="text-xs text-gray-400">{{ $data['summary']['persentase_aktif'] }}%</span>
         </div>
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Escrow Dikirim</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Escrow Sent</p>
             <h3 class="text-xl font-bold text-green-600 font-heading">Rp {{ number_format($data['escrowSummary']['total_dikirim'], 0, ',', '.') }}</h3>
         </div>
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">Escrow Ditahan</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">Escrow Held</p>
             <h3 class="text-xl font-bold text-yellow-600 font-heading">Rp {{ number_format($data['escrowSummary']['escrow_ditahan'], 0, ',', '.') }}</h3>
         </div>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">Top 10 Petani</h3>
+        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">Top 10 Farmers</h3>
         <canvas id="petaniChart" height="100"></canvas>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Top 20 Petani</h3></div>
+        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Top 20 Farmers</h3></div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
-                    <tr><th class="px-6 py-3 text-left">#</th><th class="px-6 py-3 text-left">Nama</th><th class="px-6 py-3 text-right">Pesanan</th><th class="px-6 py-3 text-right">Produk</th><th class="px-6 py-3 text-right">Total</th><th class="px-6 py-3 text-right">Rating</th></tr>
+                    <tr><th class="px-6 py-3 text-left">#</th><th class="px-6 py-3 text-left">Name</th><th class="px-6 py-3 text-right">Orders</th><th class="px-6 py-3 text-right">Products</th><th class="px-6 py-3 text-right">Total</th><th class="px-6 py-3 text-right">Rating</th></tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                     @foreach($data['topPetani'] as $i => $petani)
@@ -179,9 +179,9 @@
     {{-- PEMBELI Summary --}}
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-            <p class="text-xs text-gray-500 font-medium mb-1">User Baru</p>
+            <p class="text-xs text-gray-500 font-medium mb-1">New Buyers</p>
             <h3 class="text-xl font-bold text-[#1e3f1b] font-heading">{{ $data['newUsers']['total'] }}</h3>
-            <span class="text-xs text-gray-400">{{ $data['newUsers']['pembeli'] }} pembeli, {{ $data['newUsers']['petani'] }} petani</span>
+            <span class="text-xs text-gray-400">{{ $data['newUsers']['pembeli'] }} buyers, {{ $data['newUsers']['petani'] }} farmers</span>
         </div>
         <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
             <p class="text-xs text-gray-500 font-medium mb-1">Unique Buyers</p>
@@ -197,15 +197,15 @@
         </div>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">User Baru</h3>
+        <h3 class="text-lg font-heading font-bold text-[#1e3f1b] mb-4">New Buyers</h3>
         <div class="max-w-xs mx-auto"><canvas id="userChart" height="200"></canvas></div>
     </div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Top 20 Pembeli</h3></div>
+        <div class="px-6 py-4 border-b border-gray-100"><h3 class="font-heading font-bold text-[#1e3f1b]">Top 20 Buyers</h3></div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
-                    <tr><th class="px-6 py-3 text-left">#</th><th class="px-6 py-3 text-left">Nama</th><th class="px-6 py-3 text-right">Pesanan</th><th class="px-6 py-3 text-right">Total</th><th class="px-6 py-3 text-right">AOV</th></tr>
+                    <tr><th class="px-6 py-3 text-left">#</th><th class="px-6 py-3 text-left">Name</th><th class="px-6 py-3 text-right">Orders</th><th class="px-6 py-3 text-right">Total</th><th class="px-6 py-3 text-right">AOV</th></tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                     @foreach($data['topBuyers'] as $i => $buyer)

@@ -58,15 +58,15 @@
 
     $adminNavLinks = $adminNavLinks ?? [
     ['key' => 'dashboard', 'route' => 'admin.dashboard', 'icon' => 'dashboard', 'label' => 'Dashboard'],
-    ['key' => 'pengguna', 'route' => 'admin.pengguna', 'icon' => 'group', 'label' => 'Pengguna'],
-    ['key' => 'kategori', 'route' => 'admin.kategori', 'icon' => 'category', 'label' => 'Kategori'],
-    ['key' => 'kota', 'route' => 'admin.kota', 'icon' => 'location_city', 'label' => 'Kota'],
-    ['key' => 'kupon', 'route' => 'admin.kupon', 'icon' => 'local_offer', 'label' => 'Kupon'],
-    ['key' => 'pesanan', 'route' => 'admin.pesanan', 'icon' => 'shopping_cart', 'label' => 'Pesanan'],
+    ['key' => 'pengguna', 'route' => 'admin.pengguna', 'icon' => 'group', 'label' => 'Users'],
+    ['key' => 'kategori', 'route' => 'admin.kategori', 'icon' => 'category', 'label' => 'Categories'],
+    ['key' => 'kota', 'route' => 'admin.kota', 'icon' => 'location_city', 'label' => 'Cities'],
+    ['key' => 'kupon', 'route' => 'admin.kupon', 'icon' => 'local_offer', 'label' => 'Coupons'],
+    ['key' => 'pesanan', 'route' => 'admin.pesanan', 'icon' => 'shopping_cart', 'label' => 'Orders'],
     ['key' => 'escrow', 'route' => 'admin.escrow', 'icon' => 'gavel', 'label' => 'Escrow'],
-    ['key' => 'refund', 'route' => 'admin.refund', 'icon' => 'keyboard_return', 'label' => 'Refund'],
-    ['key' => 'laporan', 'route' => 'admin.laporan', 'icon' => 'bar_chart', 'label' => 'Laporan'],
-    ['key' => 'pesan-kontak', 'route' => 'admin.pesan-kontak', 'icon' => 'mail', 'label' => 'Pesan Kontak'],
+    ['key' => 'refund', 'route' => 'admin.refund', 'icon' => 'keyboard_return', 'label' => 'Refunds'],
+    ['key' => 'laporan', 'route' => 'admin.laporan', 'icon' => 'bar_chart', 'label' => 'Reports'],
+    ['key' => 'pesan-kontak', 'route' => 'admin.pesan-kontak', 'icon' => 'mail', 'label' => 'Contact Messages'],
     ];
     @endphp
 
@@ -147,7 +147,7 @@
                                 <div>
                                     <p class="text-sm font-bold text-tanami-dark mb-1">Transaction Controller</p>
                                     <p class="text-xs text-gray-500 leading-relaxed">
-                                        Mengontrol dan memonitoring seluruh transaksi yang terjadi di platform Tanami.
+                                        Control and monitor all transactions on the Tanami platform.
                                     </p>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                 <div>
                                     <p class="text-sm font-bold text-tanami-dark mb-1">System Monitoring</p>
                                     <p class="text-xs text-gray-500 leading-relaxed">
-                                        Memantau aktivitas pengguna, pesanan, pembayaran, dan manajemen escrow.
+                                        Monitor user activities, orders, payments, and escrow management.
                                     </p>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                                 <div>
                                     <p class="text-sm font-bold text-tanami-dark mb-1">User Management</p>
                                     <p class="text-xs text-gray-500 leading-relaxed">
-                                        Mengelola akun pembeli, petani, dan verifikasi akun baru.
+                                        Manage buyer, farmer, and new account verification.
                                     </p>
                                 </div>
                             </div>

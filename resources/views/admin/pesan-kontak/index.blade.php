@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Pesan Kontak')
-@section('header_title', 'Pesan Kontak')
+@section('title', 'Contact Messages')
+@section('header_title', 'Contact Messages')
 
 @section('content')
 <div class="max-w-[1400px] mx-auto space-y-6">
@@ -18,10 +18,10 @@
             <thead>
                 <tr class="bg-gray-50 border-b border-gray-100">
                     <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Pengirim</th>
-                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Subjek</th>
-                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
-                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Aksi</th>
+                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Sender</th>
+                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Subject</th>
+                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
+                    <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
@@ -31,11 +31,11 @@
                         @if(!$p->is_read)
                         <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold uppercase tracking-wider w-fit">
                             <span class="size-1.5 rounded-full bg-blue-600 animate-pulse"></span>
-                            Baru
+                            New
                         </span>
                         @else
                         <span class="px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 text-[10px] font-bold uppercase tracking-wider w-fit">
-                            Dibaca
+                            Read
                         </span>
                         @endif
                     </td>
@@ -57,7 +57,7 @@
                                 class="size-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-200">
                                 <span class="material-symbols-outlined text-sm">visibility</span>
                             </a>
-                            <form action="{{ route('admin.pesan-kontak.destroy', $p->id_pesan) }}" method="POST" onsubmit="return confirm('Hapus pesan ini?')">
+                            <form action="{{ route('admin.pesan-kontak.destroy', $p->id_pesan) }}" method="POST" onsubmit="return confirm('Delete this message?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="size-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all duration-200">
@@ -72,7 +72,7 @@
                     <td colspan="5" class="px-6 py-20 text-center">
                         <div class="flex flex-col items-center gap-3">
                             <span class="material-symbols-outlined text-5xl text-gray-200">mail</span>
-                            <p class="text-gray-400 font-medium">Belum ada pesan masuk</p>
+                            <p class="text-gray-400 font-medium">No messages yet</p>
                         </div>
                     </td>
                 </tr>

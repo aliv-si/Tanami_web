@@ -35,12 +35,12 @@ use Illuminate\Support\Facades\Route;
 // ============================================================================
 // LOGOUT
 // ============================================================================
-Route::get('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-    return redirect('/')->with('success', 'Berhasil logout');
-})->name('logout');
+// Route::get('/logout', function () {
+//     Auth::logout();
+//     request()->session()->invalidate();
+//     request()->session()->regenerateToken();
+//     return redirect('/')->with('success', 'Berhasil logout');
+// })->name('logout');
 
 // ============================================================================
 // PUBLIC PAGES
@@ -134,6 +134,9 @@ Route::middleware('guest')->group(function () {
 // ============================================================================
 
 Route::middleware('auth')->group(function () {
+
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // --------------------- PROFILE ---------------------
     Route::get('/profil', [AuthController::class, 'showProfil'])->name('profil');

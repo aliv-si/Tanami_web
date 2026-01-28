@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ProdukSeeder extends Seeder
+class ProdukSeederDev extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,7 +25,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 5,
                 'satuan' => 'kg',
                 'deskripsi' => 'Wortel organik segar dari dataran tinggi Bogor. Dipanen langsung dari kebun tanpa pestisida. Kaya vitamin A dan serat, cocok untuk jus, salad, atau masakan sehari-hari.',
-                'foto' => null,
+                'foto' => 'produk/wortel_organik.png',
                 'is_aktif' => true,
             ],
             [
@@ -38,7 +38,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'ikat',
                 'deskripsi' => 'Bayam hijau organik, dipetik pagi hari untuk menjaga kesegaran. Kaya zat besi dan vitamin K. Ideal untuk tumis, sup, atau salad.',
-                'foto' => null,
+                'foto' => 'produk/bayam_hijau.png',
                 'is_aktif' => true,
             ],
             [
@@ -51,7 +51,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 3,
                 'satuan' => 'ikat',
                 'deskripsi' => 'Kangkung hidroponik berkualitas tinggi. Lebih bersih dan bebas hama. Batang renyah dan daun segar.',
-                'foto' => null,
+                'foto' => 'produk/kangkung_hidroponik.png',
                 'is_aktif' => true,
             ],
             [
@@ -64,7 +64,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 2,
                 'satuan' => 'kg',
                 'deskripsi' => 'Brokoli organik segar dari dataran tinggi. Kaya antioksidan dan vitamin C. Cocok untuk tumis, sup, atau dikukus.',
-                'foto' => null,
+                'foto' => 'produk/brokoli_organik.png',
                 'is_aktif' => true,
             ],
             [
@@ -77,7 +77,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'kg',
                 'deskripsi' => 'Cabai merah keriting segar dengan tingkat kepedasan sedang. Cocok untuk sambal dan masakan pedas.',
-                'foto' => null,
+                'foto' => 'produk/cabai_merah.png',
                 'is_aktif' => true,
             ],
             [
@@ -90,7 +90,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'pcs',
                 'deskripsi' => 'Selada romaine hidroponik, renyah dan segar. Perfect untuk salad Caesar atau sandwich.',
-                'foto' => null,
+                'foto' => 'produk/selada_romaine.png',
                 'is_aktif' => true,
             ],
 
@@ -105,7 +105,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 5,
                 'satuan' => 'kg',
                 'deskripsi' => 'Tomat cherry merah manis, cocok untuk salad atau snack sehat. Kaya lycopene dan vitamin C.',
-                'foto' => null,
+                'foto' => 'produk/tomat_cherry.png',
                 'is_aktif' => true,
             ],
             [
@@ -118,7 +118,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 10,
                 'satuan' => 'kg',
                 'deskripsi' => 'Apel Malang asli, manis dan renyah. Dipetik langsung dari kebun di lereng Gunung Bromo.',
-                'foto' => null,
+                'foto' => 'produk/apel_malang.png',
                 'is_aktif' => true,
             ],
             [
@@ -131,7 +131,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'kg',
                 'deskripsi' => 'Jeruk Pontianak manis tanpa biji. Kaya vitamin C, cocok untuk jus atau dimakan langsung.',
-                'foto' => null,
+                'foto' => 'produk/jeruk_pontianak.png',
                 'is_aktif' => true,
             ],
             [
@@ -144,7 +144,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'kg',
                 'deskripsi' => 'Pepaya California orange, manis dan lembut. Cocok untuk dessert atau jus.',
-                'foto' => null,
+                'foto' => 'produk/pepaya_california.png',
                 'is_aktif' => true,
             ],
             [
@@ -157,7 +157,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 8,
                 'satuan' => 'sisir',
                 'deskripsi' => 'Pisang Cavendish grade A, manis dan tidak cepat busuk. Ideal untuk snack sehat atau smoothie.',
-                'foto' => null,
+                'foto' => 'produk/pisang_cavendish.png',
                 'is_aktif' => true,
             ],
             [
@@ -170,7 +170,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'buah',
                 'deskripsi' => 'Semangka merah tanpa biji, manis dan segar. Berat rata-rata 3-4 kg per buah.',
-                'foto' => null,
+                'foto' => 'produk/semangka_merah.png',
                 'is_aktif' => true,
             ],
 
@@ -185,7 +185,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 2,
                 'satuan' => 'pot',
                 'deskripsi' => 'Monstera Deliciosa dengan daun berlubang cantik. Tinggi 40-50cm dengan pot diameter 20cm. Indoor plant favorit!',
-                'foto' => null,
+                'foto' => 'produk/monstera_deliciosa.png',
                 'is_aktif' => true,
             ],
             [
@@ -198,7 +198,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'pot',
                 'deskripsi' => 'Calathea Makoyana dengan motif daun unik seperti lukisan. Prayer plant yang bergerak mengikuti cahaya.',
-                'foto' => null,
+                'foto' => 'produk/calathea_makoyana.png',
                 'is_aktif' => true,
             ],
             [
@@ -211,7 +211,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 1,
                 'satuan' => 'pot',
                 'deskripsi' => 'Philodendron Birkin dengan garis-garis putih elegan pada daun hijau. Tanaman hias premium.',
-                'foto' => null,
+                'foto' => 'produk/philodendron_birkin.png',
                 'is_aktif' => true,
             ],
             [
@@ -224,7 +224,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'pot',
                 'deskripsi' => 'Alocasia Black Velvet dengan daun hitam beludru dan urat putih. Tanaman eksotis collector item.',
-                'foto' => null,
+                'foto' => 'produk/alocasia_black_velvet.png',
                 'is_aktif' => true,
             ],
             [
@@ -237,7 +237,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 3,
                 'satuan' => 'pot',
                 'deskripsi' => 'Sansevieria Moonshine dengan daun silver-green. Low maintenance, cocok untuk pemula.',
-                'foto' => null,
+                'foto' => 'produk/sansevieria_moonshine.png',
                 'is_aktif' => true,
             ],
 
@@ -252,7 +252,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 15,
                 'satuan' => 'pack',
                 'deskripsi' => 'Bibit cabai rawit unggul, 1 pack berisi 20 biji. Tingkat perkecambahan 85%. Siap tanam dalam polybag.',
-                'foto' => null,
+                'foto' => 'produk/bibit_cabai_rawit.png',
                 'is_aktif' => true,
             ],
             [
@@ -265,7 +265,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'pack',
                 'deskripsi' => 'Bibit tomat cherry premium, 1 pack berisi 15 biji. Varietas produktif dengan buah manis.',
-                'foto' => null,
+                'foto' => 'produk/bibit_tomat_cherry.png',
                 'is_aktif' => true,
             ],
             [
@@ -278,7 +278,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 5,
                 'satuan' => 'pack',
                 'deskripsi' => 'Bibit terong ungu lokal, 1 pack berisi 25 biji. Hasil panen melimpah dan tahan hama.',
-                'foto' => null,
+                'foto' => 'produk/bibit_terong_ungu.png',
                 'is_aktif' => true,
             ],
             [
@@ -291,7 +291,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 10,
                 'satuan' => 'pack',
                 'deskripsi' => 'Bibit bayam hijau organik, 1 pack berisi 50 biji. Cepat tumbuh, panen dalam 25-30 hari.',
-                'foto' => null,
+                'foto' => 'produk/bibit_bayam_hijau.png',
                 'is_aktif' => true,
             ],
             [
@@ -304,7 +304,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'pack',
                 'deskripsi' => 'Bibit kangkung darat premium, 1 pack berisi 50 biji. Mudah ditanam di pot atau lahan terbuka.',
-                'foto' => null,
+                'foto' => 'produk/bibit_kangkung.png',
                 'is_aktif' => true,
             ],
             [
@@ -317,7 +317,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'pack',
                 'deskripsi' => 'Bibit selada keriting hidroponik, 1 pack berisi 30 biji. Cocok untuk sistem NFT atau DFT.',
-                'foto' => null,
+                'foto' => 'produk/bibit_selada_keriting.png',
                 'is_aktif' => true,
             ],
 
@@ -332,7 +332,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'ikat',
                 'deskripsi' => 'Sawi hijau organik segar, cocok untuk tumis atau sup.',
-                'foto' => null,
+                'foto' => 'produk/sawi_hijau.png',
                 'is_aktif' => true,
             ],
             [
@@ -345,7 +345,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 5,
                 'satuan' => 'kg',
                 'deskripsi' => 'Mangga Harum Manis matang pohon, aroma harum dan rasa manis sempurna.',
-                'foto' => null,
+                'foto' => 'produk/mangga_harum_manis.png',
                 'is_aktif' => true,
             ],
             [
@@ -358,7 +358,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'pot',
                 'deskripsi' => 'Pothos Golden dengan variegasi kuning. Tanaman gantung yang mudah dirawat.',
-                'foto' => null,
+                'foto' => 'produk/pothos_golden.png',
                 'is_aktif' => true,
             ],
             [
@@ -371,7 +371,7 @@ class ProdukSeeder extends Seeder
                 'stok_direserve' => 0,
                 'satuan' => 'kg',
                 'deskripsi' => 'Timun Jepang segar dan renyah, cocok untuk lalapan atau asinan.',
-                'foto' => null,
+                'foto' => 'produk/timun_jepang.png',
                 'is_aktif' => false, // Nonaktif
             ],
         ];

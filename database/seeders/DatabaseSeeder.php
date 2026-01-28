@@ -16,12 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // If local environment, use the comprehensive development seeder
+        if (app()->isLocal()) {
+            $this->call(DevDatabaseSeeder::class);
+            return;
+        }
+
         // Only seed essential data for production
         $this->call([
             PenggunaSeeder::class,      // Users (admin, petani, pembeli)
             KategoriSeeder::class,      // Product categories
             KotaSeeder::class,          // Cities with shipping cost
-            ProdukSeeder::class,        // Products
+            ProdukSeeder::class,        // Products (foto=null)
         ]);
     }
 }

@@ -140,7 +140,7 @@
             </div>
             <h3 class="font-heading font-bold text-gray-600 mb-2">Belum ada produk</h3>
             <p class="text-sm text-gray-400 mb-4">Mulai tambahkan produk pertama Anda</p>
-            <a href="{{ route('petani.produk.tambah') }}" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold font-heading transition-all">
+            <a href="{{ route('petani.produk.create') }}" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold font-heading transition-all">
                 <span class="material-symbols-outlined">add</span>
                 Tambah Produk
             </a>

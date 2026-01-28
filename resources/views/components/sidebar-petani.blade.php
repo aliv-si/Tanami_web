@@ -72,9 +72,12 @@ $links = [
                 <p class="text-xs text-gray-400">{{ $user->email ?? '' }}</p>
             </div>
         </div>
-        <a href="/logout" class="mt-3 flex items-center gap-2 px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">
-            <span class="material-symbols-outlined text-lg">logout</span>
-            Logout
-        </a>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="mt-3 flex items-center gap-2 px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all">
+                <span class="material-symbols-outlined text-lg">logout</span>
+                Logout
+            </button>
+        </form>
     </div>
 </aside>

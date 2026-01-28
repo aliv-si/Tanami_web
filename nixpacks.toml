@@ -3,7 +3,6 @@
 [phases.build]
 cmds = [
     "composer install --optimize-autoloader --no-dev --no-interaction",
-    "php artisan config:cache",
     "php artisan route:cache",
     "php artisan view:cache"
 ]
@@ -12,4 +11,4 @@ cmds = [
 aptPkgs = ["...", "php83-pgsql", "php83-pdo_pgsql"]
 
 [start]
-cmd = "php artisan migrate --force && php artisan db:seed --class=ProductionSeeder --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+cmd = "php artisan config:cache && php artisan migrate --force && php artisan db:seed --class=ProductionSeeder --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"

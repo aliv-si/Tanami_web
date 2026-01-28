@@ -19,27 +19,27 @@
 
 <div class="p-8 max-w-[1200px] mx-auto">
     @if(session('success'))
-        <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">check_circle</span>
-            {{ session('success') }}
-        </div>
+    <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center gap-2">
+        <span class="material-symbols-outlined">check_circle</span>
+        {{ session('success') }}
+    </div>
     @endif
 
     @if(session('error'))
-        <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
-            <span class="material-symbols-outlined">error</span>
-            {{ session('error') }}
-        </div>
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2">
+        <span class="material-symbols-outlined">error</span>
+        {{ session('error') }}
+    </div>
     @endif
 
     @if($errors->any())
-        <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
-            <ul class="list-disc list-inside text-sm">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
+        <ul class="list-disc list-inside text-sm">
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
     <!-- Bank Accounts List -->
@@ -55,7 +55,7 @@
                         <div class="flex items-center gap-2 mb-1">
                             <h3 class="font-heading font-bold text-text-dark">{{ $rekening->nama_bank }}</h3>
                             @if($rekening->is_utama)
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">Primary</span>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">Primary</span>
                             @endif
                         </div>
                         <p class="text-gray-600 font-mono text-lg">{{ $rekening->no_rekening }}</p>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     @if(!$rekening->is_utama)
-                    <form action="{{ url('/rekening/' . $rekening->id_rekening . '/utama') }}" method="POST" class="inline">
+                    <form action="{{ route('petani.rekening.utama', $rekening->id_rekening) }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="px-3 py-1.5 text-sm text-primary font-semibold hover:bg-primary/10 rounded-lg transition-all" title="Jadikan Utama">
                             Set as Primary
@@ -74,7 +74,7 @@
                     <button type="button" onclick="openEditModal({{ json_encode($rekening) }})" class="p-2 text-gray-400 hover:text-primary hover:bg-primary/10 rounded-lg transition-all" title="Edit">
                         <span class="material-symbols-outlined">edit</span>
                     </button>
-                    <form action="{{ url('/rekening/' . $rekening->id_rekening) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus rekening ini?')">
+                    <form action="{{ route('petani.rekening.destroy', $rekening->id_rekening) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus rekening ini?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all" title="Hapus">
@@ -124,24 +124,24 @@
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
-        <form action="{{ url('/rekening') }}" method="POST">
+        <form action="{{ route('petani.rekening.store') }}" method="POST">
             @csrf
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Bank Name <span class="text-red-500">*</span></label>
-                    <input type="text" name="nama_bank" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Example: BCA, Mandiri, BNI"/>
+                    <input type="text" name="nama_bank" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Example: BCA, Mandiri, BNI" />
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Account Number <span class="text-red-500">*</span></label>
-                    <input type="text" name="no_rekening" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter account number"/>
+                    <input type="text" name="no_rekening" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter account number" />
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Account Holder <span class="text-red-500">*</span></label>
-                    <input type="text" name="atas_nama" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Account holder name"/>
+                    <input type="text" name="atas_nama" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" placeholder="Account holder name" />
                 </div>
                 <div>
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" name="is_utama" value="1" class="w-4 h-4 rounded text-primary focus:ring-primary"/>
+                        <input type="checkbox" name="is_utama" value="1" class="w-4 h-4 rounded text-primary focus:ring-primary" />
                         <span class="text-sm font-medium text-gray-700">Set as primary account</span>
                     </label>
                 </div>
@@ -173,15 +173,15 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Bank Name <span class="text-red-500">*</span></label>
-                    <input type="text" name="nama_bank" id="edit-nama-bank" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary"/>
+                    <input type="text" name="nama_bank" id="edit-nama-bank" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" />
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Account Number <span class="text-red-500">*</span></label>
-                    <input type="text" name="no_rekening" id="edit-no-rekening" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary"/>
+                    <input type="text" name="no_rekening" id="edit-no-rekening" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" />
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Account Holder <span class="text-red-500">*</span></label>
-                    <input type="text" name="atas_nama" id="edit-atas-nama" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary"/>
+                    <input type="text" name="atas_nama" id="edit-atas-nama" required class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-primary focus:border-primary" />
                 </div>
             </div>
             <div class="flex gap-3 mt-6">
@@ -198,13 +198,13 @@
 
 @push('scripts')
 <script>
-function openEditModal(rekening) {
-    document.getElementById('edit-form').action = '/rekening/' + rekening.id_rekening;
-    document.getElementById('edit-nama-bank').value = rekening.nama_bank;
-    document.getElementById('edit-no-rekening').value = rekening.no_rekening;
-    document.getElementById('edit-atas-nama').value = rekening.atas_nama;
-    document.getElementById('edit-modal').classList.remove('hidden');
-}
+    function openEditModal(rekening) {
+        document.getElementById('edit-form').action = '/petani/rekening/' + rekening.id_rekening;
+        document.getElementById('edit-nama-bank').value = rekening.nama_bank;
+        document.getElementById('edit-no-rekening').value = rekening.no_rekening;
+        document.getElementById('edit-atas-nama').value = rekening.atas_nama;
+        document.getElementById('edit-modal').classList.remove('hidden');
+    }
 </script>
 @endpush
 @endsection

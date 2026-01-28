@@ -12,7 +12,7 @@ class KotaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('kota')->insert([
+        DB::table('kota')->insertOrIgnore([
             [
                 'nama_kota' => 'Jakarta',
                 'provinsi' => 'DKI Jakarta',

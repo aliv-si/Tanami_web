@@ -377,7 +377,7 @@ class ProdukSeeder extends Seeder
         ];
 
         foreach ($produk as $item) {
-            DB::table('produk')->insert(array_merge($item, [
+            DB::table('produk')->insertOrIgnore(array_merge($item, [
                 'tgl_dibuat' => now(),
                 'tgl_update' => now(),
             ]));

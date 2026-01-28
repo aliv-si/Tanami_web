@@ -22,7 +22,7 @@ class PenggunaSeeder extends Seeder
         $this->command->line('');
         $this->command->info('👤 Creating Admin users...');
 
-        DB::table('pengguna')->insert([
+        DB::table('pengguna')->insertOrIgnore([
             [
                 'nama_lengkap' => 'Admin System',
                 'email' => 'admin@tanami.com',
@@ -66,7 +66,7 @@ class PenggunaSeeder extends Seeder
         ];
 
         foreach ($petaniData as $data) {
-            DB::table('pengguna')->insert([
+            DB::table('pengguna')->insertOrIgnore([
                 'nama_lengkap' => $data[0],
                 'email' => $data[1],
                 'password' => Hash::make('password'),
@@ -101,7 +101,7 @@ class PenggunaSeeder extends Seeder
         ];
 
         foreach ($pembeliData as $data) {
-            DB::table('pengguna')->insert([
+            DB::table('pengguna')->insertOrIgnore([
                 'nama_lengkap' => $data[0],
                 'email' => $data[1],
                 'password' => Hash::make('password'),

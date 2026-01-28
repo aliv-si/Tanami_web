@@ -12,7 +12,7 @@ class KategoriSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('kategori')->insert([
+        DB::table('kategori')->insertOrIgnore([
             [
                 'nama_kategori' => 'Sayuran',
                 'slug_kategori' => 'sayuran',

@@ -135,9 +135,6 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    // Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
     // --------------------- PROFILE ---------------------
     Route::get('/profil', [AuthController::class, 'showProfil'])->name('profil');
     Route::put('/profil', [AuthController::class, 'updateProfil'])->name('profil.update');

@@ -36,7 +36,7 @@
             </form>
             <a href="{{ route('petani.produk.create') }}" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg font-bold font-heading flex items-center gap-2 transition-all shadow-sm">
                 <span class="material-symbols-outlined">add</span>
-                Tambah Produk
+                Add Product
             </a>
         </div>
     </div>
@@ -142,7 +142,7 @@
             <p class="text-sm text-gray-400 mb-4">Mulai tambahkan produk pertama Anda</p>
             <a href="{{ route('petani.produk.create') }}" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold font-heading transition-all">
                 <span class="material-symbols-outlined">add</span>
-                Tambah Produk
+                Add Product
             </a>
         </div>
         @endif

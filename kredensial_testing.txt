@@ -1,0 +1,38 @@
+🔐 KREDENSIAL LOGIN TESTING - TANAMI
+====================================
+
+Informasi akun untuk pengetesan aplikasi Tanami.
+Password default untuk semua akun: password
+
+--------------------------------------------------
+1. ROLE: ADMIN
+--------------------------------------------------
+Email: admin@tanami.com
+Email: support@tanami.com
+
+--------------------------------------------------
+2. ROLE: PETANI (Penjual)
+--------------------------------------------------
+Email: tono@petani.com
+Email: siti@petani.com
+Email: ahmad@petani.com
+Email: dewi@petani.com
+Email: joko@petani.com
+
+--------------------------------------------------
+3. ROLE: PEMBELI (Pelanggan)
+--------------------------------------------------
+Email: budi@pembeli.com
+Email: ani@pembeli.com
+Email: dedi@pembeli.com
+Email: citra@pembeli.com
+Email: eko@pembeli.com
+
+--------------------------------------------------
+📝 CATATAN:
+- Jalankan 'php artisan db:seed' atau 'php artisan migrate --seed' 
+  untuk memastikan data ini tersedia di database Anda.
+- Role Petani dapat mengelola produk dan pesanan masuk.
+- Role Pembeli dapat melakukan belanja dan pembayaran.
+- Role Admin dapat melihat dashboard ringkasan.
+--------------------------------------------------

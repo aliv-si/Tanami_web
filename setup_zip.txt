@@ -1,0 +1,40 @@
+📦 LANGKAH SETUP TANAMI (VERSI ZIP)
+====================================
+
+1. Ekstrak file ZIP dan buka terminal/CMD di dalam folder tersebut.
+
+2. Setup Otomatis (Rekomendasi):
+   Jalankan perintah ini untuk melakukan semua instalasi sekaligus:
+   composer run setup
+
+   --- ATAU SETUP MANUAL BERIKUT: ---
+
+3. Install Dependencies:
+   composer install
+   npm install
+
+4. Setup Environment:
+   cp .env.example .env
+   php artisan key:generate
+
+5. Link Storage:
+   php artisan storage:link
+
+6. Database (Pilih salah satu):
+   A. Jika menggunakan SQLite:
+      - Buat file: touch database/database.sqlite
+      - Edit .env: DB_CONNECTION=sqlite
+   B. Jika menggunakan MySQL:
+      - Buat database di phpMyAdmin bernama 'tanami'
+      - Edit .env: Sesuaikan DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD
+
+7. Migrasi & Seed Data:
+   php artisan migrate --seed
+
+8. Build Assets:
+   npm run build
+
+9. Jalankan project:
+   php artisan serve
+
+Akses di browser: http://127.0.0.1:8000

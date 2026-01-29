@@ -211,7 +211,7 @@
                                 <button type="submit"
                                     class="flex items-center gap-1.5 bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 py-1.5 rounded-lg font-bold text-[11px] transition-all duration-300 font-heading">
                                     <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
-                                    Tambah
+                                    Add
                                 </button>
                             </form>
                         </div>

@@ -1,68 +1,255 @@
-<p>
-  <img src="public/images/logotext.png" width="400" alt="Logo Tanami">
-</p>
+# 🌱 Panduan Setup Project Tanami
 
-**Tanami** is a smart gardening application designed to help users
-manage their home garden effortlessly. Equipped with automated hardware
-and intelligent features, Tanami brings modern agriculture directly to
-your backyard.
+Panduan lengkap untuk melakukan setup project **Tanami** dari awal di environment lokal.
 
-## 🚀 Core Capabilities
+---
 
-### 🔧 Smart Automation
+## 📋 Persyaratan Sistem
 
-Tanami integrates IoT-based tools capable of: 
-- **Automatic watering** using soil moisture sensors
-- **Automatic fertilizing** using soil fertility sensors
+Pastikan Anda sudah menginstall:
 
-Both operations run intelligently based on real-time sensor data.
+| Software      | Versi Minimum | Cek Versi     |
+| ------------- | ------------- | ------------- |
+| PHP           | 8.2+          | `php -v`      |
+| Composer      | 2.x           | `composer -V` |
+| Node.js       | 18+           | `node -v`     |
+| NPM           | 8+            | `npm -v`      |
+| MySQL/MariaDB | 5.7+ / 10.3+  | `mysql -V`    |
 
-## 📡 Real-Time Monitoring
+> [!TIP]
+> Jika menggunakan **Laragon**, semua persyaratan di atas sudah tersedia secara default.
 
-Tanami provides live updates including: 
-- **Soil moisture levels** (from moisture sensors) 
-- **Soil fertility levels** (from fertility sensors) 
-- **Current weather conditions** (sourced from BMKG) 
-- **10-day weather forecast** (also from BMKG)
+---
 
-## 🌿 Planting Guidance
+## 🚀 Langkah-Langkah Setup
 
-Tanami includes: 
-- **Tips & tricks** for planting various types of plants 
-- Practical guides to help users maintain healthy and productive gardens<br>
+### 1. Clone Repository
 
-## 🧑‍🤝‍🧑 Community
+```bash
+git clone <repository-url> web_tanami
+cd web_tanami
+```
 
-A social space where users can: 
-- Interact with fellow gardeners 
-- Share experiences and gardening knowledge<br>
+### 2. Install Dependencies PHP
 
-## 🛒 Marketplace
+```bash
+composer install
+```
 
-A platform for buying and selling: 
-- Garden produce 
-- Gardening tools and supplies
+> [!WARNING]
+> Jika muncul error tentang versi PHP, jalankan `composer update` untuk menyesuaikan package dengan versi PHP Anda.
 
-This feature helps users increase their income directly through the app.<br>
+### 3. Konfigurasi Environment
 
-## 🩺 TanamCare — Plant Disease Detection
+Copy file `.env.example` menjadi `.env`:
 
-An AI-powered feature that allows users to: 
-- Take a photo of an unhealthy plant 
-- Receive information about pests/diseases 
-- Get recommended solutions for treatment
+```bash
+copy .env.example .env
+```
 
-## 🤖 TanamAssistant — Your Personal Plant Advisor
+Atau di Linux/Mac:
 
-This assistant provides plant-specific insights, such as: 
-- Ideal soil moisture range 
-- Fertilizing reminders (including fertilizer types) 
-- Estimated harvest period 
-- Other maintenance tips tailored to the user's plants
+```bash
+cp .env.example .env
+```
 
-## 📌 Project Goals
+### 4. Generate Application Key
 
-Tanami aims to: 
-- Simplify home gardening 
-- Increase productivity and plant health 
-- Empower communities through technology, knowledge, and commerce
+```bash
+php artisan key:generate
+```
+
+### 5. Konfigurasi Database
+
+Edit file `.env` dan sesuaikan konfigurasi database:
+
+**Untuk MySQL:**
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tanami
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+**Untuk SQLite (default):**
+
+```env
+DB_CONNECTION=sqlite
+```
+
+Jika menggunakan SQLite, buat file database:
+
+```bash
+# Windows
+type nul > database\database.sqlite
+
+# Linux/Mac
+touch database/database.sqlite
+```
+
+### 6. Jalankan Migrasi Database
+
+```bash
+php artisan migrate
+```
+
+> [!NOTE]
+> Jika ada seeder, jalankan juga:
+>
+> ```bash
+> php artisan db:seed
+> ```
+
+### 7. Install Dependencies Node.js
+
+```bash
+npm install
+```
+
+### 8. Build Assets
+
+**Untuk development:**
+
+```bash
+npm run dev
+```
+
+**Untuk production:**
+
+```bash
+npm run build
+```
+
+---
+
+## ▶️ Menjalankan Aplikasi
+
+**Terminal 1 - PHP Server:**
+
+```bash
+php artisan serve
+```
+
+**Terminal 2 - Storage Link:**
+
+```bash
+php artisan storage:link
+```
+
+<!-- **Terminal 2 - Vite (untuk hot reload):**
+
+```bash
+npm run dev
+``` -->
+
+### Opsi 3: Menggunakan Laragon
+
+1. Pastikan project ada di folder `laragon/www/`
+2. Start Laragon
+3. Akses via browser: `http://web_tanami.test` atau `http://localhost/web_tanami/public`
+
+---
+
+## 🛠️ Quick Setup (One Command)
+
+Jika Anda ingin setup cepat, gunakan:
+
+```bash
+composer run setup
+```
+
+Ini akan otomatis:
+
+1. Install dependencies PHP
+2. Copy `.env.example` ke `.env`
+3. Generate application key
+4. Link storage
+5. Jalankan migrasi
+6. Install dependencies Node.js
+7. Build assets
+
+---
+
+## 🔧 Troubleshooting
+
+### Error: "Your lock file does not contain a compatible set of packages"
+
+```bash
+composer update
+```
+
+### Error: "file_put_contents... Resource temporarily unavailable"
+
+1. Tutup VS Code/Editor
+2. Stop Laragon
+3. Jalankan ulang `composer install`
+
+### Error: "SQLSTATE[HY000]: General error: 1 no such table"
+
+```bash
+php artisan migrate:fresh
+```
+
+### Error: "Vite manifest not found"
+
+```bash
+npm run build
+```
+
+### Cache Issues
+
+```bash
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+```
+
+---
+
+## 📁 Struktur Folder Penting
+
+```
+web_tanami/
+├── app/                 # Logic aplikasi
+├── bootstrap/           # File bootstrap framework
+├── config/              # File konfigurasi
+├── database/
+│   ├── migrations/      # File migrasi database
+│   ├── factories/       # Factory untuk testing
+│   └── seeders/         # Seeder data awal
+├── public/              # Entry point & assets publik
+├── resources/
+│   ├── views/           # Blade templates
+│   ├── css/             # Style CSS
+│   └── js/              # JavaScript
+├── routes/              # Definisi routing
+├── storage/             # File generated & logs
+├── tests/               # Unit & Feature tests
+├── .env                 # Environment variables (JANGAN commit!)
+├── composer.json        # Dependencies PHP
+└── package.json         # Dependencies Node.js
+```
+
+---
+
+## 📝 Catatan Tambahan
+
+- **Never commit** file `.env` ke repository
+- Selalu jalankan `composer install` dan `npm install` setelah `git pull`
+- Jika ada perubahan migrasi baru, jalankan `php artisan migrate`
+
+---
+
+## 🔗 Useful Links
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Vite](https://vitejs.dev/)
+
+---
+
+**Happy Coding! 🌿**
